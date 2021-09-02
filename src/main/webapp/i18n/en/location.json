@@ -1,0 +1,37 @@
+{
+  "tripperNestApp": {
+    "location": {
+      "home": {
+        "title": "Locations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Location",
+        "createOrEditLabel": "Create or edit a Location",
+        "notFound": "No Locations found"
+      },
+      "created": "A new Location is created with identifier {{ param }}",
+      "updated": "A Location is updated with identifier {{ param }}",
+      "deleted": "A Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Location"
+      },
+      "id": "ID",
+      "title": "Title",
+      "count": "Count",
+      "thumbnail": "Thumbnail",
+      "icon": "Icon",
+      "color": "Color",
+      "imgIcon": "Img Icon",
+      "description": "Description",
+      "parent": "Parent",
+      "taxonomy": "Taxonomy",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "parentLocation": "Parent Location"
+    }
+  }
+}

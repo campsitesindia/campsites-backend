@@ -1,0 +1,52 @@
+{
+  "name": "RoomType",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maxCapacity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numberOfBeds",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "numberOfBathrooms",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "roomRatePerNigt",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "room_type",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["tripperNest"],
+  "changelogDate": "20210902214818"
+}

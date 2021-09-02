@@ -1,0 +1,29 @@
+{
+  "tripperNestApp": {
+    "followers": {
+      "home": {
+        "title": "Followers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Followers",
+        "createOrEditLabel": "Create or edit a Followers",
+        "notFound": "No Followers found"
+      },
+      "created": "A new Followers is created with identifier {{ param }}",
+      "updated": "A Followers is updated with identifier {{ param }}",
+      "deleted": "A Followers is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Followers {{ id }}?"
+      },
+      "detail": {
+        "title": "Followers"
+      },
+      "id": "ID",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "followedBy": "Followed By",
+      "user": "User"
+    }
+  }
+}

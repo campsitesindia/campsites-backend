@@ -1,0 +1,31 @@
+{
+  "tripperNestApp": {
+    "images": {
+      "home": {
+        "title": "Images",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Images",
+        "createOrEditLabel": "Create or edit a Images",
+        "notFound": "No Images found"
+      },
+      "created": "A new Images is created with identifier {{ param }}",
+      "updated": "A Images is updated with identifier {{ param }}",
+      "deleted": "A Images is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Images {{ id }}?"
+      },
+      "detail": {
+        "title": "Images"
+      },
+      "id": "ID",
+      "imageUrl": "Image Url",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "post": "Post",
+      "user": "User",
+      "like": "Like"
+    }
+  }
+}

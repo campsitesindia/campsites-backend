@@ -1,0 +1,36 @@
+{
+  "tripperNestApp": {
+    "bookings": {
+      "home": {
+        "title": "Bookings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bookings",
+        "createOrEditLabel": "Create or edit a Bookings",
+        "notFound": "No Bookings found"
+      },
+      "created": "A new Bookings is created with identifier {{ param }}",
+      "updated": "A Bookings is updated with identifier {{ param }}",
+      "deleted": "A Bookings is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bookings {{ id }}?"
+      },
+      "detail": {
+        "title": "Bookings"
+      },
+      "id": "ID",
+      "name": "Name",
+      "checkInDate": "Check In Date",
+      "checkOutDate": "Check Out Date",
+      "pricePerNight": "Price Per Night",
+      "numOfNights": "Num Of Nights",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "user": "User",
+      "room": "Room",
+      "listing": "Listing",
+      "invoice": "Invoice"
+    }
+  }
+}

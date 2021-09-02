@@ -1,0 +1,32 @@
+{
+  "tripperNestApp": {
+    "roomType": {
+      "home": {
+        "title": "Room Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Room Type",
+        "createOrEditLabel": "Create or edit a Room Type",
+        "notFound": "No Room Types found"
+      },
+      "created": "A new Room Type is created with identifier {{ param }}",
+      "updated": "A Room Type is updated with identifier {{ param }}",
+      "deleted": "A Room Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Room Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Room Type"
+      },
+      "id": "ID",
+      "description": "Description",
+      "maxCapacity": "Max Capacity",
+      "numberOfBeds": "Number Of Beds",
+      "numberOfBathrooms": "Number Of Bathrooms",
+      "roomRatePerNigt": "Room Rate Per Nigt",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date"
+    }
+  }
+}

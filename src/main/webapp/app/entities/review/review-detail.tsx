@@ -1,0 +1,104 @@
+import React, { useEffect } from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { Button, Row, Col } from 'reactstrap';
+import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { getEntity } from './review.reducer';
+import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { useAppDispatch, useAppSelector } from 'app/config/store';
+
+export const ReviewDetail = (props: RouteComponentProps<{ id: string }>) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getEntity(props.match.params.id));
+  }, []);
+
+  const reviewEntity = useAppSelector(state => state.review.entity);
+  return (
+    <Row>
+      <Col md="8">
+        <h2 data-cy="reviewDetailsHeading">
+          <Translate contentKey="tripperNestApp.review.detail.title">Review</Translate>
+        </h2>
+        <dl className="jh-entity-details">
+          <dt>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.id}</dd>
+          <dt>
+            <span id="rating">
+              <Translate contentKey="tripperNestApp.review.rating">Rating</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.rating}</dd>
+          <dt>
+            <span id="reviewbBody">
+              <Translate contentKey="tripperNestApp.review.reviewbBody">Reviewb Body</Translate>
+            </span>
+          </dt>
+          <dd>
+            {reviewEntity.reviewbBody ? (
+              <div>
+                {reviewEntity.reviewbBodyContentType ? (
+                  <a onClick={openFile(reviewEntity.reviewbBodyContentType, reviewEntity.reviewbBody)}>
+                    <Translate contentKey="entity.action.open">Open</Translate>&nbsp;
+                  </a>
+                ) : null}
+                <span>
+                  {reviewEntity.reviewbBodyContentType}, {byteSize(reviewEntity.reviewbBody)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="createdBy">
+              <Translate contentKey="tripperNestApp.review.createdBy">Created By</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.createdBy}</dd>
+          <dt>
+            <span id="createdDate">
+              <Translate contentKey="tripperNestApp.review.createdDate">Created Date</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.createdDate ? <TextFormat value={reviewEntity.createdDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="updatedBy">
+              <Translate contentKey="tripperNestApp.review.updatedBy">Updated By</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.updatedBy ? <TextFormat value={reviewEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="updateDate">
+              <Translate contentKey="tripperNestApp.review.updateDate">Update Date</Translate>
+            </span>
+          </dt>
+          <dd>{reviewEntity.updateDate ? <TextFormat value={reviewEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <Translate contentKey="tripperNestApp.review.booking">Booking</Translate>
+          </dt>
+          <dd>{reviewEntity.booking ? reviewEntity.booking.name : ''}</dd>
+        </dl>
+        <Button tag={Link} to="/review" replace color="info" data-cy="entityDetailsBackButton">
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
+        </Button>
+        &nbsp;
+        <Button tag={Link} to={`/review/${reviewEntity.id}/edit`} replace color="primary">
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
+        </Button>
+      </Col>
+    </Row>
+  );
+};
+
+export default ReviewDetail;

@@ -1,0 +1,47 @@
+{
+  "tripperNestApp": {
+    "listing": {
+      "home": {
+        "title": "Listings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Listing",
+        "createOrEditLabel": "Create or edit a Listing",
+        "notFound": "No Listings found"
+      },
+      "created": "A new Listing is created with identifier {{ param }}",
+      "updated": "A Listing is updated with identifier {{ param }}",
+      "deleted": "A Listing is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Listing {{ id }}?"
+      },
+      "detail": {
+        "title": "Listing"
+      },
+      "id": "ID",
+      "address": "Address",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "url": "Url",
+      "title": "Title",
+      "content": "Content",
+      "thumbnail": "Thumbnail",
+      "isFeatured": "Is Featured",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "comment": "Comment",
+      "disableBooking": "Disable Booking",
+      "viewCount": "View Count",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "listingType": "Listing Type",
+      "rating": "Rating",
+      "location": "Location",
+      "feature": "Feature",
+      "room": "Room",
+      "owner": "Owner"
+    }
+  }
+}

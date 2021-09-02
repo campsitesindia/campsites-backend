@@ -1,0 +1,286 @@
+
+application {
+  config {
+    baseName tripperNest,
+    applicationType monolith,
+    packageName com.dd.ttippernest,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    clientFramework react
+  }
+  entities *
+}
+
+entity AuthenticatedUser {
+ firstName String ,
+ lastName String ,
+ authTimestamp Instant
+}
+
+
+
+entity Post{
+  content String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+entity Images{
+  imageUrl String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+entity Comments{
+  commentText String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+entity Location{
+  title String,
+  count Integer,
+  thumbnail String,
+  icon String,
+  color String,
+  imgIcon String,
+  description String,
+  parent Integer,
+  taxonomy String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+
+entity Rating{
+ name String
+}
+entity ListingType{
+  title String,
+  count Integer,
+  thumbnail String,
+  icon String,
+  color String,
+  imgIcon String,
+  description String,
+  parent Integer,
+  taxonomy String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+entity Listing{
+    address String,
+    latitude Double,
+    longitude Double,
+    url String,
+    title String,
+    content String,
+    thumbnail String,
+    isFeatured Boolean,
+	phone String,
+	email  String,
+	website String,
+	comment Boolean,
+	disableBooking Boolean,
+    viewCount  Integer,
+    createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+
+}
+entity Photos {
+
+	alt String,
+	caption String,
+	description String,
+	href  String,
+	src  String,
+	title  String,
+    createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+entity Videos {
+name String,
+url String,
+createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+entity Features{
+  title String,
+  count Integer,
+  thumbnail String,
+  icon String,
+  color String,
+  imgIcon String,
+  description String,
+  parent Integer,
+  taxonomy String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+
+
+entity  Bookings {
+  //id integer [primary key]
+  //user_id integer
+  //place_id integer
+  name String,
+  checkInDate Instant ,
+  checkOutDate Instant,
+  pricePerNight Double,
+  numOfNights Integer,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+enum InvoiceStatus{
+ PAID,
+ CANCELED,
+ REFUNDED
+}
+entity Invoice {
+  invoiceAmount Double,
+  status InvoiceStatus,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant,
+}
+
+entity Room{
+//roomType_id
+	name String,
+    roomNumber String,
+    isSmoking String,
+    status String,
+    createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+
+    //roomType
+}
+
+entity RoomType{
+	description String,
+    maxCapacity String,
+    numberOfBeds Integer,
+    numberOfBathrooms Integer,
+    roomRatePerNigt Double,
+    createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+entity RoomFeatures{
+  title String,
+  count Integer,
+  thumbnail String,
+  icon String,
+  color String,
+  imgIcon String,
+  description String,
+  parent Integer,
+  taxonomy String,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+entity Review {
+
+ // id integer [primary key]
+ // booking_id integer
+  rating Integer,
+  reviewbBody Blob,
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+
+}
+
+
+entity Like{
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+
+
+entity Followers{
+  createdBy String,
+  createdDate Instant,
+  updatedBy Instant,
+  updateDate Instant
+}
+relationship OneToOne {
+  AuthenticatedUser{user(email)} to User
+  Like to Post
+  Like {user(firstName)} to User
+  Like to Images
+
+  Listing{listingType(title)} to ListingType
+  Location{ParentLocation(title)} to Location
+  Listing {Rating(name)}to Rating
+
+
+}
+
+
+
+relationship ManyToOne {
+Post{user(email)}  to User
+Followers{followedBy(email)}  to User
+Followers{user(email)}  to User
+Images  to Post
+Images{user(email)} to User
+Comments to Post
+Comments {user(email)} to User
+Room {roomType} to RoomType
+Bookings{user(email)} to User
+Bookings {room(roomNumber)} to Room
+Bookings {listing(title)}  to Listing
+
+RoomFeatures {room(roomNumber)} to Room
+Photos {listing(title)}  to Listing
+Videos {listing(title)}  to Listing
+Listing {location(title)} to Location
+Listing {feature(title)} to Features
+Review {booking(name)} to Bookings
+Listing {Room(roomNumber)} to Room
+Listing {Owner(email)} to User
+Invoice to Bookings
+Invoice{Customer(email)} to User
+}
+
+
+
+
+
+paginate * with pagination
+filter *
+
+service all with serviceImpl

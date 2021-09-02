@@ -1,0 +1,30 @@
+{
+  "tripperNestApp": {
+    "videos": {
+      "home": {
+        "title": "Videos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Videos",
+        "createOrEditLabel": "Create or edit a Videos",
+        "notFound": "No Videos found"
+      },
+      "created": "A new Videos is created with identifier {{ param }}",
+      "updated": "A Videos is updated with identifier {{ param }}",
+      "deleted": "A Videos is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Videos {{ id }}?"
+      },
+      "detail": {
+        "title": "Videos"
+      },
+      "id": "ID",
+      "name": "Name",
+      "url": "Url",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date",
+      "listing": "Listing"
+    }
+  }
+}

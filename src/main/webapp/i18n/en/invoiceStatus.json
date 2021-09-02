@@ -1,0 +1,10 @@
+{
+  "tripperNestApp": {
+    "InvoiceStatus": {
+      "null": "",
+      "PAID": "PAID",
+      "CANCELED": "CANCELED",
+      "REFUNDED": "REFUNDED"
+    }
+  }
+}

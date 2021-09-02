@@ -1,0 +1,36 @@
+{
+  "tripperNestApp": {
+    "listingType": {
+      "home": {
+        "title": "Listing Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Listing Type",
+        "createOrEditLabel": "Create or edit a Listing Type",
+        "notFound": "No Listing Types found"
+      },
+      "created": "A new Listing Type is created with identifier {{ param }}",
+      "updated": "A Listing Type is updated with identifier {{ param }}",
+      "deleted": "A Listing Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Listing Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Listing Type"
+      },
+      "id": "ID",
+      "title": "Title",
+      "count": "Count",
+      "thumbnail": "Thumbnail",
+      "icon": "Icon",
+      "color": "Color",
+      "imgIcon": "Img Icon",
+      "description": "Description",
+      "parent": "Parent",
+      "taxonomy": "Taxonomy",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updateDate": "Update Date"
+    }
+  }
+}

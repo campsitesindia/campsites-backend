@@ -1,0 +1,80 @@
+{
+  "name": "Bookings",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkInDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "checkOutDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "pricePerNight",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "numOfNights",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "user",
+      "otherEntityField": "email"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "room",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "room",
+      "otherEntityField": "roomNumber"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "listing",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "listing",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "invoice"
+    }
+  ],
+  "entityTableName": "bookings",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["tripperNest"],
+  "changelogDate": "20210902214518"
+}
