@@ -20,7 +20,7 @@ export const RoomTypeDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="roomTypeDetailsHeading">
-          <Translate contentKey="tripperNestApp.roomType.detail.title">RoomType</Translate>
+          <Translate contentKey="campsitesindiaApp.roomType.detail.title">RoomType</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -30,44 +30,50 @@ export const RoomTypeDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{roomTypeEntity.id}</dd>
           <dt>
+            <span id="type">
+              <Translate contentKey="campsitesindiaApp.roomType.type">Type</Translate>
+            </span>
+          </dt>
+          <dd>{roomTypeEntity.type}</dd>
+          <dt>
             <span id="description">
-              <Translate contentKey="tripperNestApp.roomType.description">Description</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.description">Description</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.description}</dd>
           <dt>
             <span id="maxCapacity">
-              <Translate contentKey="tripperNestApp.roomType.maxCapacity">Max Capacity</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.maxCapacity">Max Capacity</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.maxCapacity}</dd>
           <dt>
             <span id="numberOfBeds">
-              <Translate contentKey="tripperNestApp.roomType.numberOfBeds">Number Of Beds</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.numberOfBeds">Number Of Beds</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.numberOfBeds}</dd>
           <dt>
             <span id="numberOfBathrooms">
-              <Translate contentKey="tripperNestApp.roomType.numberOfBathrooms">Number Of Bathrooms</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.numberOfBathrooms">Number Of Bathrooms</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.numberOfBathrooms}</dd>
           <dt>
-            <span id="roomRatePerNigt">
-              <Translate contentKey="tripperNestApp.roomType.roomRatePerNigt">Room Rate Per Nigt</Translate>
+            <span id="roomRatePerNight">
+              <Translate contentKey="campsitesindiaApp.roomType.roomRatePerNight">Room Rate Per Night</Translate>
             </span>
           </dt>
-          <dd>{roomTypeEntity.roomRatePerNigt}</dd>
+          <dd>{roomTypeEntity.roomRatePerNight}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.roomType.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.roomType.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -75,13 +81,13 @@ export const RoomTypeDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.roomType.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{roomTypeEntity.updatedBy ? <TextFormat value={roomTypeEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.roomType.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>

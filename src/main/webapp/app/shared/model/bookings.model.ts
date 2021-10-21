@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { IUser } from 'app/shared/model/user.model';
-import { IRoom } from 'app/shared/model/room.model';
 import { IListing } from 'app/shared/model/listing.model';
 import { IInvoice } from 'app/shared/model/invoice.model';
 
@@ -16,7 +15,6 @@ export interface IBookings {
   updatedBy?: string | null;
   updateDate?: string | null;
   user?: IUser | null;
-  room?: IRoom | null;
   listing?: IListing | null;
   invoices?: IInvoice[] | null;
 }

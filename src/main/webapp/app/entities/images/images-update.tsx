@@ -90,8 +90,8 @@ export const ImagesUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.images.home.createOrEditLabel" data-cy="ImagesCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.images.home.createOrEditLabel">Create or edit a Images</Translate>
+          <h2 id="campsitesindiaApp.images.home.createOrEditLabel" data-cy="ImagesCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.images.home.createOrEditLabel">Create or edit a Images</Translate>
           </h2>
         </Col>
       </Row>
@@ -112,21 +112,21 @@ export const ImagesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.images.imageUrl')}
+                label={translate('campsitesindiaApp.images.imageUrl')}
                 id="images-imageUrl"
                 name="imageUrl"
                 data-cy="imageUrl"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.images.createdBy')}
+                label={translate('campsitesindiaApp.images.createdBy')}
                 id="images-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.images.createdDate')}
+                label={translate('campsitesindiaApp.images.createdDate')}
                 id="images-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -134,7 +134,7 @@ export const ImagesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.images.updatedBy')}
+                label={translate('campsitesindiaApp.images.updatedBy')}
                 id="images-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -142,14 +142,20 @@ export const ImagesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.images.updateDate')}
+                label={translate('campsitesindiaApp.images.updateDate')}
                 id="images-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="images-post" name="postId" data-cy="post" label={translate('tripperNestApp.images.post')} type="select">
+              <ValidatedField
+                id="images-post"
+                name="postId"
+                data-cy="post"
+                label={translate('campsitesindiaApp.images.post')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {posts
                   ? posts.map(otherEntity => (
@@ -159,7 +165,13 @@ export const ImagesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="images-user" name="userId" data-cy="user" label={translate('tripperNestApp.images.user')} type="select">
+              <ValidatedField
+                id="images-user"
+                name="userId"
+                data-cy="user"
+                label={translate('campsitesindiaApp.images.user')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (

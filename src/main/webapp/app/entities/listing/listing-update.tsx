@@ -6,14 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IListingType } from 'app/shared/model/listing-type.model';
 import { getEntities as getListingTypes } from 'app/entities/listing-type/listing-type.reducer';
-import { IRating } from 'app/shared/model/rating.model';
-import { getEntities as getRatings } from 'app/entities/rating/rating.reducer';
 import { ILocation } from 'app/shared/model/location.model';
 import { getEntities as getLocations } from 'app/entities/location/location.reducer';
-import { IFeatures } from 'app/shared/model/features.model';
-import { getEntities as getFeatures } from 'app/entities/features/features.reducer';
-import { IRoom } from 'app/shared/model/room.model';
-import { getEntities as getRooms } from 'app/entities/room/room.reducer';
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './listing.reducer';
@@ -28,10 +22,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const listingTypes = useAppSelector(state => state.listingType.entities);
-  const ratings = useAppSelector(state => state.rating.entities);
   const locations = useAppSelector(state => state.location.entities);
-  const features = useAppSelector(state => state.features.entities);
-  const rooms = useAppSelector(state => state.room.entities);
   const users = useAppSelector(state => state.userManagement.users);
   const listingEntity = useAppSelector(state => state.listing.entity);
   const loading = useAppSelector(state => state.listing.loading);
@@ -50,10 +41,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getListingTypes({}));
-    dispatch(getRatings({}));
     dispatch(getLocations({}));
-    dispatch(getFeatures({}));
-    dispatch(getRooms({}));
     dispatch(getUsers({}));
   }, []);
 
@@ -72,10 +60,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...listingEntity,
       ...values,
       listingType: listingTypes.find(it => it.id.toString() === values.listingTypeId.toString()),
-      rating: ratings.find(it => it.id.toString() === values.ratingId.toString()),
       location: locations.find(it => it.id.toString() === values.locationId.toString()),
-      feature: features.find(it => it.id.toString() === values.featureId.toString()),
-      room: rooms.find(it => it.id.toString() === values.roomId.toString()),
       owner: users.find(it => it.id.toString() === values.ownerId.toString()),
     };
 
@@ -99,10 +84,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
           updatedBy: convertDateTimeFromServer(listingEntity.updatedBy),
           updateDate: convertDateTimeFromServer(listingEntity.updateDate),
           listingTypeId: listingEntity?.listingType?.id,
-          ratingId: listingEntity?.rating?.id,
           locationId: listingEntity?.location?.id,
-          featureId: listingEntity?.feature?.id,
-          roomId: listingEntity?.room?.id,
           ownerId: listingEntity?.owner?.id,
         };
 
@@ -110,8 +92,8 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.listing.home.createOrEditLabel" data-cy="ListingCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.listing.home.createOrEditLabel">Create or edit a Listing</Translate>
+          <h2 id="campsitesindiaApp.listing.home.createOrEditLabel" data-cy="ListingCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.listing.home.createOrEditLabel">Create or edit a Listing</Translate>
           </h2>
         </Col>
       </Row>
@@ -132,50 +114,50 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.listing.address')}
+                label={translate('campsitesindiaApp.listing.address')}
                 id="listing-address"
                 name="address"
                 data-cy="address"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.latitude')}
+                label={translate('campsitesindiaApp.listing.latitude')}
                 id="listing-latitude"
                 name="latitude"
                 data-cy="latitude"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.longitude')}
+                label={translate('campsitesindiaApp.listing.longitude')}
                 id="listing-longitude"
                 name="longitude"
                 data-cy="longitude"
                 type="text"
               />
-              <ValidatedField label={translate('tripperNestApp.listing.url')} id="listing-url" name="url" data-cy="url" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.listing.url')} id="listing-url" name="url" data-cy="url" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.listing.title')}
+                label={translate('campsitesindiaApp.listing.title')}
                 id="listing-title"
                 name="title"
                 data-cy="title"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.content')}
+                label={translate('campsitesindiaApp.listing.content')}
                 id="listing-content"
                 name="content"
                 data-cy="content"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.thumbnail')}
+                label={translate('campsitesindiaApp.listing.thumbnail')}
                 id="listing-thumbnail"
                 name="thumbnail"
                 data-cy="thumbnail"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.isFeatured')}
+                label={translate('campsitesindiaApp.listing.isFeatured')}
                 id="listing-isFeatured"
                 name="isFeatured"
                 data-cy="isFeatured"
@@ -183,36 +165,42 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="checkbox"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.phone')}
+                label={translate('campsitesindiaApp.listing.pricePerPerson')}
+                id="listing-pricePerPerson"
+                name="pricePerPerson"
+                data-cy="pricePerPerson"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.listing.phone')}
                 id="listing-phone"
                 name="phone"
                 data-cy="phone"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.email')}
+                label={translate('campsitesindiaApp.listing.email')}
                 id="listing-email"
                 name="email"
                 data-cy="email"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.website')}
+                label={translate('campsitesindiaApp.listing.website')}
                 id="listing-website"
                 name="website"
                 data-cy="website"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.comment')}
+                label={translate('campsitesindiaApp.listing.comment')}
                 id="listing-comment"
                 name="comment"
                 data-cy="comment"
-                check
-                type="checkbox"
+                type="textarea"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.disableBooking')}
+                label={translate('campsitesindiaApp.listing.disableBooking')}
                 id="listing-disableBooking"
                 name="disableBooking"
                 data-cy="disableBooking"
@@ -220,21 +208,21 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="checkbox"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.viewCount')}
+                label={translate('campsitesindiaApp.listing.viewCount')}
                 id="listing-viewCount"
                 name="viewCount"
                 data-cy="viewCount"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.createdBy')}
+                label={translate('campsitesindiaApp.listing.createdBy')}
                 id="listing-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.createdDate')}
+                label={translate('campsitesindiaApp.listing.createdDate')}
                 id="listing-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -242,7 +230,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.updatedBy')}
+                label={translate('campsitesindiaApp.listing.updatedBy')}
                 id="listing-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -250,7 +238,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listing.updateDate')}
+                label={translate('campsitesindiaApp.listing.updateDate')}
                 id="listing-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -261,7 +249,7 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="listing-listingType"
                 name="listingTypeId"
                 data-cy="listingType"
-                label={translate('tripperNestApp.listing.listingType')}
+                label={translate('campsitesindiaApp.listing.listingType')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -274,26 +262,10 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="listing-rating"
-                name="ratingId"
-                data-cy="rating"
-                label={translate('tripperNestApp.listing.rating')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {ratings
-                  ? ratings.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.name}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
                 id="listing-location"
                 name="locationId"
                 data-cy="location"
-                label={translate('tripperNestApp.listing.location')}
+                label={translate('campsitesindiaApp.listing.location')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -306,36 +278,10 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="listing-feature"
-                name="featureId"
-                data-cy="feature"
-                label={translate('tripperNestApp.listing.feature')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {features
-                  ? features.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.title}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField id="listing-room" name="roomId" data-cy="room" label={translate('tripperNestApp.listing.room')} type="select">
-                <option value="" key="0" />
-                {rooms
-                  ? rooms.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.roomNumber}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
                 id="listing-owner"
                 name="ownerId"
                 data-cy="owner"
-                label={translate('tripperNestApp.listing.owner')}
+                label={translate('campsitesindiaApp.listing.owner')}
                 type="select"
               >
                 <option value="" key="0" />

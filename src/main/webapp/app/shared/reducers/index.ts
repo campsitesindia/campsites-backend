@@ -42,13 +42,19 @@ import room from 'app/entities/room/room.reducer';
 // prettier-ignore
 import roomType from 'app/entities/room-type/room-type.reducer';
 // prettier-ignore
-import roomFeatures from 'app/entities/room-features/room-features.reducer';
-// prettier-ignore
 import review from 'app/entities/review/review.reducer';
 // prettier-ignore
 import like from 'app/entities/like/like.reducer';
 // prettier-ignore
 import followers from 'app/entities/followers/followers.reducer';
+// prettier-ignore
+import featuresListing from 'app/entities/features-listing/features-listing.reducer';
+// prettier-ignore
+import featuresInRoom from 'app/entities/features-in-room/features-in-room.reducer';
+// prettier-ignore
+import roomsForListing from 'app/entities/rooms-for-listing/rooms-for-listing.reducer';
+// prettier-ignore
+import roomsInBooking from 'app/entities/rooms-in-booking/rooms-in-booking.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -77,10 +83,13 @@ const rootReducer = {
   invoice,
   room,
   roomType,
-  roomFeatures,
   review,
   like,
   followers,
+  featuresListing,
+  featuresInRoom,
+  roomsForListing,
+  roomsInBooking,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

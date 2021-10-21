@@ -50,7 +50,7 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...locationEntity,
       ...values,
-      parentLocation: locations.find(it => it.id.toString() === values.parentLocationId.toString()),
+      parent: locations.find(it => it.id.toString() === values.parentId.toString()),
     };
 
     if (isNew) {
@@ -72,15 +72,15 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
           createdDate: convertDateTimeFromServer(locationEntity.createdDate),
           updatedBy: convertDateTimeFromServer(locationEntity.updatedBy),
           updateDate: convertDateTimeFromServer(locationEntity.updateDate),
-          parentLocationId: locationEntity?.parentLocation?.id,
+          parentId: locationEntity?.parent?.id,
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.location.home.createOrEditLabel" data-cy="LocationCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.location.home.createOrEditLabel">Create or edit a Location</Translate>
+          <h2 id="campsitesindiaApp.location.home.createOrEditLabel" data-cy="LocationCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.location.home.createOrEditLabel">Create or edit a Location</Translate>
           </h2>
         </Col>
       </Row>
@@ -101,71 +101,70 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.location.title')}
+                label={translate('campsitesindiaApp.location.title')}
                 id="location-title"
                 name="title"
                 data-cy="title"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.count')}
+                label={translate('campsitesindiaApp.location.count')}
                 id="location-count"
                 name="count"
                 data-cy="count"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.thumbnail')}
+                label={translate('campsitesindiaApp.location.thumbnail')}
                 id="location-thumbnail"
                 name="thumbnail"
                 data-cy="thumbnail"
                 type="text"
               />
-              <ValidatedField label={translate('tripperNestApp.location.icon')} id="location-icon" name="icon" data-cy="icon" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.location.color')}
+                label={translate('campsitesindiaApp.location.icon')}
+                id="location-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.location.color')}
                 id="location-color"
                 name="color"
                 data-cy="color"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.imgIcon')}
+                label={translate('campsitesindiaApp.location.imgIcon')}
                 id="location-imgIcon"
                 name="imgIcon"
                 data-cy="imgIcon"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.description')}
+                label={translate('campsitesindiaApp.location.description')}
                 id="location-description"
                 name="description"
                 data-cy="description"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.parent')}
-                id="location-parent"
-                name="parent"
-                data-cy="parent"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tripperNestApp.location.taxonomy')}
+                label={translate('campsitesindiaApp.location.taxonomy')}
                 id="location-taxonomy"
                 name="taxonomy"
                 data-cy="taxonomy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.createdBy')}
+                label={translate('campsitesindiaApp.location.createdBy')}
                 id="location-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.createdDate')}
+                label={translate('campsitesindiaApp.location.createdDate')}
                 id="location-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -173,7 +172,7 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.updatedBy')}
+                label={translate('campsitesindiaApp.location.updatedBy')}
                 id="location-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -181,7 +180,7 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.location.updateDate')}
+                label={translate('campsitesindiaApp.location.updateDate')}
                 id="location-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -189,10 +188,10 @@ export const LocationUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                id="location-parentLocation"
-                name="parentLocationId"
-                data-cy="parentLocation"
-                label={translate('tripperNestApp.location.parentLocation')}
+                id="location-parent"
+                name="parentId"
+                data-cy="parent"
+                label={translate('campsitesindiaApp.location.parent')}
                 type="select"
               >
                 <option value="" key="0" />

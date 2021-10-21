@@ -20,7 +20,7 @@ export const VideosDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="videosDetailsHeading">
-          <Translate contentKey="tripperNestApp.videos.detail.title">Videos</Translate>
+          <Translate contentKey="campsitesindiaApp.videos.detail.title">Videos</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,42 +31,42 @@ export const VideosDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{videosEntity.id}</dd>
           <dt>
             <span id="name">
-              <Translate contentKey="tripperNestApp.videos.name">Name</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.name">Name</Translate>
             </span>
           </dt>
           <dd>{videosEntity.name}</dd>
           <dt>
             <span id="url">
-              <Translate contentKey="tripperNestApp.videos.url">Url</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.url">Url</Translate>
             </span>
           </dt>
           <dd>{videosEntity.url}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.videos.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{videosEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.videos.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>{videosEntity.createdDate ? <TextFormat value={videosEntity.createdDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.videos.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{videosEntity.updatedBy ? <TextFormat value={videosEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.videos.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.videos.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{videosEntity.updateDate ? <TextFormat value={videosEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.videos.listing">Listing</Translate>
+            <Translate contentKey="campsitesindiaApp.videos.listing">Listing</Translate>
           </dt>
           <dd>{videosEntity.listing ? videosEntity.listing.title : ''}</dd>
         </dl>

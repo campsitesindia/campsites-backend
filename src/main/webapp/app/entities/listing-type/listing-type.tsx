@@ -82,16 +82,16 @@ export const ListingType = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="listing-type-heading" data-cy="ListingTypeHeading">
-        <Translate contentKey="tripperNestApp.listingType.home.title">Listing Types</Translate>
+        <Translate contentKey="campsitesindiaApp.listingType.home.title">Listing Types</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.listingType.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.listingType.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.listingType.home.createLabel">Create new Listing Type</Translate>
+            <Translate contentKey="campsitesindiaApp.listingType.home.createLabel">Create new Listing Type</Translate>
           </Link>
         </div>
       </h2>
@@ -101,46 +101,46 @@ export const ListingType = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.listingType.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('title')}>
-                  <Translate contentKey="tripperNestApp.listingType.title">Title</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.title">Title</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('count')}>
-                  <Translate contentKey="tripperNestApp.listingType.count">Count</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.count">Count</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('thumbnail')}>
-                  <Translate contentKey="tripperNestApp.listingType.thumbnail">Thumbnail</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.thumbnail">Thumbnail</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('icon')}>
-                  <Translate contentKey="tripperNestApp.listingType.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('color')}>
-                  <Translate contentKey="tripperNestApp.listingType.color">Color</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.color">Color</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('imgIcon')}>
-                  <Translate contentKey="tripperNestApp.listingType.imgIcon">Img Icon</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.imgIcon">Img Icon</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="tripperNestApp.listingType.description">Description</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('parent')}>
-                  <Translate contentKey="tripperNestApp.listingType.parent">Parent</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.description">Description</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('taxonomy')}>
-                  <Translate contentKey="tripperNestApp.listingType.taxonomy">Taxonomy</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.taxonomy">Taxonomy</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.listingType.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.listingType.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.listingType.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.listingType.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listingType.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="campsitesindiaApp.listingType.parent">Parent</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -160,7 +160,6 @@ export const ListingType = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{listingType.color}</td>
                   <td>{listingType.imgIcon}</td>
                   <td>{listingType.description}</td>
-                  <td>{listingType.parent}</td>
                   <td>{listingType.taxonomy}</td>
                   <td>{listingType.createdBy}</td>
                   <td>
@@ -172,6 +171,7 @@ export const ListingType = (props: RouteComponentProps<{ url: string }>) => {
                   <td>
                     {listingType.updateDate ? <TextFormat type="date" value={listingType.updateDate} format={APP_DATE_FORMAT} /> : null}
                   </td>
+                  <td>{listingType.parent ? <Link to={`listing-type/${listingType.parent.id}`}>{listingType.parent.title}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${listingType.id}`} color="info" size="sm" data-cy="entityDetailsButton">
@@ -213,7 +213,7 @@ export const ListingType = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.listingType.home.notFound">No Listing Types found</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.home.notFound">No Listing Types found</Translate>
             </div>
           )
         )}

@@ -1,5 +1,5 @@
 {
-  "tripperNestApp": {
+  "campsitesindiaApp": {
     "listing": {
       "home": {
         "title": "Listings",
@@ -26,6 +26,7 @@
       "content": "Content",
       "thumbnail": "Thumbnail",
       "isFeatured": "Is Featured",
+      "pricePerPerson": "Price Per Person",
       "phone": "Phone",
       "email": "Email",
       "website": "Website",
@@ -37,10 +38,7 @@
       "updatedBy": "Updated By",
       "updateDate": "Update Date",
       "listingType": "Listing Type",
-      "rating": "Rating",
       "location": "Location",
-      "feature": "Feature",
-      "room": "Room",
       "owner": "Owner"
     }
   }

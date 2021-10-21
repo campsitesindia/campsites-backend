@@ -1,5 +1,5 @@
 {
-  "tripperNestApp": {
+  "campsitesindiaApp": {
     "rating": {
       "home": {
         "title": "Ratings",
@@ -18,7 +18,8 @@
         "title": "Rating"
       },
       "id": "ID",
-      "name": "Name"
+      "name": "Name",
+      "listing": "Listing"
     }
   }
 }

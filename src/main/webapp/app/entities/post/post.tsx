@@ -82,16 +82,16 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="post-heading" data-cy="PostHeading">
-        <Translate contentKey="tripperNestApp.post.home.title">Posts</Translate>
+        <Translate contentKey="campsitesindiaApp.post.home.title">Posts</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.post.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.post.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.post.home.createLabel">Create new Post</Translate>
+            <Translate contentKey="campsitesindiaApp.post.home.createLabel">Create new Post</Translate>
           </Link>
         </div>
       </h2>
@@ -101,25 +101,25 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.post.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('content')}>
-                  <Translate contentKey="tripperNestApp.post.content">Content</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.content">Content</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.post.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.post.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.post.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.post.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.post.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.post.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -179,7 +179,7 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.post.home.notFound">No Posts found</Translate>
+              <Translate contentKey="campsitesindiaApp.post.home.notFound">No Posts found</Translate>
             </div>
           )
         )}

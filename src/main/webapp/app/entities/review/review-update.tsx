@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IBookings } from 'app/shared/model/bookings.model';
@@ -80,8 +80,8 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.review.home.createOrEditLabel" data-cy="ReviewCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.review.home.createOrEditLabel">Create or edit a Review</Translate>
+          <h2 id="campsitesindiaApp.review.home.createOrEditLabel" data-cy="ReviewCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.review.home.createOrEditLabel">Create or edit a Review</Translate>
           </h2>
         </Col>
       </Row>
@@ -102,28 +102,28 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.review.rating')}
+                label={translate('campsitesindiaApp.review.rating')}
                 id="review-rating"
                 name="rating"
                 data-cy="rating"
                 type="text"
               />
-              <ValidatedBlobField
-                label={translate('tripperNestApp.review.reviewbBody')}
+              <ValidatedField
+                label={translate('campsitesindiaApp.review.reviewbBody')}
                 id="review-reviewbBody"
                 name="reviewbBody"
                 data-cy="reviewbBody"
-                openActionLabel={translate('entity.action.open')}
+                type="textarea"
               />
               <ValidatedField
-                label={translate('tripperNestApp.review.createdBy')}
+                label={translate('campsitesindiaApp.review.createdBy')}
                 id="review-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.review.createdDate')}
+                label={translate('campsitesindiaApp.review.createdDate')}
                 id="review-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -131,7 +131,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.review.updatedBy')}
+                label={translate('campsitesindiaApp.review.updatedBy')}
                 id="review-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -139,7 +139,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.review.updateDate')}
+                label={translate('campsitesindiaApp.review.updateDate')}
                 id="review-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -150,7 +150,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="review-booking"
                 name="bookingId"
                 data-cy="booking"
-                label={translate('tripperNestApp.review.booking')}
+                label={translate('campsitesindiaApp.review.booking')}
                 type="select"
               >
                 <option value="" key="0" />

@@ -82,16 +82,16 @@ export const Images = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="images-heading" data-cy="ImagesHeading">
-        <Translate contentKey="tripperNestApp.images.home.title">Images</Translate>
+        <Translate contentKey="campsitesindiaApp.images.home.title">Images</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.images.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.images.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.images.home.createLabel">Create new Images</Translate>
+            <Translate contentKey="campsitesindiaApp.images.home.createLabel">Create new Images</Translate>
           </Link>
         </div>
       </h2>
@@ -101,28 +101,28 @@ export const Images = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.images.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('imageUrl')}>
-                  <Translate contentKey="tripperNestApp.images.imageUrl">Image Url</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.imageUrl">Image Url</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.images.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.images.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.images.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.images.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.images.post">Post</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.post">Post</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.images.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.images.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -183,7 +183,7 @@ export const Images = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.images.home.notFound">No Images found</Translate>
+              <Translate contentKey="campsitesindiaApp.images.home.notFound">No Images found</Translate>
             </div>
           )
         )}

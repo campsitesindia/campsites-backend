@@ -20,7 +20,7 @@ export const InvoiceDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="invoiceDetailsHeading">
-          <Translate contentKey="tripperNestApp.invoice.detail.title">Invoice</Translate>
+          <Translate contentKey="campsitesindiaApp.invoice.detail.title">Invoice</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,25 +31,25 @@ export const InvoiceDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{invoiceEntity.id}</dd>
           <dt>
             <span id="invoiceAmount">
-              <Translate contentKey="tripperNestApp.invoice.invoiceAmount">Invoice Amount</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.invoiceAmount">Invoice Amount</Translate>
             </span>
           </dt>
           <dd>{invoiceEntity.invoiceAmount}</dd>
           <dt>
             <span id="status">
-              <Translate contentKey="tripperNestApp.invoice.status">Status</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.status">Status</Translate>
             </span>
           </dt>
           <dd>{invoiceEntity.status}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.invoice.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{invoiceEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.invoice.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -57,22 +57,22 @@ export const InvoiceDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.invoice.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{invoiceEntity.updatedBy ? <TextFormat value={invoiceEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.invoice.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{invoiceEntity.updateDate ? <TextFormat value={invoiceEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.invoice.bookings">Bookings</Translate>
+            <Translate contentKey="campsitesindiaApp.invoice.bookings">Bookings</Translate>
           </dt>
           <dd>{invoiceEntity.bookings ? invoiceEntity.bookings.id : ''}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.invoice.customer">Customer</Translate>
+            <Translate contentKey="campsitesindiaApp.invoice.customer">Customer</Translate>
           </dt>
           <dd>{invoiceEntity.customer ? invoiceEntity.customer.email : ''}</dd>
         </dl>

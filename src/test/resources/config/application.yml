@@ -18,10 +18,10 @@ spring:
     # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
     #active: testcontainers
   application:
-    name: tripperNest
+    name: campsitesindia
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:trippernest;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:campsitesindia;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
@@ -57,13 +57,13 @@ spring:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: tripper-nest-task-
+      thread-name-prefix: campsitesindia-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: tripper-nest-scheduling-
+      thread-name-prefix: campsitesindia-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -81,7 +81,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'tripperNestApp'
+    name: 'campsitesindiaApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -97,7 +97,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: NThkYjk0YzhkMDgzMzU3NDQ1MzViOWI1ZTYwMjI0MTEyMmQ2MzA0NDM4NWUxNjYxOTNmZGJiMWY0MTkyMWMyNjBkMjY5OTBhOGNmZjQ5OWZlYmQxOWIwMWI2YjA4Yzg5ZGZlNTM4MjBmN2Y0N2YyYjg2NGEzNjhiMjViYWYyMDg=
+        base64-secret: MWQ1YjVmODViYzBmY2UyZTc1YTUyOWFhYTllMTdlNWVlZDBmZGEyMjFiMmRkMjUwN2E0ZGU2YWEwZjRhZDQwNTliNjczY2E0MTc4YzExOTEwOWVlZWY1Yzc2YThhZjUyODgyZDNhZDZkYWMxNTFlNTI3NTVlYTM0OGYzMjVlMjQ=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
 # ===================================================================

@@ -7,7 +7,7 @@
     "serviceDiscoveryType": false,
     "skipUserManagement": false,
     "withAdminUi": true,
-    "baseName": "tripperNest",
+    "baseName": "campsitesindia",
     "buildTool": "maven",
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
@@ -23,8 +23,8 @@
     "testFrameworks": [],
     "websocket": false,
     "applicationType": "monolith",
-    "packageName": "com.dd.ttippernest",
-    "packageFolder": "com/dd/ttippernest",
+    "packageName": "com.dd.campsites",
+    "packageFolder": "com/dd/campsites",
     "jhipsterVersion": "7.1.0",
     "skipServer": false,
     "clientPackageManager": "npm",
@@ -50,10 +50,13 @@
       "Invoice",
       "Room",
       "RoomType",
-      "RoomFeatures",
       "Review",
       "Like",
-      "Followers"
+      "Followers",
+      "FeaturesListing",
+      "FeaturesInRoom",
+      "RoomsForListing",
+      "RoomsInBooking"
     ],
     "skipCheckLengthOfIdentifier": false,
     "skipFakeData": false,
@@ -61,9 +64,9 @@
     "otherModules": [],
     "pages": [],
     "nativeLanguage": "en",
-    "creationTimestamp": 1630618398697,
-    "jwtSecretKey": "NThkYjk0YzhkMDgzMzU3NDQ1MzViOWI1ZTYwMjI0MTEyMmQ2MzA0NDM4NWUxNjYxOTNmZGJiMWY0MTkyMWMyNjBkMjY5OTBhOGNmZjQ5OWZlYmQxOWIwMWI2YjA4Yzg5ZGZlNTM4MjBmN2Y0N2YyYjg2NGEzNjhiMjViYWYyMDg=",
+    "creationTimestamp": 1632239670607,
+    "jwtSecretKey": "MWQ1YjVmODViYzBmY2UyZTc1YTUyOWFhYTllMTdlNWVlZDBmZGEyMjFiMmRkMjUwN2E0ZGU2YWEwZjRhZDQwNTliNjczY2E0MTc4YzExOTEwOWVlZWY1Yzc2YThhZjUyODgyZDNhZDZkYWMxNTFlNTI3NTVlYTM0OGYzMjVlMjQ=",
     "devServerPort": 9060,
-    "lastLiquibaseTimestamp": 1630619538000
+    "lastLiquibaseTimestamp": 1632240990000
   }
 }

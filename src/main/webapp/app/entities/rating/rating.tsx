@@ -82,16 +82,16 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="rating-heading" data-cy="RatingHeading">
-        <Translate contentKey="tripperNestApp.rating.home.title">Ratings</Translate>
+        <Translate contentKey="campsitesindiaApp.rating.home.title">Ratings</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.rating.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.rating.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.rating.home.createLabel">Create new Rating</Translate>
+            <Translate contentKey="campsitesindiaApp.rating.home.createLabel">Create new Rating</Translate>
           </Link>
         </div>
       </h2>
@@ -101,10 +101,13 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.rating.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.rating.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  <Translate contentKey="tripperNestApp.rating.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.rating.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="campsitesindiaApp.rating.listing">Listing</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -118,6 +121,7 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
                     </Button>
                   </td>
                   <td>{rating.name}</td>
+                  <td>{rating.listing ? <Link to={`listing/${rating.listing.id}`}>{rating.listing.title}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${rating.id}`} color="info" size="sm" data-cy="entityDetailsButton">
@@ -159,7 +163,7 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.rating.home.notFound">No Ratings found</Translate>
+              <Translate contentKey="campsitesindiaApp.rating.home.notFound">No Ratings found</Translate>
             </div>
           )
         )}

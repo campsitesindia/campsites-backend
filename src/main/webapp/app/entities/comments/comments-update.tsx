@@ -86,8 +86,8 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.comments.home.createOrEditLabel" data-cy="CommentsCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.comments.home.createOrEditLabel">Create or edit a Comments</Translate>
+          <h2 id="campsitesindiaApp.comments.home.createOrEditLabel" data-cy="CommentsCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.comments.home.createOrEditLabel">Create or edit a Comments</Translate>
           </h2>
         </Col>
       </Row>
@@ -108,21 +108,21 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.comments.commentText')}
+                label={translate('campsitesindiaApp.comments.commentText')}
                 id="comments-commentText"
                 name="commentText"
                 data-cy="commentText"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.comments.createdBy')}
+                label={translate('campsitesindiaApp.comments.createdBy')}
                 id="comments-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.comments.createdDate')}
+                label={translate('campsitesindiaApp.comments.createdDate')}
                 id="comments-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -130,7 +130,7 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.comments.updatedBy')}
+                label={translate('campsitesindiaApp.comments.updatedBy')}
                 id="comments-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -138,7 +138,7 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.comments.updateDate')}
+                label={translate('campsitesindiaApp.comments.updateDate')}
                 id="comments-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -149,7 +149,7 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="comments-post"
                 name="postId"
                 data-cy="post"
-                label={translate('tripperNestApp.comments.post')}
+                label={translate('campsitesindiaApp.comments.post')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -165,7 +165,7 @@ export const CommentsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="comments-user"
                 name="userId"
                 data-cy="user"
-                label={translate('tripperNestApp.comments.user')}
+                label={translate('campsitesindiaApp.comments.user')}
                 type="select"
               >
                 <option value="" key="0" />

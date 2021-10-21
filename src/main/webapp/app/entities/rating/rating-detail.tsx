@@ -20,7 +20,7 @@ export const RatingDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="ratingDetailsHeading">
-          <Translate contentKey="tripperNestApp.rating.detail.title">Rating</Translate>
+          <Translate contentKey="campsitesindiaApp.rating.detail.title">Rating</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,10 +31,14 @@ export const RatingDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{ratingEntity.id}</dd>
           <dt>
             <span id="name">
-              <Translate contentKey="tripperNestApp.rating.name">Name</Translate>
+              <Translate contentKey="campsitesindiaApp.rating.name">Name</Translate>
             </span>
           </dt>
           <dd>{ratingEntity.name}</dd>
+          <dt>
+            <Translate contentKey="campsitesindiaApp.rating.listing">Listing</Translate>
+          </dt>
+          <dd>{ratingEntity.listing ? ratingEntity.listing.title : ''}</dd>
         </dl>
         <Button tag={Link} to="/rating" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

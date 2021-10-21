@@ -82,16 +82,16 @@ export const AuthenticatedUser = (props: RouteComponentProps<{ url: string }>) =
   return (
     <div>
       <h2 id="authenticated-user-heading" data-cy="AuthenticatedUserHeading">
-        <Translate contentKey="tripperNestApp.authenticatedUser.home.title">Authenticated Users</Translate>
+        <Translate contentKey="campsitesindiaApp.authenticatedUser.home.title">Authenticated Users</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.authenticatedUser.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.authenticatedUser.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.authenticatedUser.home.createLabel">Create new Authenticated User</Translate>
+            <Translate contentKey="campsitesindiaApp.authenticatedUser.home.createLabel">Create new Authenticated User</Translate>
           </Link>
         </div>
       </h2>
@@ -101,20 +101,21 @@ export const AuthenticatedUser = (props: RouteComponentProps<{ url: string }>) =
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.authenticatedUser.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('firstName')}>
-                  <Translate contentKey="tripperNestApp.authenticatedUser.firstName">First Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.firstName">First Name</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('lastName')}>
-                  <Translate contentKey="tripperNestApp.authenticatedUser.lastName">Last Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.lastName">Last Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('authTimestamp')}>
-                  <Translate contentKey="tripperNestApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>{' '}
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.authenticatedUser.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -176,7 +177,7 @@ export const AuthenticatedUser = (props: RouteComponentProps<{ url: string }>) =
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.authenticatedUser.home.notFound">No Authenticated Users found</Translate>
+              <Translate contentKey="campsitesindiaApp.authenticatedUser.home.notFound">No Authenticated Users found</Translate>
             </div>
           )
         )}

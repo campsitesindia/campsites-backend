@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
+import { Translate, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './review.reducer';
@@ -20,7 +20,7 @@ export const ReviewDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="reviewDetailsHeading">
-          <Translate contentKey="tripperNestApp.review.detail.title">Review</Translate>
+          <Translate contentKey="campsitesindiaApp.review.detail.title">Review</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,55 +31,42 @@ export const ReviewDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{reviewEntity.id}</dd>
           <dt>
             <span id="rating">
-              <Translate contentKey="tripperNestApp.review.rating">Rating</Translate>
+              <Translate contentKey="campsitesindiaApp.review.rating">Rating</Translate>
             </span>
           </dt>
           <dd>{reviewEntity.rating}</dd>
           <dt>
             <span id="reviewbBody">
-              <Translate contentKey="tripperNestApp.review.reviewbBody">Reviewb Body</Translate>
+              <Translate contentKey="campsitesindiaApp.review.reviewbBody">Reviewb Body</Translate>
             </span>
           </dt>
-          <dd>
-            {reviewEntity.reviewbBody ? (
-              <div>
-                {reviewEntity.reviewbBodyContentType ? (
-                  <a onClick={openFile(reviewEntity.reviewbBodyContentType, reviewEntity.reviewbBody)}>
-                    <Translate contentKey="entity.action.open">Open</Translate>&nbsp;
-                  </a>
-                ) : null}
-                <span>
-                  {reviewEntity.reviewbBodyContentType}, {byteSize(reviewEntity.reviewbBody)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
+          <dd>{reviewEntity.reviewbBody}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.review.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.review.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{reviewEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.review.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.review.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>{reviewEntity.createdDate ? <TextFormat value={reviewEntity.createdDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.review.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.review.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{reviewEntity.updatedBy ? <TextFormat value={reviewEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.review.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.review.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{reviewEntity.updateDate ? <TextFormat value={reviewEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.review.booking">Booking</Translate>
+            <Translate contentKey="campsitesindiaApp.review.booking">Booking</Translate>
           </dt>
           <dd>{reviewEntity.booking ? reviewEntity.booking.name : ''}</dd>
         </dl>

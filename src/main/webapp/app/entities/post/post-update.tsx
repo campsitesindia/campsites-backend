@@ -84,8 +84,8 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.post.home.createOrEditLabel" data-cy="PostCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.post.home.createOrEditLabel">Create or edit a Post</Translate>
+          <h2 id="campsitesindiaApp.post.home.createOrEditLabel" data-cy="PostCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.post.home.createOrEditLabel">Create or edit a Post</Translate>
           </h2>
         </Col>
       </Row>
@@ -106,21 +106,21 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.post.content')}
+                label={translate('campsitesindiaApp.post.content')}
                 id="post-content"
                 name="content"
                 data-cy="content"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.post.createdBy')}
+                label={translate('campsitesindiaApp.post.createdBy')}
                 id="post-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.post.createdDate')}
+                label={translate('campsitesindiaApp.post.createdDate')}
                 id="post-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -128,7 +128,7 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.post.updatedBy')}
+                label={translate('campsitesindiaApp.post.updatedBy')}
                 id="post-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -136,14 +136,14 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.post.updateDate')}
+                label={translate('campsitesindiaApp.post.updateDate')}
                 id="post-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="post-user" name="userId" data-cy="user" label={translate('tripperNestApp.post.user')} type="select">
+              <ValidatedField id="post-user" name="userId" data-cy="user" label={translate('campsitesindiaApp.post.user')} type="select">
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (

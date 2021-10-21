@@ -80,8 +80,8 @@ export const RoomUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.room.home.createOrEditLabel" data-cy="RoomCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.room.home.createOrEditLabel">Create or edit a Room</Translate>
+          <h2 id="campsitesindiaApp.room.home.createOrEditLabel" data-cy="RoomCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.room.home.createOrEditLabel">Create or edit a Room</Translate>
           </h2>
         </Col>
       </Row>
@@ -101,31 +101,37 @@ export const RoomUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('tripperNestApp.room.name')} id="room-name" name="name" data-cy="name" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.room.name')} id="room-name" name="name" data-cy="name" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.room.roomNumber')}
+                label={translate('campsitesindiaApp.room.roomNumber')}
                 id="room-roomNumber"
                 name="roomNumber"
                 data-cy="roomNumber"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.room.isSmoking')}
+                label={translate('campsitesindiaApp.room.isSmoking')}
                 id="room-isSmoking"
                 name="isSmoking"
                 data-cy="isSmoking"
                 type="text"
               />
-              <ValidatedField label={translate('tripperNestApp.room.status')} id="room-status" name="status" data-cy="status" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.room.createdBy')}
+                label={translate('campsitesindiaApp.room.status')}
+                id="room-status"
+                name="status"
+                data-cy="status"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.room.createdBy')}
                 id="room-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.room.createdDate')}
+                label={translate('campsitesindiaApp.room.createdDate')}
                 id="room-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -133,7 +139,7 @@ export const RoomUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.room.updatedBy')}
+                label={translate('campsitesindiaApp.room.updatedBy')}
                 id="room-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -141,7 +147,7 @@ export const RoomUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.room.updateDate')}
+                label={translate('campsitesindiaApp.room.updateDate')}
                 id="room-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -152,7 +158,7 @@ export const RoomUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="room-roomType"
                 name="roomTypeId"
                 data-cy="roomType"
-                label={translate('tripperNestApp.room.roomType')}
+                label={translate('campsitesindiaApp.room.roomType')}
                 type="select"
               >
                 <option value="" key="0" />

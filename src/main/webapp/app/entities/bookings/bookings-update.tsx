@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { IRoom } from 'app/shared/model/room.model';
-import { getEntities as getRooms } from 'app/entities/room/room.reducer';
 import { IListing } from 'app/shared/model/listing.model';
 import { getEntities as getListings } from 'app/entities/listing/listing.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './bookings.reducer';
@@ -22,7 +20,6 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const users = useAppSelector(state => state.userManagement.users);
-  const rooms = useAppSelector(state => state.room.entities);
   const listings = useAppSelector(state => state.listing.entities);
   const bookingsEntity = useAppSelector(state => state.bookings.entity);
   const loading = useAppSelector(state => state.bookings.loading);
@@ -41,7 +38,6 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getUsers({}));
-    dispatch(getRooms({}));
     dispatch(getListings({}));
   }, []);
 
@@ -62,7 +58,6 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...bookingsEntity,
       ...values,
       user: users.find(it => it.id.toString() === values.userId.toString()),
-      room: rooms.find(it => it.id.toString() === values.roomId.toString()),
       listing: listings.find(it => it.id.toString() === values.listingId.toString()),
     };
 
@@ -90,7 +85,6 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
           updatedBy: convertDateTimeFromServer(bookingsEntity.updatedBy),
           updateDate: convertDateTimeFromServer(bookingsEntity.updateDate),
           userId: bookingsEntity?.user?.id,
-          roomId: bookingsEntity?.room?.id,
           listingId: bookingsEntity?.listing?.id,
         };
 
@@ -98,8 +92,8 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.bookings.home.createOrEditLabel" data-cy="BookingsCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.bookings.home.createOrEditLabel">Create or edit a Bookings</Translate>
+          <h2 id="campsitesindiaApp.bookings.home.createOrEditLabel" data-cy="BookingsCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.bookings.home.createOrEditLabel">Create or edit a Bookings</Translate>
           </h2>
         </Col>
       </Row>
@@ -119,9 +113,15 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('tripperNestApp.bookings.name')} id="bookings-name" name="name" data-cy="name" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.checkInDate')}
+                label={translate('campsitesindiaApp.bookings.name')}
+                id="bookings-name"
+                name="name"
+                data-cy="name"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.bookings.checkInDate')}
                 id="bookings-checkInDate"
                 name="checkInDate"
                 data-cy="checkInDate"
@@ -129,7 +129,7 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.checkOutDate')}
+                label={translate('campsitesindiaApp.bookings.checkOutDate')}
                 id="bookings-checkOutDate"
                 name="checkOutDate"
                 data-cy="checkOutDate"
@@ -137,28 +137,28 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.pricePerNight')}
+                label={translate('campsitesindiaApp.bookings.pricePerNight')}
                 id="bookings-pricePerNight"
                 name="pricePerNight"
                 data-cy="pricePerNight"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.numOfNights')}
+                label={translate('campsitesindiaApp.bookings.numOfNights')}
                 id="bookings-numOfNights"
                 name="numOfNights"
                 data-cy="numOfNights"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.createdBy')}
+                label={translate('campsitesindiaApp.bookings.createdBy')}
                 id="bookings-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.createdDate')}
+                label={translate('campsitesindiaApp.bookings.createdDate')}
                 id="bookings-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -166,7 +166,7 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.updatedBy')}
+                label={translate('campsitesindiaApp.bookings.updatedBy')}
                 id="bookings-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -174,7 +174,7 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.bookings.updateDate')}
+                label={translate('campsitesindiaApp.bookings.updateDate')}
                 id="bookings-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -185,7 +185,7 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="bookings-user"
                 name="userId"
                 data-cy="user"
-                label={translate('tripperNestApp.bookings.user')}
+                label={translate('campsitesindiaApp.bookings.user')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -198,26 +198,10 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="bookings-room"
-                name="roomId"
-                data-cy="room"
-                label={translate('tripperNestApp.bookings.room')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {rooms
-                  ? rooms.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.roomNumber}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
                 id="bookings-listing"
                 name="listingId"
                 data-cy="listing"
-                label={translate('tripperNestApp.bookings.listing')}
+                label={translate('campsitesindiaApp.bookings.listing')}
                 type="select"
               >
                 <option value="" key="0" />

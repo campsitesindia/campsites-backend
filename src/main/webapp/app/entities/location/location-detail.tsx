@@ -20,7 +20,7 @@ export const LocationDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="locationDetailsHeading">
-          <Translate contentKey="tripperNestApp.location.detail.title">Location</Translate>
+          <Translate contentKey="campsitesindiaApp.location.detail.title">Location</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,67 +31,61 @@ export const LocationDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{locationEntity.id}</dd>
           <dt>
             <span id="title">
-              <Translate contentKey="tripperNestApp.location.title">Title</Translate>
+              <Translate contentKey="campsitesindiaApp.location.title">Title</Translate>
             </span>
           </dt>
           <dd>{locationEntity.title}</dd>
           <dt>
             <span id="count">
-              <Translate contentKey="tripperNestApp.location.count">Count</Translate>
+              <Translate contentKey="campsitesindiaApp.location.count">Count</Translate>
             </span>
           </dt>
           <dd>{locationEntity.count}</dd>
           <dt>
             <span id="thumbnail">
-              <Translate contentKey="tripperNestApp.location.thumbnail">Thumbnail</Translate>
+              <Translate contentKey="campsitesindiaApp.location.thumbnail">Thumbnail</Translate>
             </span>
           </dt>
           <dd>{locationEntity.thumbnail}</dd>
           <dt>
             <span id="icon">
-              <Translate contentKey="tripperNestApp.location.icon">Icon</Translate>
+              <Translate contentKey="campsitesindiaApp.location.icon">Icon</Translate>
             </span>
           </dt>
           <dd>{locationEntity.icon}</dd>
           <dt>
             <span id="color">
-              <Translate contentKey="tripperNestApp.location.color">Color</Translate>
+              <Translate contentKey="campsitesindiaApp.location.color">Color</Translate>
             </span>
           </dt>
           <dd>{locationEntity.color}</dd>
           <dt>
             <span id="imgIcon">
-              <Translate contentKey="tripperNestApp.location.imgIcon">Img Icon</Translate>
+              <Translate contentKey="campsitesindiaApp.location.imgIcon">Img Icon</Translate>
             </span>
           </dt>
           <dd>{locationEntity.imgIcon}</dd>
           <dt>
             <span id="description">
-              <Translate contentKey="tripperNestApp.location.description">Description</Translate>
+              <Translate contentKey="campsitesindiaApp.location.description">Description</Translate>
             </span>
           </dt>
           <dd>{locationEntity.description}</dd>
           <dt>
-            <span id="parent">
-              <Translate contentKey="tripperNestApp.location.parent">Parent</Translate>
-            </span>
-          </dt>
-          <dd>{locationEntity.parent}</dd>
-          <dt>
             <span id="taxonomy">
-              <Translate contentKey="tripperNestApp.location.taxonomy">Taxonomy</Translate>
+              <Translate contentKey="campsitesindiaApp.location.taxonomy">Taxonomy</Translate>
             </span>
           </dt>
           <dd>{locationEntity.taxonomy}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.location.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.location.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{locationEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.location.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.location.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -99,22 +93,22 @@ export const LocationDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.location.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.location.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{locationEntity.updatedBy ? <TextFormat value={locationEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.location.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.location.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>
             {locationEntity.updateDate ? <TextFormat value={locationEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
           <dt>
-            <Translate contentKey="tripperNestApp.location.parentLocation">Parent Location</Translate>
+            <Translate contentKey="campsitesindiaApp.location.parent">Parent</Translate>
           </dt>
-          <dd>{locationEntity.parentLocation ? locationEntity.parentLocation.title : ''}</dd>
+          <dd>{locationEntity.parent ? locationEntity.parent.title : ''}</dd>
         </dl>
         <Button tag={Link} to="/location" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

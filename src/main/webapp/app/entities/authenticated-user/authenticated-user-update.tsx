@@ -74,8 +74,10 @@ export const AuthenticatedUserUpdate = (props: RouteComponentProps<{ id: string 
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.authenticatedUser.home.createOrEditLabel" data-cy="AuthenticatedUserCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.authenticatedUser.home.createOrEditLabel">Create or edit a AuthenticatedUser</Translate>
+          <h2 id="campsitesindiaApp.authenticatedUser.home.createOrEditLabel" data-cy="AuthenticatedUserCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.authenticatedUser.home.createOrEditLabel">
+              Create or edit a AuthenticatedUser
+            </Translate>
           </h2>
         </Col>
       </Row>
@@ -96,21 +98,21 @@ export const AuthenticatedUserUpdate = (props: RouteComponentProps<{ id: string 
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.authenticatedUser.firstName')}
+                label={translate('campsitesindiaApp.authenticatedUser.firstName')}
                 id="authenticated-user-firstName"
                 name="firstName"
                 data-cy="firstName"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.authenticatedUser.lastName')}
+                label={translate('campsitesindiaApp.authenticatedUser.lastName')}
                 id="authenticated-user-lastName"
                 name="lastName"
                 data-cy="lastName"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.authenticatedUser.authTimestamp')}
+                label={translate('campsitesindiaApp.authenticatedUser.authTimestamp')}
                 id="authenticated-user-authTimestamp"
                 name="authTimestamp"
                 data-cy="authTimestamp"
@@ -121,7 +123,7 @@ export const AuthenticatedUserUpdate = (props: RouteComponentProps<{ id: string 
                 id="authenticated-user-user"
                 name="userId"
                 data-cy="user"
-                label={translate('tripperNestApp.authenticatedUser.user')}
+                label={translate('campsitesindiaApp.authenticatedUser.user')}
                 type="select"
               >
                 <option value="" key="0" />

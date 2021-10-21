@@ -73,8 +73,8 @@ export const RoomTypeUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.roomType.home.createOrEditLabel" data-cy="RoomTypeCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.roomType.home.createOrEditLabel">Create or edit a RoomType</Translate>
+          <h2 id="campsitesindiaApp.roomType.home.createOrEditLabel" data-cy="RoomTypeCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.roomType.home.createOrEditLabel">Create or edit a RoomType</Translate>
           </h2>
         </Col>
       </Row>
@@ -95,49 +95,56 @@ export const RoomTypeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.roomType.description')}
+                label={translate('campsitesindiaApp.roomType.type')}
+                id="room-type-type"
+                name="type"
+                data-cy="type"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.roomType.description')}
                 id="room-type-description"
                 name="description"
                 data-cy="description"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.maxCapacity')}
+                label={translate('campsitesindiaApp.roomType.maxCapacity')}
                 id="room-type-maxCapacity"
                 name="maxCapacity"
                 data-cy="maxCapacity"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.numberOfBeds')}
+                label={translate('campsitesindiaApp.roomType.numberOfBeds')}
                 id="room-type-numberOfBeds"
                 name="numberOfBeds"
                 data-cy="numberOfBeds"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.numberOfBathrooms')}
+                label={translate('campsitesindiaApp.roomType.numberOfBathrooms')}
                 id="room-type-numberOfBathrooms"
                 name="numberOfBathrooms"
                 data-cy="numberOfBathrooms"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.roomRatePerNigt')}
-                id="room-type-roomRatePerNigt"
-                name="roomRatePerNigt"
-                data-cy="roomRatePerNigt"
+                label={translate('campsitesindiaApp.roomType.roomRatePerNight')}
+                id="room-type-roomRatePerNight"
+                name="roomRatePerNight"
+                data-cy="roomRatePerNight"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.createdBy')}
+                label={translate('campsitesindiaApp.roomType.createdBy')}
                 id="room-type-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.createdDate')}
+                label={translate('campsitesindiaApp.roomType.createdDate')}
                 id="room-type-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -145,7 +152,7 @@ export const RoomTypeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.updatedBy')}
+                label={translate('campsitesindiaApp.roomType.updatedBy')}
                 id="room-type-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -153,7 +160,7 @@ export const RoomTypeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.roomType.updateDate')}
+                label={translate('campsitesindiaApp.roomType.updateDate')}
                 id="room-type-updateDate"
                 name="updateDate"
                 data-cy="updateDate"

@@ -36,8 +36,8 @@ export const AuthenticatedUserDeleteDialog = (props: RouteComponentProps<{ id: s
       <ModalHeader toggle={handleClose} data-cy="authenticatedUserDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.authenticatedUser.delete.question">
-        <Translate contentKey="tripperNestApp.authenticatedUser.delete.question" interpolate={{ id: authenticatedUserEntity.id }}>
+      <ModalBody id="campsitesindiaApp.authenticatedUser.delete.question">
+        <Translate contentKey="campsitesindiaApp.authenticatedUser.delete.question" interpolate={{ id: authenticatedUserEntity.id }}>
           Are you sure you want to delete this AuthenticatedUser?
         </Translate>
       </ModalBody>

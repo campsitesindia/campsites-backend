@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntities } from './review.reducer';
@@ -82,16 +82,16 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="review-heading" data-cy="ReviewHeading">
-        <Translate contentKey="tripperNestApp.review.home.title">Reviews</Translate>
+        <Translate contentKey="campsitesindiaApp.review.home.title">Reviews</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.review.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.review.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.review.home.createLabel">Create new Review</Translate>
+            <Translate contentKey="campsitesindiaApp.review.home.createLabel">Create new Review</Translate>
           </Link>
         </div>
       </h2>
@@ -101,28 +101,28 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.review.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('rating')}>
-                  <Translate contentKey="tripperNestApp.review.rating">Rating</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.rating">Rating</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('reviewbBody')}>
-                  <Translate contentKey="tripperNestApp.review.reviewbBody">Reviewb Body</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.reviewbBody">Reviewb Body</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.review.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.review.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.review.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.review.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.review.booking">Booking</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.review.booking">Booking</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -136,21 +136,7 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
                     </Button>
                   </td>
                   <td>{review.rating}</td>
-                  <td>
-                    {review.reviewbBody ? (
-                      <div>
-                        {review.reviewbBodyContentType ? (
-                          <a onClick={openFile(review.reviewbBodyContentType, review.reviewbBody)}>
-                            <Translate contentKey="entity.action.open">Open</Translate>
-                            &nbsp;
-                          </a>
-                        ) : null}
-                        <span>
-                          {review.reviewbBodyContentType}, {byteSize(review.reviewbBody)}
-                        </span>
-                      </div>
-                    ) : null}
-                  </td>
+                  <td>{review.reviewbBody}</td>
                   <td>{review.createdBy}</td>
                   <td>{review.createdDate ? <TextFormat type="date" value={review.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{review.updatedBy ? <TextFormat type="date" value={review.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>
@@ -197,7 +183,7 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.review.home.notFound">No Reviews found</Translate>
+              <Translate contentKey="campsitesindiaApp.review.home.notFound">No Reviews found</Translate>
             </div>
           )
         )}

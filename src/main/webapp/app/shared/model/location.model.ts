@@ -9,13 +9,12 @@ export interface ILocation {
   color?: string | null;
   imgIcon?: string | null;
   description?: string | null;
-  parent?: number | null;
   taxonomy?: string | null;
   createdBy?: string | null;
   createdDate?: string | null;
   updatedBy?: string | null;
   updateDate?: string | null;
-  parentLocation?: ILocation | null;
+  parent?: ILocation | null;
 }
 
 export const defaultValue: Readonly<ILocation> = {};

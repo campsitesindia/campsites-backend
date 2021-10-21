@@ -36,8 +36,8 @@ export const VideosDeleteDialog = (props: RouteComponentProps<{ id: string }>) =
       <ModalHeader toggle={handleClose} data-cy="videosDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.videos.delete.question">
-        <Translate contentKey="tripperNestApp.videos.delete.question" interpolate={{ id: videosEntity.id }}>
+      <ModalBody id="campsitesindiaApp.videos.delete.question">
+        <Translate contentKey="campsitesindiaApp.videos.delete.question" interpolate={{ id: videosEntity.id }}>
           Are you sure you want to delete this Videos?
         </Translate>
       </ModalBody>

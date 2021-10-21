@@ -1,25 +1,25 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
 services:
-  trippernest-app:
-    image: trippernest
+  campsitesindia-app:
+    image: campsitesindia
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://trippernest-postgresql:5432/tripperNest
-      - SPRING_LIQUIBASE_URL=jdbc:postgresql://trippernest-postgresql:5432/tripperNest
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://campsitesindia-postgresql:5432/campsitesindia
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://campsitesindia-postgresql:5432/campsitesindia
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:8080:8080
-  trippernest-postgresql:
+  campsitesindia-postgresql:
     image: postgres:13.3
     # volumes:
-    #   - ~/volumes/jhipster/tripperNest/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/jhipster/campsitesindia/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=tripperNest
+      - POSTGRES_USER=campsitesindia
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,

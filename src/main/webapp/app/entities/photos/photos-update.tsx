@@ -80,8 +80,8 @@ export const PhotosUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.photos.home.createOrEditLabel" data-cy="PhotosCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.photos.home.createOrEditLabel">Create or edit a Photos</Translate>
+          <h2 id="campsitesindiaApp.photos.home.createOrEditLabel" data-cy="PhotosCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.photos.home.createOrEditLabel">Create or edit a Photos</Translate>
           </h2>
         </Col>
       </Row>
@@ -101,33 +101,39 @@ export const PhotosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('tripperNestApp.photos.alt')} id="photos-alt" name="alt" data-cy="alt" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.photos.alt')} id="photos-alt" name="alt" data-cy="alt" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.photos.caption')}
+                label={translate('campsitesindiaApp.photos.caption')}
                 id="photos-caption"
                 name="caption"
                 data-cy="caption"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.photos.description')}
+                label={translate('campsitesindiaApp.photos.description')}
                 id="photos-description"
                 name="description"
                 data-cy="description"
                 type="text"
               />
-              <ValidatedField label={translate('tripperNestApp.photos.href')} id="photos-href" name="href" data-cy="href" type="text" />
-              <ValidatedField label={translate('tripperNestApp.photos.src')} id="photos-src" name="src" data-cy="src" type="text" />
-              <ValidatedField label={translate('tripperNestApp.photos.title')} id="photos-title" name="title" data-cy="title" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.photos.href')} id="photos-href" name="href" data-cy="href" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.photos.src')} id="photos-src" name="src" data-cy="src" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.photos.createdBy')}
+                label={translate('campsitesindiaApp.photos.title')}
+                id="photos-title"
+                name="title"
+                data-cy="title"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.photos.createdBy')}
                 id="photos-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.photos.createdDate')}
+                label={translate('campsitesindiaApp.photos.createdDate')}
                 id="photos-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -135,7 +141,7 @@ export const PhotosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.photos.updatedBy')}
+                label={translate('campsitesindiaApp.photos.updatedBy')}
                 id="photos-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -143,7 +149,7 @@ export const PhotosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.photos.updateDate')}
+                label={translate('campsitesindiaApp.photos.updateDate')}
                 id="photos-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -154,7 +160,7 @@ export const PhotosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="photos-listing"
                 name="listingId"
                 data-cy="listing"
-                label={translate('tripperNestApp.photos.listing')}
+                label={translate('campsitesindiaApp.photos.listing')}
                 type="select"
               >
                 <option value="" key="0" />

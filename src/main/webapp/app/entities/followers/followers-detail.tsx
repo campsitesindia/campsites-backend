@@ -20,7 +20,7 @@ export const FollowersDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="followersDetailsHeading">
-          <Translate contentKey="tripperNestApp.followers.detail.title">Followers</Translate>
+          <Translate contentKey="campsitesindiaApp.followers.detail.title">Followers</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,13 +31,13 @@ export const FollowersDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{followersEntity.id}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.followers.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.followers.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{followersEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.followers.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.followers.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -45,7 +45,7 @@ export const FollowersDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.followers.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.followers.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>
@@ -53,18 +53,18 @@ export const FollowersDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.followers.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.followers.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>
             {followersEntity.updateDate ? <TextFormat value={followersEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
           <dt>
-            <Translate contentKey="tripperNestApp.followers.followedBy">Followed By</Translate>
+            <Translate contentKey="campsitesindiaApp.followers.followedBy">Followed By</Translate>
           </dt>
           <dd>{followersEntity.followedBy ? followersEntity.followedBy.email : ''}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.followers.user">User</Translate>
+            <Translate contentKey="campsitesindiaApp.followers.user">User</Translate>
           </dt>
           <dd>{followersEntity.user ? followersEntity.user.email : ''}</dd>
         </dl>

@@ -20,7 +20,7 @@ export const AuthenticatedUserDetail = (props: RouteComponentProps<{ id: string 
     <Row>
       <Col md="8">
         <h2 data-cy="authenticatedUserDetailsHeading">
-          <Translate contentKey="tripperNestApp.authenticatedUser.detail.title">AuthenticatedUser</Translate>
+          <Translate contentKey="campsitesindiaApp.authenticatedUser.detail.title">AuthenticatedUser</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,19 +31,19 @@ export const AuthenticatedUserDetail = (props: RouteComponentProps<{ id: string 
           <dd>{authenticatedUserEntity.id}</dd>
           <dt>
             <span id="firstName">
-              <Translate contentKey="tripperNestApp.authenticatedUser.firstName">First Name</Translate>
+              <Translate contentKey="campsitesindiaApp.authenticatedUser.firstName">First Name</Translate>
             </span>
           </dt>
           <dd>{authenticatedUserEntity.firstName}</dd>
           <dt>
             <span id="lastName">
-              <Translate contentKey="tripperNestApp.authenticatedUser.lastName">Last Name</Translate>
+              <Translate contentKey="campsitesindiaApp.authenticatedUser.lastName">Last Name</Translate>
             </span>
           </dt>
           <dd>{authenticatedUserEntity.lastName}</dd>
           <dt>
             <span id="authTimestamp">
-              <Translate contentKey="tripperNestApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>
+              <Translate contentKey="campsitesindiaApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>
             </span>
           </dt>
           <dd>
@@ -52,7 +52,7 @@ export const AuthenticatedUserDetail = (props: RouteComponentProps<{ id: string 
             ) : null}
           </dd>
           <dt>
-            <Translate contentKey="tripperNestApp.authenticatedUser.user">User</Translate>
+            <Translate contentKey="campsitesindiaApp.authenticatedUser.user">User</Translate>
           </dt>
           <dd>{authenticatedUserEntity.user ? authenticatedUserEntity.user.email : ''}</dd>
         </dl>

@@ -1,11 +1,11 @@
-id;description;max_capacity;number_of_beds;number_of_bathrooms;room_rate_per_nigt;created_by;created_date;updated_by;update_date
-1;Guyana Streamlined Generic;AI Connecticut;39186;33599;80518;Beauty panel deliver;2021-09-02T20:22:12;2021-09-02T01:08:56;2021-09-02T12:21:23
-2;Beauty Inverse Louisiana;Valley Granite mesh;42168;81213;75493;asynchronous collaboration;2021-09-02T18:00:18;2021-09-02T21:46:27;2021-09-02T00:52:12
-3;Jewelery Berkshire yellow;Identity Small Account;94216;66922;17577;Industrial networks application;2021-09-01T22:26:37;2021-09-02T11:47:25;2021-09-02T03:35:16
-4;feed Account;Bedfordshire override;25232;79330;49205;Cote;2021-09-02T11:57:10;2021-09-01T21:57:54;2021-09-01T23:11:52
-5;Sausages Applications;Caribbean Ergonomic digital;26699;63495;83943;Terrace Dynamic navigate;2021-09-02T05:00:04;2021-09-02T03:37:34;2021-09-02T05:38:02
-6;Wooden Savings payment;auxiliary encryption customized;96740;13101;60273;Innovative Loan SSL;2021-09-02T06:11:26;2021-09-02T12:42:26;2021-09-02T03:44:54
-7;deposit panel;copying Home Account;46370;87715;31122;heuristic Computers;2021-09-02T03:44:14;2021-09-02T12:51:43;2021-09-01T23:57:22
-8;turn-key Fresh Loan;Towels service-desk Computers;84650;37421;21898;Tasty Chair;2021-09-01T22:09:56;2021-09-02T03:04:59;2021-09-02T19:33:03
-9;killer Small;Chile;16527;3855;42093;Music;2021-09-02T07:47:05;2021-09-02T09:37:39;2021-09-01T23:22:12
-10;Credit Oregon;International port;21861;65440;90623;Wisconsin;2021-09-02T15:25:51;2021-09-02T06:48:32;2021-09-02T05:05:16
+id;type;description;max_capacity;number_of_beds;number_of_bathrooms;room_rate_per_night;created_by;created_date;updated_by;update_date
+1;Guyana Streamlined Generic;AI Connecticut;wireless Beauty;70426;14670;74919;Jamaica AI;2021-09-21T16:04:43;2021-09-21T03:33:50;2021-09-20T20:26:54
+2;e-tailers;Lesotho Chief;Dollar Group;75493;39734;27060;Plastic;2021-09-21T16:08:43;2021-09-21T12:21:30;2021-09-21T16:07:39
+3;Solutions online mission-critical;Factors;Small Account;94216;66922;17577;Industrial networks application;2021-09-20T16:47:49;2021-09-21T06:08:37;2021-09-20T21:56:28
+4;feed Account;Bedfordshire override;online;51884;20964;49934;Representative Sausages;2021-09-20T17:04:06;2021-09-21T04:52:41;2021-09-21T08:59:35
+5;Caribbean Ergonomic digital;invoice;PCI payment;36821;24694;70014;El Cotton pink;2021-09-21T03:13:41;2021-09-20T17:03:26;2021-09-20T18:22:29
+6;Gloves customized Liaison;Innovative Loan SSL;unleash deposit;70615;16445;91990;copying Home Account;2021-09-21T05:01:44;2021-09-20T19:06:23;2021-09-21T08:41:19
+7;heuristic Computers;iterate turn-key Fresh;quantifying Towels;31002;82945;58250;logistical;2021-09-21T07:10:36;2021-09-21T10:54:09;2021-09-21T03:00:04
+8;Interactions;matrix;Islands;40988;8628;623;sky strategic;2021-09-21T06:03:20;2021-09-21T09:59:57;2021-09-21T15:37:59
+9;front-end;Loan logistical base;monitor teal Dynamic;96574;88162;26557;Franc SDD;2021-09-20T21:26:31;2021-09-21T10:59:04;2021-09-21T00:36:49
+10;program open-source up;Gorgeous SDD;Administrator analyzer;23711;40566;30352;Buckinghamshire;2021-09-20T23:28:01;2021-09-21T10:06:43;2021-09-20T16:11:06

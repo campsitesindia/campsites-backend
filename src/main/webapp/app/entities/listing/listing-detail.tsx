@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
+import { Translate, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './listing.reducer';
@@ -20,7 +20,7 @@ export const ListingDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="listingDetailsHeading">
-          <Translate contentKey="tripperNestApp.listing.detail.title">Listing</Translate>
+          <Translate contentKey="campsitesindiaApp.listing.detail.title">Listing</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,97 +31,103 @@ export const ListingDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{listingEntity.id}</dd>
           <dt>
             <span id="address">
-              <Translate contentKey="tripperNestApp.listing.address">Address</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.address">Address</Translate>
             </span>
           </dt>
           <dd>{listingEntity.address}</dd>
           <dt>
             <span id="latitude">
-              <Translate contentKey="tripperNestApp.listing.latitude">Latitude</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.latitude">Latitude</Translate>
             </span>
           </dt>
           <dd>{listingEntity.latitude}</dd>
           <dt>
             <span id="longitude">
-              <Translate contentKey="tripperNestApp.listing.longitude">Longitude</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.longitude">Longitude</Translate>
             </span>
           </dt>
           <dd>{listingEntity.longitude}</dd>
           <dt>
             <span id="url">
-              <Translate contentKey="tripperNestApp.listing.url">Url</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.url">Url</Translate>
             </span>
           </dt>
           <dd>{listingEntity.url}</dd>
           <dt>
             <span id="title">
-              <Translate contentKey="tripperNestApp.listing.title">Title</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.title">Title</Translate>
             </span>
           </dt>
           <dd>{listingEntity.title}</dd>
           <dt>
             <span id="content">
-              <Translate contentKey="tripperNestApp.listing.content">Content</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.content">Content</Translate>
             </span>
           </dt>
           <dd>{listingEntity.content}</dd>
           <dt>
             <span id="thumbnail">
-              <Translate contentKey="tripperNestApp.listing.thumbnail">Thumbnail</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.thumbnail">Thumbnail</Translate>
             </span>
           </dt>
           <dd>{listingEntity.thumbnail}</dd>
           <dt>
             <span id="isFeatured">
-              <Translate contentKey="tripperNestApp.listing.isFeatured">Is Featured</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.isFeatured">Is Featured</Translate>
             </span>
           </dt>
           <dd>{listingEntity.isFeatured ? 'true' : 'false'}</dd>
           <dt>
+            <span id="pricePerPerson">
+              <Translate contentKey="campsitesindiaApp.listing.pricePerPerson">Price Per Person</Translate>
+            </span>
+          </dt>
+          <dd>{listingEntity.pricePerPerson}</dd>
+          <dt>
             <span id="phone">
-              <Translate contentKey="tripperNestApp.listing.phone">Phone</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.phone">Phone</Translate>
             </span>
           </dt>
           <dd>{listingEntity.phone}</dd>
           <dt>
             <span id="email">
-              <Translate contentKey="tripperNestApp.listing.email">Email</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.email">Email</Translate>
             </span>
           </dt>
           <dd>{listingEntity.email}</dd>
           <dt>
             <span id="website">
-              <Translate contentKey="tripperNestApp.listing.website">Website</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.website">Website</Translate>
             </span>
           </dt>
           <dd>{listingEntity.website}</dd>
           <dt>
             <span id="comment">
-              <Translate contentKey="tripperNestApp.listing.comment">Comment</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.comment">Comment</Translate>
             </span>
           </dt>
-          <dd>{listingEntity.comment ? 'true' : 'false'}</dd>
+          <dd>{listingEntity.comment}</dd>
           <dt>
             <span id="disableBooking">
-              <Translate contentKey="tripperNestApp.listing.disableBooking">Disable Booking</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.disableBooking">Disable Booking</Translate>
             </span>
           </dt>
           <dd>{listingEntity.disableBooking ? 'true' : 'false'}</dd>
           <dt>
             <span id="viewCount">
-              <Translate contentKey="tripperNestApp.listing.viewCount">View Count</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.viewCount">View Count</Translate>
             </span>
           </dt>
           <dd>{listingEntity.viewCount}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.listing.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{listingEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.listing.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -129,38 +135,26 @@ export const ListingDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.listing.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{listingEntity.updatedBy ? <TextFormat value={listingEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.listing.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.listing.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{listingEntity.updateDate ? <TextFormat value={listingEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.listing.listingType">Listing Type</Translate>
+            <Translate contentKey="campsitesindiaApp.listing.listingType">Listing Type</Translate>
           </dt>
           <dd>{listingEntity.listingType ? listingEntity.listingType.title : ''}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.listing.rating">Rating</Translate>
-          </dt>
-          <dd>{listingEntity.rating ? listingEntity.rating.name : ''}</dd>
-          <dt>
-            <Translate contentKey="tripperNestApp.listing.location">Location</Translate>
+            <Translate contentKey="campsitesindiaApp.listing.location">Location</Translate>
           </dt>
           <dd>{listingEntity.location ? listingEntity.location.title : ''}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.listing.feature">Feature</Translate>
-          </dt>
-          <dd>{listingEntity.feature ? listingEntity.feature.title : ''}</dd>
-          <dt>
-            <Translate contentKey="tripperNestApp.listing.room">Room</Translate>
-          </dt>
-          <dd>{listingEntity.room ? listingEntity.room.roomNumber : ''}</dd>
-          <dt>
-            <Translate contentKey="tripperNestApp.listing.owner">Owner</Translate>
+            <Translate contentKey="campsitesindiaApp.listing.owner">Owner</Translate>
           </dt>
           <dd>{listingEntity.owner ? listingEntity.owner.email : ''}</dd>
         </dl>

@@ -4,6 +4,8 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { IListing } from 'app/shared/model/listing.model';
+import { getEntities as getListings } from 'app/entities/listing/listing.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './rating.reducer';
 import { IRating } from 'app/shared/model/rating.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -15,6 +17,7 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
+  const listings = useAppSelector(state => state.listing.entities);
   const ratingEntity = useAppSelector(state => state.rating.entity);
   const loading = useAppSelector(state => state.rating.loading);
   const updating = useAppSelector(state => state.rating.updating);
@@ -30,6 +33,8 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
     } else {
       dispatch(getEntity(props.match.params.id));
     }
+
+    dispatch(getListings({}));
   }, []);
 
   useEffect(() => {
@@ -42,6 +47,7 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...ratingEntity,
       ...values,
+      listing: listings.find(it => it.id.toString() === values.listingId.toString()),
     };
 
     if (isNew) {
@@ -56,14 +62,15 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ? {}
       : {
           ...ratingEntity,
+          listingId: ratingEntity?.listing?.id,
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.rating.home.createOrEditLabel" data-cy="RatingCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.rating.home.createOrEditLabel">Create or edit a Rating</Translate>
+          <h2 id="campsitesindiaApp.rating.home.createOrEditLabel" data-cy="RatingCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.rating.home.createOrEditLabel">Create or edit a Rating</Translate>
           </h2>
         </Col>
       </Row>
@@ -83,7 +90,23 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('tripperNestApp.rating.name')} id="rating-name" name="name" data-cy="name" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.rating.name')} id="rating-name" name="name" data-cy="name" type="text" />
+              <ValidatedField
+                id="rating-listing"
+                name="listingId"
+                data-cy="listing"
+                label={translate('campsitesindiaApp.rating.listing')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {listings
+                  ? listings.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.title}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/rating" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

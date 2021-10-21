@@ -82,16 +82,16 @@ export const Invoice = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="invoice-heading" data-cy="InvoiceHeading">
-        <Translate contentKey="tripperNestApp.invoice.home.title">Invoices</Translate>
+        <Translate contentKey="campsitesindiaApp.invoice.home.title">Invoices</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.invoice.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.invoice.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.invoice.home.createLabel">Create new Invoice</Translate>
+            <Translate contentKey="campsitesindiaApp.invoice.home.createLabel">Create new Invoice</Translate>
           </Link>
         </div>
       </h2>
@@ -101,31 +101,31 @@ export const Invoice = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.invoice.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('invoiceAmount')}>
-                  <Translate contentKey="tripperNestApp.invoice.invoiceAmount">Invoice Amount</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.invoiceAmount">Invoice Amount</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  <Translate contentKey="tripperNestApp.invoice.status">Status</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.invoice.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.invoice.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.invoice.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.invoice.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.invoice.bookings">Bookings</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.bookings">Bookings</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.invoice.customer">Customer</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.invoice.customer">Customer</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -140,7 +140,7 @@ export const Invoice = (props: RouteComponentProps<{ url: string }>) => {
                   </td>
                   <td>{invoice.invoiceAmount}</td>
                   <td>
-                    <Translate contentKey={`tripperNestApp.InvoiceStatus.${invoice.status}`} />
+                    <Translate contentKey={`campsitesindiaApp.InvoiceStatus.${invoice.status}`} />
                   </td>
                   <td>{invoice.createdBy}</td>
                   <td>{invoice.createdDate ? <TextFormat type="date" value={invoice.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
@@ -189,7 +189,7 @@ export const Invoice = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.invoice.home.notFound">No Invoices found</Translate>
+              <Translate contentKey="campsitesindiaApp.invoice.home.notFound">No Invoices found</Translate>
             </div>
           )
         )}

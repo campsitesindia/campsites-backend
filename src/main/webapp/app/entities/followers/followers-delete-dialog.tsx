@@ -36,8 +36,8 @@ export const FollowersDeleteDialog = (props: RouteComponentProps<{ id: string }>
       <ModalHeader toggle={handleClose} data-cy="followersDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.followers.delete.question">
-        <Translate contentKey="tripperNestApp.followers.delete.question" interpolate={{ id: followersEntity.id }}>
+      <ModalBody id="campsitesindiaApp.followers.delete.question">
+        <Translate contentKey="campsitesindiaApp.followers.delete.question" interpolate={{ id: followersEntity.id }}>
           Are you sure you want to delete this Followers?
         </Translate>
       </ModalBody>

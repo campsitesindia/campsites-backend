@@ -4,6 +4,7 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { getEntities as getListingTypes } from 'app/entities/listing-type/listing-type.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './listing-type.reducer';
 import { IListingType } from 'app/shared/model/listing-type.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -15,6 +16,7 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
+  const listingTypes = useAppSelector(state => state.listingType.entities);
   const listingTypeEntity = useAppSelector(state => state.listingType.entity);
   const loading = useAppSelector(state => state.listingType.loading);
   const updating = useAppSelector(state => state.listingType.updating);
@@ -30,6 +32,8 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
     } else {
       dispatch(getEntity(props.match.params.id));
     }
+
+    dispatch(getListingTypes({}));
   }, []);
 
   useEffect(() => {
@@ -46,6 +50,7 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
     const entity = {
       ...listingTypeEntity,
       ...values,
+      parent: listingTypes.find(it => it.id.toString() === values.parentId.toString()),
     };
 
     if (isNew) {
@@ -67,14 +72,15 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
           createdDate: convertDateTimeFromServer(listingTypeEntity.createdDate),
           updatedBy: convertDateTimeFromServer(listingTypeEntity.updatedBy),
           updateDate: convertDateTimeFromServer(listingTypeEntity.updateDate),
+          parentId: listingTypeEntity?.parent?.id,
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.listingType.home.createOrEditLabel" data-cy="ListingTypeCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.listingType.home.createOrEditLabel">Create or edit a ListingType</Translate>
+          <h2 id="campsitesindiaApp.listingType.home.createOrEditLabel" data-cy="ListingTypeCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.listingType.home.createOrEditLabel">Create or edit a ListingType</Translate>
           </h2>
         </Col>
       </Row>
@@ -95,77 +101,70 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.listingType.title')}
+                label={translate('campsitesindiaApp.listingType.title')}
                 id="listing-type-title"
                 name="title"
                 data-cy="title"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.count')}
+                label={translate('campsitesindiaApp.listingType.count')}
                 id="listing-type-count"
                 name="count"
                 data-cy="count"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.thumbnail')}
+                label={translate('campsitesindiaApp.listingType.thumbnail')}
                 id="listing-type-thumbnail"
                 name="thumbnail"
                 data-cy="thumbnail"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.icon')}
+                label={translate('campsitesindiaApp.listingType.icon')}
                 id="listing-type-icon"
                 name="icon"
                 data-cy="icon"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.color')}
+                label={translate('campsitesindiaApp.listingType.color')}
                 id="listing-type-color"
                 name="color"
                 data-cy="color"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.imgIcon')}
+                label={translate('campsitesindiaApp.listingType.imgIcon')}
                 id="listing-type-imgIcon"
                 name="imgIcon"
                 data-cy="imgIcon"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.description')}
+                label={translate('campsitesindiaApp.listingType.description')}
                 id="listing-type-description"
                 name="description"
                 data-cy="description"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.parent')}
-                id="listing-type-parent"
-                name="parent"
-                data-cy="parent"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tripperNestApp.listingType.taxonomy')}
+                label={translate('campsitesindiaApp.listingType.taxonomy')}
                 id="listing-type-taxonomy"
                 name="taxonomy"
                 data-cy="taxonomy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.createdBy')}
+                label={translate('campsitesindiaApp.listingType.createdBy')}
                 id="listing-type-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.createdDate')}
+                label={translate('campsitesindiaApp.listingType.createdDate')}
                 id="listing-type-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -173,7 +172,7 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.updatedBy')}
+                label={translate('campsitesindiaApp.listingType.updatedBy')}
                 id="listing-type-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -181,13 +180,29 @@ export const ListingTypeUpdate = (props: RouteComponentProps<{ id: string }>) =>
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.listingType.updateDate')}
+                label={translate('campsitesindiaApp.listingType.updateDate')}
                 id="listing-type-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField
+                id="listing-type-parent"
+                name="parentId"
+                data-cy="parent"
+                label={translate('campsitesindiaApp.listingType.parent')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {listingTypes
+                  ? listingTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.title}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/listing-type" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

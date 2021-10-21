@@ -82,16 +82,16 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="bookings-heading" data-cy="BookingsHeading">
-        <Translate contentKey="tripperNestApp.bookings.home.title">Bookings</Translate>
+        <Translate contentKey="campsitesindiaApp.bookings.home.title">Bookings</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.bookings.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.bookings.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.bookings.home.createLabel">Create new Bookings</Translate>
+            <Translate contentKey="campsitesindiaApp.bookings.home.createLabel">Create new Bookings</Translate>
           </Link>
         </div>
       </h2>
@@ -101,43 +101,41 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.bookings.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  <Translate contentKey="tripperNestApp.bookings.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('checkInDate')}>
-                  <Translate contentKey="tripperNestApp.bookings.checkInDate">Check In Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.checkInDate">Check In Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('checkOutDate')}>
-                  <Translate contentKey="tripperNestApp.bookings.checkOutDate">Check Out Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.checkOutDate">Check Out Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('pricePerNight')}>
-                  <Translate contentKey="tripperNestApp.bookings.pricePerNight">Price Per Night</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.pricePerNight">Price Per Night</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('numOfNights')}>
-                  <Translate contentKey="tripperNestApp.bookings.numOfNights">Num Of Nights</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.numOfNights">Num Of Nights</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.bookings.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.bookings.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.bookings.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.bookings.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.bookings.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tripperNestApp.bookings.room">Room</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="tripperNestApp.bookings.listing">Listing</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.bookings.listing">Listing</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -162,7 +160,6 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{bookings.updatedBy ? <TextFormat type="date" value={bookings.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{bookings.updateDate ? <TextFormat type="date" value={bookings.updateDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{bookings.user ? bookings.user.email : ''}</td>
-                  <td>{bookings.room ? <Link to={`room/${bookings.room.id}`}>{bookings.room.roomNumber}</Link> : ''}</td>
                   <td>{bookings.listing ? <Link to={`listing/${bookings.listing.id}`}>{bookings.listing.title}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
@@ -205,7 +202,7 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.bookings.home.notFound">No Bookings found</Translate>
+              <Translate contentKey="campsitesindiaApp.bookings.home.notFound">No Bookings found</Translate>
             </div>
           )
         )}

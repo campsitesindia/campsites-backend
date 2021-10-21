@@ -92,8 +92,8 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.like.home.createOrEditLabel" data-cy="LikeCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.like.home.createOrEditLabel">Create or edit a Like</Translate>
+          <h2 id="campsitesindiaApp.like.home.createOrEditLabel" data-cy="LikeCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.like.home.createOrEditLabel">Create or edit a Like</Translate>
           </h2>
         </Col>
       </Row>
@@ -114,14 +114,14 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.like.createdBy')}
+                label={translate('campsitesindiaApp.like.createdBy')}
                 id="like-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.like.createdDate')}
+                label={translate('campsitesindiaApp.like.createdDate')}
                 id="like-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -129,7 +129,7 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.like.updatedBy')}
+                label={translate('campsitesindiaApp.like.updatedBy')}
                 id="like-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -137,14 +137,14 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.like.updateDate')}
+                label={translate('campsitesindiaApp.like.updateDate')}
                 id="like-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="like-post" name="postId" data-cy="post" label={translate('tripperNestApp.like.post')} type="select">
+              <ValidatedField id="like-post" name="postId" data-cy="post" label={translate('campsitesindiaApp.like.post')} type="select">
                 <option value="" key="0" />
                 {posts
                   ? posts.map(otherEntity => (
@@ -154,7 +154,7 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="like-user" name="userId" data-cy="user" label={translate('tripperNestApp.like.user')} type="select">
+              <ValidatedField id="like-user" name="userId" data-cy="user" label={translate('campsitesindiaApp.like.user')} type="select">
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
@@ -168,7 +168,7 @@ export const LikeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="like-images"
                 name="imagesId"
                 data-cy="images"
-                label={translate('tripperNestApp.like.images')}
+                label={translate('campsitesindiaApp.like.images')}
                 type="select"
               >
                 <option value="" key="0" />

@@ -1,5 +1,5 @@
 {
-  "tripperNestApp": {
+  "campsitesindiaApp": {
     "roomType": {
       "home": {
         "title": "Room Types",
@@ -18,11 +18,12 @@
         "title": "Room Type"
       },
       "id": "ID",
+      "type": "Type",
       "description": "Description",
       "maxCapacity": "Max Capacity",
       "numberOfBeds": "Number Of Beds",
       "numberOfBathrooms": "Number Of Bathrooms",
-      "roomRatePerNigt": "Room Rate Per Nigt",
+      "roomRatePerNight": "Room Rate Per Night",
       "createdBy": "Created By",
       "createdDate": "Created Date",
       "updatedBy": "Updated By",

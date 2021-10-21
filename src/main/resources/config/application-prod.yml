@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    com.dd.ttippernest: INFO
+    com.dd.campsites: INFO
 
 management:
   metrics:
@@ -33,8 +33,8 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/tripperNest
-    username: tripperNest
+    url: jdbc:postgresql://localhost:5432/campsitesindia
+    username: campsitesindia
     password:
     hikari:
       poolName: Hikari
@@ -54,7 +54,7 @@ spring:
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias trippernest -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias campsitesindia -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
@@ -101,7 +101,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: NThkYjk0YzhkMDgzMzU3NDQ1MzViOWI1ZTYwMjI0MTEyMmQ2MzA0NDM4NWUxNjYxOTNmZGJiMWY0MTkyMWMyNjBkMjY5OTBhOGNmZjQ5OWZlYmQxOWIwMWI2YjA4Yzg5ZGZlNTM4MjBmN2Y0N2YyYjg2NGEzNjhiMjViYWYyMDg=
+        base64-secret: MWQ1YjVmODViYzBmY2UyZTc1YTUyOWFhYTllMTdlNWVlZDBmZGEyMjFiMmRkMjUwN2E0ZGU2YWEwZjRhZDQwNTliNjczY2E0MTc4YzExOTEwOWVlZWY1Yzc2YThhZjUyODgyZDNhZDZkYWMxNTFlNTI3NTVlYTM0OGYzMjVlMjQ=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

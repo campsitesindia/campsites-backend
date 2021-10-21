@@ -36,8 +36,8 @@ export const RatingDeleteDialog = (props: RouteComponentProps<{ id: string }>) =
       <ModalHeader toggle={handleClose} data-cy="ratingDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.rating.delete.question">
-        <Translate contentKey="tripperNestApp.rating.delete.question" interpolate={{ id: ratingEntity.id }}>
+      <ModalBody id="campsitesindiaApp.rating.delete.question">
+        <Translate contentKey="campsitesindiaApp.rating.delete.question" interpolate={{ id: ratingEntity.id }}>
           Are you sure you want to delete this Rating?
         </Translate>
       </ModalBody>

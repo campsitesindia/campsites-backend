@@ -1,5 +1,5 @@
 {
-  "tripperNestApp": {
+  "campsitesindiaApp": {
     "bookings": {
       "home": {
         "title": "Bookings",
@@ -28,7 +28,6 @@
       "updatedBy": "Updated By",
       "updateDate": "Update Date",
       "user": "User",
-      "room": "Room",
       "listing": "Listing",
       "invoice": "Invoice"
     }

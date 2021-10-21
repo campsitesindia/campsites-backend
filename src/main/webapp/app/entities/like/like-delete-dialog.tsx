@@ -36,8 +36,8 @@ export const LikeDeleteDialog = (props: RouteComponentProps<{ id: string }>) => 
       <ModalHeader toggle={handleClose} data-cy="likeDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.like.delete.question">
-        <Translate contentKey="tripperNestApp.like.delete.question" interpolate={{ id: likeEntity.id }}>
+      <ModalBody id="campsitesindiaApp.like.delete.question">
+        <Translate contentKey="campsitesindiaApp.like.delete.question" interpolate={{ id: likeEntity.id }}>
           Are you sure you want to delete this Like?
         </Translate>
       </ModalBody>

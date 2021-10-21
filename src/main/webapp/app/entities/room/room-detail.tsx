@@ -20,7 +20,7 @@ export const RoomDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="roomDetailsHeading">
-          <Translate contentKey="tripperNestApp.room.detail.title">Room</Translate>
+          <Translate contentKey="campsitesindiaApp.room.detail.title">Room</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,54 +31,54 @@ export const RoomDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{roomEntity.id}</dd>
           <dt>
             <span id="name">
-              <Translate contentKey="tripperNestApp.room.name">Name</Translate>
+              <Translate contentKey="campsitesindiaApp.room.name">Name</Translate>
             </span>
           </dt>
           <dd>{roomEntity.name}</dd>
           <dt>
             <span id="roomNumber">
-              <Translate contentKey="tripperNestApp.room.roomNumber">Room Number</Translate>
+              <Translate contentKey="campsitesindiaApp.room.roomNumber">Room Number</Translate>
             </span>
           </dt>
           <dd>{roomEntity.roomNumber}</dd>
           <dt>
             <span id="isSmoking">
-              <Translate contentKey="tripperNestApp.room.isSmoking">Is Smoking</Translate>
+              <Translate contentKey="campsitesindiaApp.room.isSmoking">Is Smoking</Translate>
             </span>
           </dt>
           <dd>{roomEntity.isSmoking}</dd>
           <dt>
             <span id="status">
-              <Translate contentKey="tripperNestApp.room.status">Status</Translate>
+              <Translate contentKey="campsitesindiaApp.room.status">Status</Translate>
             </span>
           </dt>
           <dd>{roomEntity.status}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.room.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.room.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{roomEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.room.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.room.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>{roomEntity.createdDate ? <TextFormat value={roomEntity.createdDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.room.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.room.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{roomEntity.updatedBy ? <TextFormat value={roomEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.room.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.room.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{roomEntity.updateDate ? <TextFormat value={roomEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.room.roomType">Room Type</Translate>
+            <Translate contentKey="campsitesindiaApp.room.roomType">Room Type</Translate>
           </dt>
           <dd>{roomEntity.roomType ? roomEntity.roomType.id : ''}</dd>
         </dl>

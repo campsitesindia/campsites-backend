@@ -20,7 +20,7 @@ export const PostDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Row>
       <Col md="8">
         <h2 data-cy="postDetailsHeading">
-          <Translate contentKey="tripperNestApp.post.detail.title">Post</Translate>
+          <Translate contentKey="campsitesindiaApp.post.detail.title">Post</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,36 +31,36 @@ export const PostDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{postEntity.id}</dd>
           <dt>
             <span id="content">
-              <Translate contentKey="tripperNestApp.post.content">Content</Translate>
+              <Translate contentKey="campsitesindiaApp.post.content">Content</Translate>
             </span>
           </dt>
           <dd>{postEntity.content}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.post.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.post.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{postEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.post.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.post.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>{postEntity.createdDate ? <TextFormat value={postEntity.createdDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.post.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.post.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>{postEntity.updatedBy ? <TextFormat value={postEntity.updatedBy} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.post.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.post.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>{postEntity.updateDate ? <TextFormat value={postEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="tripperNestApp.post.user">User</Translate>
+            <Translate contentKey="campsitesindiaApp.post.user">User</Translate>
           </dt>
           <dd>{postEntity.user ? postEntity.user.email : ''}</dd>
         </dl>

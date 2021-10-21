@@ -80,8 +80,8 @@ export const VideosUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.videos.home.createOrEditLabel" data-cy="VideosCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.videos.home.createOrEditLabel">Create or edit a Videos</Translate>
+          <h2 id="campsitesindiaApp.videos.home.createOrEditLabel" data-cy="VideosCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.videos.home.createOrEditLabel">Create or edit a Videos</Translate>
           </h2>
         </Col>
       </Row>
@@ -101,17 +101,17 @@ export const VideosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('tripperNestApp.videos.name')} id="videos-name" name="name" data-cy="name" type="text" />
-              <ValidatedField label={translate('tripperNestApp.videos.url')} id="videos-url" name="url" data-cy="url" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.videos.name')} id="videos-name" name="name" data-cy="name" type="text" />
+              <ValidatedField label={translate('campsitesindiaApp.videos.url')} id="videos-url" name="url" data-cy="url" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.videos.createdBy')}
+                label={translate('campsitesindiaApp.videos.createdBy')}
                 id="videos-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.videos.createdDate')}
+                label={translate('campsitesindiaApp.videos.createdDate')}
                 id="videos-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -119,7 +119,7 @@ export const VideosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.videos.updatedBy')}
+                label={translate('campsitesindiaApp.videos.updatedBy')}
                 id="videos-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -127,7 +127,7 @@ export const VideosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.videos.updateDate')}
+                label={translate('campsitesindiaApp.videos.updateDate')}
                 id="videos-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -138,7 +138,7 @@ export const VideosUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="videos-listing"
                 name="listingId"
                 data-cy="listing"
-                label={translate('tripperNestApp.videos.listing')}
+                label={translate('campsitesindiaApp.videos.listing')}
                 type="select"
               >
                 <option value="" key="0" />

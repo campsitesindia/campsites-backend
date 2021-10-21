@@ -82,16 +82,16 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="room-type-heading" data-cy="RoomTypeHeading">
-        <Translate contentKey="tripperNestApp.roomType.home.title">Room Types</Translate>
+        <Translate contentKey="campsitesindiaApp.roomType.home.title">Room Types</Translate>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tripperNestApp.roomType.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="campsitesindiaApp.roomType.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="tripperNestApp.roomType.home.createLabel">Create new Room Type</Translate>
+            <Translate contentKey="campsitesindiaApp.roomType.home.createLabel">Create new Room Type</Translate>
           </Link>
         </div>
       </h2>
@@ -101,36 +101,39 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tripperNestApp.roomType.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('type')}>
+                  <Translate contentKey="campsitesindiaApp.roomType.type">Type</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="tripperNestApp.roomType.description">Description</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.description">Description</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('maxCapacity')}>
-                  <Translate contentKey="tripperNestApp.roomType.maxCapacity">Max Capacity</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.maxCapacity">Max Capacity</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('numberOfBeds')}>
-                  <Translate contentKey="tripperNestApp.roomType.numberOfBeds">Number Of Beds</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.numberOfBeds">Number Of Beds</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('numberOfBathrooms')}>
-                  <Translate contentKey="tripperNestApp.roomType.numberOfBathrooms">Number Of Bathrooms</Translate>{' '}
+                  <Translate contentKey="campsitesindiaApp.roomType.numberOfBathrooms">Number Of Bathrooms</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('roomRatePerNigt')}>
-                  <Translate contentKey="tripperNestApp.roomType.roomRatePerNigt">Room Rate Per Nigt</Translate>{' '}
+                <th className="hand" onClick={sort('roomRatePerNight')}>
+                  <Translate contentKey="campsitesindiaApp.roomType.roomRatePerNight">Room Rate Per Night</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
-                  <Translate contentKey="tripperNestApp.roomType.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="tripperNestApp.roomType.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updatedBy')}>
-                  <Translate contentKey="tripperNestApp.roomType.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.updatedBy">Updated By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('updateDate')}>
-                  <Translate contentKey="tripperNestApp.roomType.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.roomType.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -143,11 +146,12 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
                       {roomType.id}
                     </Button>
                   </td>
+                  <td>{roomType.type}</td>
                   <td>{roomType.description}</td>
                   <td>{roomType.maxCapacity}</td>
                   <td>{roomType.numberOfBeds}</td>
                   <td>{roomType.numberOfBathrooms}</td>
-                  <td>{roomType.roomRatePerNigt}</td>
+                  <td>{roomType.roomRatePerNight}</td>
                   <td>{roomType.createdBy}</td>
                   <td>{roomType.createdDate ? <TextFormat type="date" value={roomType.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{roomType.updatedBy ? <TextFormat type="date" value={roomType.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>
@@ -193,7 +197,7 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="tripperNestApp.roomType.home.notFound">No Room Types found</Translate>
+              <Translate contentKey="campsitesindiaApp.roomType.home.notFound">No Room Types found</Translate>
             </div>
           )
         )}

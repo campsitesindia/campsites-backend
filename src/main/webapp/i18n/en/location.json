@@ -1,5 +1,5 @@
 {
-  "tripperNestApp": {
+  "campsitesindiaApp": {
     "location": {
       "home": {
         "title": "Locations",
@@ -25,13 +25,12 @@
       "color": "Color",
       "imgIcon": "Img Icon",
       "description": "Description",
-      "parent": "Parent",
       "taxonomy": "Taxonomy",
       "createdBy": "Created By",
       "createdDate": "Created Date",
       "updatedBy": "Updated By",
       "updateDate": "Update Date",
-      "parentLocation": "Parent Location"
+      "parent": "Parent"
     }
   }
 }

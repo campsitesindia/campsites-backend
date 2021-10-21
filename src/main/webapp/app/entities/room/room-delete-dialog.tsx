@@ -36,8 +36,8 @@ export const RoomDeleteDialog = (props: RouteComponentProps<{ id: string }>) => 
       <ModalHeader toggle={handleClose} data-cy="roomDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="tripperNestApp.room.delete.question">
-        <Translate contentKey="tripperNestApp.room.delete.question" interpolate={{ id: roomEntity.id }}>
+      <ModalBody id="campsitesindiaApp.room.delete.question">
+        <Translate contentKey="campsitesindiaApp.room.delete.question" interpolate={{ id: roomEntity.id }}>
           Are you sure you want to delete this Room?
         </Translate>
       </ModalBody>

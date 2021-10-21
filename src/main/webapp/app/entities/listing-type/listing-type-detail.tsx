@@ -20,7 +20,7 @@ export const ListingTypeDetail = (props: RouteComponentProps<{ id: string }>) =>
     <Row>
       <Col md="8">
         <h2 data-cy="listingTypeDetailsHeading">
-          <Translate contentKey="tripperNestApp.listingType.detail.title">ListingType</Translate>
+          <Translate contentKey="campsitesindiaApp.listingType.detail.title">ListingType</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,67 +31,61 @@ export const ListingTypeDetail = (props: RouteComponentProps<{ id: string }>) =>
           <dd>{listingTypeEntity.id}</dd>
           <dt>
             <span id="title">
-              <Translate contentKey="tripperNestApp.listingType.title">Title</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.title">Title</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.title}</dd>
           <dt>
             <span id="count">
-              <Translate contentKey="tripperNestApp.listingType.count">Count</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.count">Count</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.count}</dd>
           <dt>
             <span id="thumbnail">
-              <Translate contentKey="tripperNestApp.listingType.thumbnail">Thumbnail</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.thumbnail">Thumbnail</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.thumbnail}</dd>
           <dt>
             <span id="icon">
-              <Translate contentKey="tripperNestApp.listingType.icon">Icon</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.icon">Icon</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.icon}</dd>
           <dt>
             <span id="color">
-              <Translate contentKey="tripperNestApp.listingType.color">Color</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.color">Color</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.color}</dd>
           <dt>
             <span id="imgIcon">
-              <Translate contentKey="tripperNestApp.listingType.imgIcon">Img Icon</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.imgIcon">Img Icon</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.imgIcon}</dd>
           <dt>
             <span id="description">
-              <Translate contentKey="tripperNestApp.listingType.description">Description</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.description">Description</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.description}</dd>
           <dt>
-            <span id="parent">
-              <Translate contentKey="tripperNestApp.listingType.parent">Parent</Translate>
-            </span>
-          </dt>
-          <dd>{listingTypeEntity.parent}</dd>
-          <dt>
             <span id="taxonomy">
-              <Translate contentKey="tripperNestApp.listingType.taxonomy">Taxonomy</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.taxonomy">Taxonomy</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.taxonomy}</dd>
           <dt>
             <span id="createdBy">
-              <Translate contentKey="tripperNestApp.listingType.createdBy">Created By</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.createdBy">Created By</Translate>
             </span>
           </dt>
           <dd>{listingTypeEntity.createdBy}</dd>
           <dt>
             <span id="createdDate">
-              <Translate contentKey="tripperNestApp.listingType.createdDate">Created Date</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.createdDate">Created Date</Translate>
             </span>
           </dt>
           <dd>
@@ -101,7 +95,7 @@ export const ListingTypeDetail = (props: RouteComponentProps<{ id: string }>) =>
           </dd>
           <dt>
             <span id="updatedBy">
-              <Translate contentKey="tripperNestApp.listingType.updatedBy">Updated By</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.updatedBy">Updated By</Translate>
             </span>
           </dt>
           <dd>
@@ -109,12 +103,16 @@ export const ListingTypeDetail = (props: RouteComponentProps<{ id: string }>) =>
           </dd>
           <dt>
             <span id="updateDate">
-              <Translate contentKey="tripperNestApp.listingType.updateDate">Update Date</Translate>
+              <Translate contentKey="campsitesindiaApp.listingType.updateDate">Update Date</Translate>
             </span>
           </dt>
           <dd>
             {listingTypeEntity.updateDate ? <TextFormat value={listingTypeEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
+          <dt>
+            <Translate contentKey="campsitesindiaApp.listingType.parent">Parent</Translate>
+          </dt>
+          <dd>{listingTypeEntity.parent ? listingTypeEntity.parent.title : ''}</dd>
         </dl>
         <Button tag={Link} to="/listing-type" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

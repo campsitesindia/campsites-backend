@@ -82,8 +82,8 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.followers.home.createOrEditLabel" data-cy="FollowersCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.followers.home.createOrEditLabel">Create or edit a Followers</Translate>
+          <h2 id="campsitesindiaApp.followers.home.createOrEditLabel" data-cy="FollowersCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.followers.home.createOrEditLabel">Create or edit a Followers</Translate>
           </h2>
         </Col>
       </Row>
@@ -104,14 +104,14 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.followers.createdBy')}
+                label={translate('campsitesindiaApp.followers.createdBy')}
                 id="followers-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.followers.createdDate')}
+                label={translate('campsitesindiaApp.followers.createdDate')}
                 id="followers-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -119,7 +119,7 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.followers.updatedBy')}
+                label={translate('campsitesindiaApp.followers.updatedBy')}
                 id="followers-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -127,7 +127,7 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.followers.updateDate')}
+                label={translate('campsitesindiaApp.followers.updateDate')}
                 id="followers-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -138,7 +138,7 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="followers-followedBy"
                 name="followedById"
                 data-cy="followedBy"
-                label={translate('tripperNestApp.followers.followedBy')}
+                label={translate('campsitesindiaApp.followers.followedBy')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -154,7 +154,7 @@ export const FollowersUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="followers-user"
                 name="userId"
                 data-cy="user"
-                label={translate('tripperNestApp.followers.user')}
+                label={translate('campsitesindiaApp.followers.user')}
                 type="select"
               >
                 <option value="" key="0" />

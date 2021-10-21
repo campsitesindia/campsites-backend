@@ -1,9 +1,13 @@
-
+//rating table -- after listing we need to create rating
+//featurs to Listing
+//room to listing
+//room photos
+//bookings and rooms
 application {
   config {
-    baseName tripperNest,
+    baseName campsitesindia,
     applicationType monolith,
-    packageName com.dd.ttippernest,
+    packageName com.dd.campsites,
     authenticationType jwt,
     prodDatabaseType postgresql,
     clientFramework react
@@ -49,7 +53,6 @@ entity Location{
   color String,
   imgIcon String,
   description String,
-  parent Integer,
   taxonomy String,
   createdBy String,
   createdDate Instant,
@@ -59,6 +62,7 @@ entity Location{
 
 
 entity Rating{
+ value Double,
  name String
 }
 entity ListingType{
@@ -69,7 +73,6 @@ entity ListingType{
   color String,
   imgIcon String,
   description String,
-  parent Integer,
   taxonomy String,
   createdBy String,
   createdDate Instant,
@@ -86,16 +89,17 @@ entity Listing{
     content String,
     thumbnail String,
     isFeatured Boolean,
+    pricePerPerson Double,
 	phone String,
 	email  String,
 	website String,
-	comment Boolean,
+	comment TextBlob,
 	disableBooking Boolean,
     viewCount  Integer,
     createdBy String,
-  createdDate Instant,
-  updatedBy Instant,
-  updateDate Instant
+    createdDate Instant,
+    updatedBy Instant,
+    updateDate Instant
 
 }
 entity Photos {
@@ -182,38 +186,25 @@ entity Room{
 }
 
 entity RoomType{
+    type String,
 	description String,
     maxCapacity String,
     numberOfBeds Integer,
     numberOfBathrooms Integer,
-    roomRatePerNigt Double,
+    roomRatePerNight Double,
     createdBy String,
   createdDate Instant,
   updatedBy Instant,
   updateDate Instant
 }
-entity RoomFeatures{
-  title String,
-  count Integer,
-  thumbnail String,
-  icon String,
-  color String,
-  imgIcon String,
-  description String,
-  parent Integer,
-  taxonomy String,
-  createdBy String,
-  createdDate Instant,
-  updatedBy Instant,
-  updateDate Instant
-}
+
 
 entity Review {
 
  // id integer [primary key]
  // booking_id integer
   rating Integer,
-  reviewbBody Blob,
+  reviewbBody TextBlob,
   createdBy String,
   createdDate Instant,
   updatedBy Instant,
@@ -236,15 +227,27 @@ entity Followers{
   updatedBy Instant,
   updateDate Instant
 }
+entity FeaturesListing {
+
+}
+entity FeaturesInRoom {
+
+}
+entity RoomsForListing {
+
+}
+entity RoomsInBooking {
+
+}
 relationship OneToOne {
   AuthenticatedUser{user(email)} to User
   Like to Post
   Like {user(firstName)} to User
   Like to Images
-
   Listing{listingType(title)} to ListingType
-  Location{ParentLocation(title)} to Location
-  Listing {Rating(name)}to Rating
+  ListingType{Parent(title)} to ListingType
+  Location{Parent(title)} to Location
+  Rating  {listing(title)} to Listing
 
 
 }
@@ -261,16 +264,23 @@ Comments to Post
 Comments {user(email)} to User
 Room {roomType} to RoomType
 Bookings{user(email)} to User
-Bookings {room(roomNumber)} to Room
+
 Bookings {listing(title)}  to Listing
 
-RoomFeatures {room(roomNumber)} to Room
 Photos {listing(title)}  to Listing
 Videos {listing(title)}  to Listing
 Listing {location(title)} to Location
-Listing {feature(title)} to Features
+
+FeaturesListing {Listing(title)} to Listing
+FeaturesListing {feature(title)} to Features
+FeaturesInRoom {room(roomNumber)} to Room
+FeaturesInRoom {feature(title)} to Features
+RoomsForListing {Listing(title)} to Listing
+RoomsForListing {room(roomNumber)} to Room
+RoomsInBooking {Bookings(name)} to Bookings
+RoomsInBooking {Room(roomNumber)} to Room
 Review {booking(name)} to Bookings
-Listing {Room(roomNumber)} to Room
+
 Listing {Owner(email)} to User
 Invoice to Bookings
 Invoice{Customer(email)} to User
@@ -282,5 +292,5 @@ Invoice{Customer(email)} to User
 
 paginate * with pagination
 filter *
-
+service * with serviceClass
 service all with serviceImpl

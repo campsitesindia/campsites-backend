@@ -73,8 +73,8 @@ export const FeaturesUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.features.home.createOrEditLabel" data-cy="FeaturesCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.features.home.createOrEditLabel">Create or edit a Features</Translate>
+          <h2 id="campsitesindiaApp.features.home.createOrEditLabel" data-cy="FeaturesCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.features.home.createOrEditLabel">Create or edit a Features</Translate>
           </h2>
         </Col>
       </Row>
@@ -95,71 +95,77 @@ export const FeaturesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.features.title')}
+                label={translate('campsitesindiaApp.features.title')}
                 id="features-title"
                 name="title"
                 data-cy="title"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.count')}
+                label={translate('campsitesindiaApp.features.count')}
                 id="features-count"
                 name="count"
                 data-cy="count"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.thumbnail')}
+                label={translate('campsitesindiaApp.features.thumbnail')}
                 id="features-thumbnail"
                 name="thumbnail"
                 data-cy="thumbnail"
                 type="text"
               />
-              <ValidatedField label={translate('tripperNestApp.features.icon')} id="features-icon" name="icon" data-cy="icon" type="text" />
               <ValidatedField
-                label={translate('tripperNestApp.features.color')}
+                label={translate('campsitesindiaApp.features.icon')}
+                id="features-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.features.color')}
                 id="features-color"
                 name="color"
                 data-cy="color"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.imgIcon')}
+                label={translate('campsitesindiaApp.features.imgIcon')}
                 id="features-imgIcon"
                 name="imgIcon"
                 data-cy="imgIcon"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.description')}
+                label={translate('campsitesindiaApp.features.description')}
                 id="features-description"
                 name="description"
                 data-cy="description"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.parent')}
+                label={translate('campsitesindiaApp.features.parent')}
                 id="features-parent"
                 name="parent"
                 data-cy="parent"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.taxonomy')}
+                label={translate('campsitesindiaApp.features.taxonomy')}
                 id="features-taxonomy"
                 name="taxonomy"
                 data-cy="taxonomy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.createdBy')}
+                label={translate('campsitesindiaApp.features.createdBy')}
                 id="features-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.createdDate')}
+                label={translate('campsitesindiaApp.features.createdDate')}
                 id="features-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -167,7 +173,7 @@ export const FeaturesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.updatedBy')}
+                label={translate('campsitesindiaApp.features.updatedBy')}
                 id="features-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -175,7 +181,7 @@ export const FeaturesUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.features.updateDate')}
+                label={translate('campsitesindiaApp.features.updateDate')}
                 id="features-updateDate"
                 name="updateDate"
                 data-cy="updateDate"

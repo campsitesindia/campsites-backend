@@ -87,8 +87,8 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tripperNestApp.invoice.home.createOrEditLabel" data-cy="InvoiceCreateUpdateHeading">
-            <Translate contentKey="tripperNestApp.invoice.home.createOrEditLabel">Create or edit a Invoice</Translate>
+          <h2 id="campsitesindiaApp.invoice.home.createOrEditLabel" data-cy="InvoiceCreateUpdateHeading">
+            <Translate contentKey="campsitesindiaApp.invoice.home.createOrEditLabel">Create or edit a Invoice</Translate>
           </h2>
         </Col>
       </Row>
@@ -109,32 +109,32 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tripperNestApp.invoice.invoiceAmount')}
+                label={translate('campsitesindiaApp.invoice.invoiceAmount')}
                 id="invoice-invoiceAmount"
                 name="invoiceAmount"
                 data-cy="invoiceAmount"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.invoice.status')}
+                label={translate('campsitesindiaApp.invoice.status')}
                 id="invoice-status"
                 name="status"
                 data-cy="status"
                 type="select"
               >
-                <option value="PAID">{translate('tripperNestApp.InvoiceStatus.PAID')}</option>
-                <option value="CANCELED">{translate('tripperNestApp.InvoiceStatus.CANCELED')}</option>
-                <option value="REFUNDED">{translate('tripperNestApp.InvoiceStatus.REFUNDED')}</option>
+                <option value="PAID">{translate('campsitesindiaApp.InvoiceStatus.PAID')}</option>
+                <option value="CANCELED">{translate('campsitesindiaApp.InvoiceStatus.CANCELED')}</option>
+                <option value="REFUNDED">{translate('campsitesindiaApp.InvoiceStatus.REFUNDED')}</option>
               </ValidatedField>
               <ValidatedField
-                label={translate('tripperNestApp.invoice.createdBy')}
+                label={translate('campsitesindiaApp.invoice.createdBy')}
                 id="invoice-createdBy"
                 name="createdBy"
                 data-cy="createdBy"
                 type="text"
               />
               <ValidatedField
-                label={translate('tripperNestApp.invoice.createdDate')}
+                label={translate('campsitesindiaApp.invoice.createdDate')}
                 id="invoice-createdDate"
                 name="createdDate"
                 data-cy="createdDate"
@@ -142,7 +142,7 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.invoice.updatedBy')}
+                label={translate('campsitesindiaApp.invoice.updatedBy')}
                 id="invoice-updatedBy"
                 name="updatedBy"
                 data-cy="updatedBy"
@@ -150,7 +150,7 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                label={translate('tripperNestApp.invoice.updateDate')}
+                label={translate('campsitesindiaApp.invoice.updateDate')}
                 id="invoice-updateDate"
                 name="updateDate"
                 data-cy="updateDate"
@@ -161,7 +161,7 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="invoice-bookings"
                 name="bookingsId"
                 data-cy="bookings"
-                label={translate('tripperNestApp.invoice.bookings')}
+                label={translate('campsitesindiaApp.invoice.bookings')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -177,7 +177,7 @@ export const InvoiceUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 id="invoice-customer"
                 name="customerId"
                 data-cy="customer"
-                label={translate('tripperNestApp.invoice.customer')}
+                label={translate('campsitesindiaApp.invoice.customer')}
                 type="select"
               >
                 <option value="" key="0" />
