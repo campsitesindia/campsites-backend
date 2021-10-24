@@ -30,6 +30,12 @@ export const RatingDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{ratingEntity.id}</dd>
           <dt>
+            <span id="value">
+              <Translate contentKey="campsitesindiaApp.rating.value">Value</Translate>
+            </span>
+          </dt>
+          <dd>{ratingEntity.value}</dd>
+          <dt>
             <span id="name">
               <Translate contentKey="campsitesindiaApp.rating.name">Name</Translate>
             </span>

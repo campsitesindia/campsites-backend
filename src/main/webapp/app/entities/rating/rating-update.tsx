@@ -90,6 +90,13 @@ export const RatingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
+              <ValidatedField
+                label={translate('campsitesindiaApp.rating.value')}
+                id="rating-value"
+                name="value"
+                data-cy="value"
+                type="text"
+              />
               <ValidatedField label={translate('campsitesindiaApp.rating.name')} id="rating-name" name="name" data-cy="name" type="text" />
               <ValidatedField
                 id="rating-listing"

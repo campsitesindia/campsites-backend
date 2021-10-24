@@ -103,6 +103,9 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="campsitesindiaApp.rating.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('value')}>
+                  <Translate contentKey="campsitesindiaApp.rating.value">Value</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('name')}>
                   <Translate contentKey="campsitesindiaApp.rating.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -120,6 +123,7 @@ export const Rating = (props: RouteComponentProps<{ url: string }>) => {
                       {rating.id}
                     </Button>
                   </td>
+                  <td>{rating.value}</td>
                   <td>{rating.name}</td>
                   <td>{rating.listing ? <Link to={`listing/${rating.listing.id}`}>{rating.listing.title}</Link> : ''}</td>
                   <td className="text-right">

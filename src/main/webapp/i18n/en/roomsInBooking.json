@@ -1,0 +1,25 @@
+{
+  "campsitesindiaApp": {
+    "roomsInBooking": {
+      "home": {
+        "title": "Rooms In Bookings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Rooms In Booking",
+        "createOrEditLabel": "Create or edit a Rooms In Booking",
+        "notFound": "No Rooms In Bookings found"
+      },
+      "created": "A new Rooms In Booking is created with identifier {{ param }}",
+      "updated": "A Rooms In Booking is updated with identifier {{ param }}",
+      "deleted": "A Rooms In Booking is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Rooms In Booking {{ id }}?"
+      },
+      "detail": {
+        "title": "Rooms In Booking"
+      },
+      "id": "ID",
+      "bookings": "Bookings",
+      "room": "Room"
+    }
+  }
+}

@@ -17,7 +17,7 @@ public interface ListingDetailsService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Listing> findOne(Long id);
+    Optional<ListingModel> findOne(Long id);
 
     /**
      * Get all the listings.

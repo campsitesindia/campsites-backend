@@ -122,6 +122,9 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="campsitesindiaApp.review.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
+                  <Translate contentKey="campsitesindiaApp.review.listing">Listing</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="campsitesindiaApp.review.booking">Booking</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -141,6 +144,7 @@ export const Review = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{review.createdDate ? <TextFormat type="date" value={review.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{review.updatedBy ? <TextFormat type="date" value={review.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{review.updateDate ? <TextFormat type="date" value={review.updateDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{review.listing ? <Link to={`listing/${review.listing.id}`}>{review.listing.title}</Link> : ''}</td>
                   <td>{review.booking ? <Link to={`bookings/${review.booking.id}`}>{review.booking.name}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

@@ -1,9 +1,6 @@
 package com.dd.campsites.service.campsitesindia;
 
-import com.dd.campsites.domain.Listing;
-import com.dd.campsites.domain.Photos;
-import com.dd.campsites.domain.Rating;
-import com.dd.campsites.domain.Review;
+import com.dd.campsites.domain.*;
 import com.dd.campsites.repository.ListingRepository;
 import com.dd.campsites.repository.PhotosRepository;
 import com.dd.campsites.repository.RatingRepository;
@@ -14,7 +11,6 @@ import com.dd.campsites.service.criteria.ListingCriteria;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,6 +32,7 @@ public class ListingDetailsServiceImpl implements ListingDetailsService {
     private final PhotosRepository photosRepository;
     private final ReviewRepository reviewRepository;
     private final RatingRepository ratingRepository;
+    private final FeatureBusinessService featureBusinessService;
     private final ListingQueryService listingQueryService;
 
     public ListingDetailsServiceImpl(
@@ -43,6 +40,7 @@ public class ListingDetailsServiceImpl implements ListingDetailsService {
         PhotosRepository photosRepository,
         ReviewRepository reviewRepository,
         RatingRepository ratingRepository,
+        FeatureBusinessService featureBusinessService,
         ListingQueryService listingQueryService
     ) {
         this.listingRepository = listingRepository;
@@ -50,14 +48,31 @@ public class ListingDetailsServiceImpl implements ListingDetailsService {
         this.reviewRepository = reviewRepository;
 
         this.ratingRepository = ratingRepository;
+        this.featureBusinessService = featureBusinessService;
         this.listingQueryService = listingQueryService;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Listing> findOne(Long id) {
+    public Optional<ListingModel> findOne(Long id) {
         log.debug("Request to get Listing : {}", id);
-        return listingRepository.findById(id);
+        List<Photos> photos = photosRepository.findAllByListingIdEquals(id);
+        List<Review> reviews = reviewRepository.findAllByListingIdEquals(id);
+        Rating ratings = ratingRepository.findAllByListingIdEquals(id);
+        Optional<Listing> listing = listingRepository.findById(id);
+        ListingModel listingModel = new ListingModel();
+        List<Features> features = featureBusinessService.findByListingId(id);
+        if (listing.isEmpty()) {
+            listingModel.setListing(new Listing());
+        } else {
+            listingModel.setListing(listing.get());
+        }
+        listingModel.setPhotosList(photos);
+        listingModel.setReviews(reviews);
+        listingModel.setRatings(ratings);
+        listingModel.setFeaturesList(features);
+
+        return Optional.ofNullable(listingModel);
     }
 
     @Override
@@ -72,13 +87,13 @@ public class ListingDetailsServiceImpl implements ListingDetailsService {
 
         for (Listing listing : listingList) {
             List<Photos> photos = photosRepository.findAllByListingIdEquals(listing.getId());
-            //            List<Review> reviews=reviewRepository.findAllByBooking_Listing(listing.getId());
-            List<Rating> ratings = ratingRepository.findAllByListingIdEquals(listing.getId());
+            List<Review> reviews = reviewRepository.findAllByListingIdEquals(listing.getId());
+            Rating ratings = ratingRepository.findAllByListingIdEquals(listing.getId());
             ListingModel listingModel = new ListingModel();
             listingModel.setListing(listing);
             listingModel.setPhotosList(photos);
             listingModel.setRatings(ratings);
-            //          listingModel.setReviews(reviews);
+            listingModel.setReviews(reviews);
             listingModels.add(listingModel);
         }
         // Creation

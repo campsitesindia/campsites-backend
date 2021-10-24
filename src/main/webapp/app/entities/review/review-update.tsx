@@ -4,6 +4,8 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { IListing } from 'app/shared/model/listing.model';
+import { getEntities as getListings } from 'app/entities/listing/listing.reducer';
 import { IBookings } from 'app/shared/model/bookings.model';
 import { getEntities as getBookings } from 'app/entities/bookings/bookings.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './review.reducer';
@@ -17,6 +19,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
+  const listings = useAppSelector(state => state.listing.entities);
   const bookings = useAppSelector(state => state.bookings.entities);
   const reviewEntity = useAppSelector(state => state.review.entity);
   const loading = useAppSelector(state => state.review.loading);
@@ -34,6 +37,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
       dispatch(getEntity(props.match.params.id));
     }
 
+    dispatch(getListings({}));
     dispatch(getBookings({}));
   }, []);
 
@@ -51,6 +55,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...reviewEntity,
       ...values,
+      listing: listings.find(it => it.id.toString() === values.listingId.toString()),
       booking: bookings.find(it => it.id.toString() === values.bookingId.toString()),
     };
 
@@ -73,6 +78,7 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
           createdDate: convertDateTimeFromServer(reviewEntity.createdDate),
           updatedBy: convertDateTimeFromServer(reviewEntity.updatedBy),
           updateDate: convertDateTimeFromServer(reviewEntity.updateDate),
+          listingId: reviewEntity?.listing?.id,
           bookingId: reviewEntity?.booking?.id,
         };
 
@@ -146,6 +152,22 @@ export const ReviewUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField
+                id="review-listing"
+                name="listingId"
+                data-cy="listing"
+                label={translate('campsitesindiaApp.review.listing')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {listings
+                  ? listings.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.title}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
                 id="review-booking"
                 name="bookingId"

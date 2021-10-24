@@ -13,11 +13,18 @@ import org.hibernate.annotations.Type;
 public class ListingModel {
 
     private Listing listing;
+    private List<Features> featuresList;
     private List<Photos> photosList;
-
     private List<Review> reviews;
+    private Rating ratings;
 
-    private List<Rating> ratings;
+    public List<Features> getFeaturesList() {
+        return featuresList;
+    }
+
+    public void setFeaturesList(List<Features> featuresList) {
+        this.featuresList = featuresList;
+    }
 
     public List<Photos> getPhotosList() {
         return photosList;
@@ -35,11 +42,11 @@ public class ListingModel {
         this.reviews = reviews;
     }
 
-    public List<Rating> getRatings() {
+    public Rating getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<Rating> ratings) {
+    public void setRatings(Rating ratings) {
         this.ratings = ratings;
     }
 
@@ -54,7 +61,18 @@ public class ListingModel {
     @Override
     public String toString() {
         return (
-            "ListingModel{" + "listing=" + listing + ", photosList=" + photosList + ", reviews=" + reviews + ", ratings=" + ratings + '}'
+            "ListingModel{" +
+            "listing=" +
+            listing +
+            ", featuresList=" +
+            featuresList +
+            ", photosList=" +
+            photosList +
+            ", reviews=" +
+            reviews +
+            ", ratings=" +
+            ratings +
+            '}'
         );
     }
 }

@@ -66,6 +66,10 @@ export const ReviewDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{reviewEntity.updateDate ? <TextFormat value={reviewEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
+            <Translate contentKey="campsitesindiaApp.review.listing">Listing</Translate>
+          </dt>
+          <dd>{reviewEntity.listing ? reviewEntity.listing.title : ''}</dd>
+          <dt>
             <Translate contentKey="campsitesindiaApp.review.booking">Booking</Translate>
           </dt>
           <dd>{reviewEntity.booking ? reviewEntity.booking.name : ''}</dd>

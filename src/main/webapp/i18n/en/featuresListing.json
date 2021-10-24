@@ -1,0 +1,25 @@
+{
+  "campsitesindiaApp": {
+    "featuresListing": {
+      "home": {
+        "title": "Features Listings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Features Listing",
+        "createOrEditLabel": "Create or edit a Features Listing",
+        "notFound": "No Features Listings found"
+      },
+      "created": "A new Features Listing is created with identifier {{ param }}",
+      "updated": "A Features Listing is updated with identifier {{ param }}",
+      "deleted": "A Features Listing is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Features Listing {{ id }}?"
+      },
+      "detail": {
+        "title": "Features Listing"
+      },
+      "id": "ID",
+      "listing": "Listing",
+      "feature": "Feature"
+    }
+  }
+}

@@ -266,6 +266,7 @@ Room {roomType} to RoomType
 Bookings{user(email)} to User
 
 Bookings {listing(title)}  to Listing
+Review {listing(title)}  to Listing
 
 Photos {listing(title)}  to Listing
 Videos {listing(title)}  to Listing

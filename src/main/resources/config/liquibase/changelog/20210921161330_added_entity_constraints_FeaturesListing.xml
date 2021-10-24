@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity FeaturesListing.
+    -->
+    <changeSet id="20210921161330-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="listing_id"
+                                 baseTableName="features_listing"
+                                 constraintName="fk_features_listing__listing_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="listing"/>
+
+        <addForeignKeyConstraint baseColumnNames="feature_id"
+                                 baseTableName="features_listing"
+                                 constraintName="fk_features_listing__feature_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="features"/>
+    </changeSet>
+</databaseChangeLog>

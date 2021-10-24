@@ -18,6 +18,7 @@
         "title": "Rating"
       },
       "id": "ID",
+      "value": "Value",
       "name": "Name",
       "listing": "Listing"
     }
