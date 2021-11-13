@@ -244,7 +244,6 @@ relationship OneToOne {
   Like to Post
   Like {user(firstName)} to User
   Like to Images
-  Listing{listingType(title)} to ListingType
   ListingType{Parent(title)} to ListingType
   Location{Parent(title)} to Location
   Rating  {listing(title)} to Listing

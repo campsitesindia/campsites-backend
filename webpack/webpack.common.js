@@ -85,6 +85,7 @@ module.exports = options =>
           },
         ],
       },
+
       stats: {
         children: false,
       },
