@@ -34,6 +34,10 @@
       "fieldType": "Boolean"
     },
     {
+      "fieldName": "pricePerPerson",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "phone",
       "fieldType": "String"
     },
@@ -47,7 +51,8 @@
     },
     {
       "fieldName": "comment",
-      "fieldType": "Boolean"
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "disableBooking",
@@ -84,33 +89,11 @@
       "ownerSide": true
     },
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "rating",
-      "otherEntityRelationshipName": "listing",
-      "relationshipName": "rating",
-      "otherEntityField": "name",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "many-to-one",
       "otherEntityName": "location",
       "otherEntityRelationshipName": "listing",
       "relationshipName": "location",
       "otherEntityField": "title"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "features",
-      "otherEntityRelationshipName": "listing",
-      "relationshipName": "feature",
-      "otherEntityField": "title"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "room",
-      "otherEntityRelationshipName": "listing",
-      "relationshipName": "room",
-      "otherEntityField": "roomNumber"
     },
     {
       "relationshipType": "many-to-one",
@@ -128,6 +111,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902214118"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921160230"
 }

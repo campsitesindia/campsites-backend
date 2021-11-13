@@ -2,6 +2,10 @@
   "name": "RoomType",
   "fields": [
     {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "description",
       "fieldType": "String"
     },
@@ -18,7 +22,7 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "roomRatePerNigt",
+      "fieldName": "roomRatePerNight",
       "fieldType": "Double"
     },
     {
@@ -47,6 +51,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902214818"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921160930"
 }

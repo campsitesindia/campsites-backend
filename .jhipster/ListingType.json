@@ -30,10 +30,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "parent",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "taxonomy",
       "fieldType": "String"
     },
@@ -54,7 +50,16 @@
       "fieldType": "Instant"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "listingType",
+      "otherEntityRelationshipName": "listingType",
+      "relationshipName": "parent",
+      "otherEntityField": "title",
+      "ownerSide": true
+    }
+  ],
   "entityTableName": "listing_type",
   "dto": "no",
   "pagination": "pagination",
@@ -63,6 +68,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902214018"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921160130"
 }

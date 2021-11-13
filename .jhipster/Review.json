@@ -8,7 +8,7 @@
     {
       "fieldName": "reviewbBody",
       "fieldType": "byte[]",
-      "fieldTypeBlobContent": "any"
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "createdBy",
@@ -30,6 +30,13 @@
   "relationships": [
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "listing",
+      "otherEntityRelationshipName": "review",
+      "relationshipName": "listing",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "bookings",
       "otherEntityRelationshipName": "review",
       "relationshipName": "booking",
@@ -44,6 +51,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902215018"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921161030"
 }

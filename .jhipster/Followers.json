@@ -42,6 +42,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902215218"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921161230"
 }

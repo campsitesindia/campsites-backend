@@ -1,20 +1,26 @@
 package com.dd.campsites;
 
 import com.dd.campsites.config.ApplicationProperties;
+import com.dd.campsites.service.campsitesindia.fileupload.service.FilesStorageService;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.util.unit.DataSize;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
@@ -25,6 +31,15 @@ public class CampsitesindiaApp {
     private static final Logger log = LoggerFactory.getLogger(CampsitesindiaApp.class);
 
     private final Environment env;
+
+    @Resource
+    FilesStorageService storageService;
+
+    @Value("${spring.servlet.multipart.max-file-size}")
+    String maxFileSize;
+
+    @Value("${spring.servlet.multipart.max-request-size}")
+    String maxRequestSize;
 
     public CampsitesindiaApp(Environment env) {
         this.env = env;
@@ -40,6 +55,7 @@ public class CampsitesindiaApp {
     @PostConstruct
     public void initApplication() {
         Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
+        storageService.init();
         if (
             activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) &&
             activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)
@@ -65,6 +81,7 @@ public class CampsitesindiaApp {
      */
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(CampsitesindiaApp.class);
+
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
@@ -99,5 +116,13 @@ public class CampsitesindiaApp {
             contextPath,
             env.getActiveProfiles()
         );
+    }
+
+    @Bean
+    public CommonsMultipartResolver commonsMultipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setMaxUploadSize(DataSize.parse(maxRequestSize).toBytes());
+        commonsMultipartResolver.setMaxUploadSizePerFile(DataSize.parse(maxFileSize).toBytes());
+        return commonsMultipartResolver;
     }
 }

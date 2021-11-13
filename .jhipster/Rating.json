@@ -2,11 +2,24 @@
   "name": "Rating",
   "fields": [
     {
+      "fieldName": "value",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "name",
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "listing",
+      "otherEntityRelationshipName": "rating",
+      "relationshipName": "listing",
+      "otherEntityField": "title",
+      "ownerSide": true
+    }
+  ],
   "entityTableName": "rating",
   "dto": "no",
   "pagination": "pagination",
@@ -15,6 +28,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902213918"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921160030"
 }

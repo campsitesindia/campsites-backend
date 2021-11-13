@@ -48,13 +48,6 @@
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "room",
-      "otherEntityRelationshipName": "bookings",
-      "relationshipName": "room",
-      "otherEntityField": "roomNumber"
-    },
-    {
-      "relationshipType": "many-to-one",
       "otherEntityName": "listing",
       "otherEntityRelationshipName": "bookings",
       "relationshipName": "listing",
@@ -75,6 +68,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902214518"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921160630"
 }

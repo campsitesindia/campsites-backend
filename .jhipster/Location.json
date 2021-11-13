@@ -30,10 +30,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "parent",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "taxonomy",
       "fieldType": "String"
     },
@@ -59,7 +55,7 @@
       "relationshipType": "one-to-one",
       "otherEntityName": "location",
       "otherEntityRelationshipName": "location",
-      "relationshipName": "parentLocation",
+      "relationshipName": "parent",
       "otherEntityField": "title",
       "ownerSide": true
     }
@@ -72,6 +68,6 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "applications": ["tripperNest"],
-  "changelogDate": "20210902213818"
+  "applications": ["campsitesindia"],
+  "changelogDate": "20210921155930"
 }
