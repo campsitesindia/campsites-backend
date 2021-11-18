@@ -53,6 +53,10 @@ class RoomTypeResourceIT {
     private static final Double UPDATED_ROOM_RATE_PER_NIGHT = 2D;
     private static final Double SMALLER_ROOM_RATE_PER_NIGHT = 1D - 1D;
 
+    private static final Double DEFAULT_ROOM_RATE_CHILD_PER_NIGHT = 1D;
+    private static final Double UPDATED_ROOM_RATE_CHILD_PER_NIGHT = 2D;
+    private static final Double SMALLER_ROOM_RATE_CHILD_PER_NIGHT = 1D - 1D;
+
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
@@ -96,6 +100,7 @@ class RoomTypeResourceIT {
             .numberOfBeds(DEFAULT_NUMBER_OF_BEDS)
             .numberOfBathrooms(DEFAULT_NUMBER_OF_BATHROOMS)
             .roomRatePerNight(DEFAULT_ROOM_RATE_PER_NIGHT)
+            .roomRateChildPerNight(DEFAULT_ROOM_RATE_CHILD_PER_NIGHT)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .updatedBy(DEFAULT_UPDATED_BY)
@@ -117,6 +122,7 @@ class RoomTypeResourceIT {
             .numberOfBeds(UPDATED_NUMBER_OF_BEDS)
             .numberOfBathrooms(UPDATED_NUMBER_OF_BATHROOMS)
             .roomRatePerNight(UPDATED_ROOM_RATE_PER_NIGHT)
+            .roomRateChildPerNight(UPDATED_ROOM_RATE_CHILD_PER_NIGHT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -148,6 +154,7 @@ class RoomTypeResourceIT {
         assertThat(testRoomType.getNumberOfBeds()).isEqualTo(DEFAULT_NUMBER_OF_BEDS);
         assertThat(testRoomType.getNumberOfBathrooms()).isEqualTo(DEFAULT_NUMBER_OF_BATHROOMS);
         assertThat(testRoomType.getRoomRatePerNight()).isEqualTo(DEFAULT_ROOM_RATE_PER_NIGHT);
+        assertThat(testRoomType.getRoomRateChildPerNight()).isEqualTo(DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
         assertThat(testRoomType.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testRoomType.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testRoomType.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
@@ -190,6 +197,7 @@ class RoomTypeResourceIT {
             .andExpect(jsonPath("$.[*].numberOfBeds").value(hasItem(DEFAULT_NUMBER_OF_BEDS)))
             .andExpect(jsonPath("$.[*].numberOfBathrooms").value(hasItem(DEFAULT_NUMBER_OF_BATHROOMS)))
             .andExpect(jsonPath("$.[*].roomRatePerNight").value(hasItem(DEFAULT_ROOM_RATE_PER_NIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].roomRateChildPerNight").value(hasItem(DEFAULT_ROOM_RATE_CHILD_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
@@ -214,6 +222,7 @@ class RoomTypeResourceIT {
             .andExpect(jsonPath("$.numberOfBeds").value(DEFAULT_NUMBER_OF_BEDS))
             .andExpect(jsonPath("$.numberOfBathrooms").value(DEFAULT_NUMBER_OF_BATHROOMS))
             .andExpect(jsonPath("$.roomRatePerNight").value(DEFAULT_ROOM_RATE_PER_NIGHT.doubleValue()))
+            .andExpect(jsonPath("$.roomRateChildPerNight").value(DEFAULT_ROOM_RATE_CHILD_PER_NIGHT.doubleValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
@@ -786,6 +795,112 @@ class RoomTypeResourceIT {
 
     @Test
     @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsEqualToSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight equals to DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.equals=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight equals to UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.equals=" + UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight not equals to DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.notEquals=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight not equals to UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.notEquals=" + UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsInShouldWork() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight in DEFAULT_ROOM_RATE_CHILD_PER_NIGHT or UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound(
+            "roomRateChildPerNight.in=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT + "," + UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        );
+
+        // Get all the roomTypeList where roomRateChildPerNight equals to UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.in=" + UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight is not null
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.specified=true");
+
+        // Get all the roomTypeList where roomRateChildPerNight is null
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight is greater than or equal to DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.greaterThanOrEqual=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight is greater than or equal to UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.greaterThanOrEqual=" + UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight is less than or equal to DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.lessThanOrEqual=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight is less than or equal to SMALLER_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.lessThanOrEqual=" + SMALLER_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsLessThanSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight is less than DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.lessThan=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight is less than UPDATED_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.lessThan=" + UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllRoomTypesByRoomRateChildPerNightIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        roomTypeRepository.saveAndFlush(roomType);
+
+        // Get all the roomTypeList where roomRateChildPerNight is greater than DEFAULT_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldNotBeFound("roomRateChildPerNight.greaterThan=" + DEFAULT_ROOM_RATE_CHILD_PER_NIGHT);
+
+        // Get all the roomTypeList where roomRateChildPerNight is greater than SMALLER_ROOM_RATE_CHILD_PER_NIGHT
+        defaultRoomTypeShouldBeFound("roomRateChildPerNight.greaterThan=" + SMALLER_ROOM_RATE_CHILD_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
     void getAllRoomTypesByCreatedByIsEqualToSomething() throws Exception {
         // Initialize the database
         roomTypeRepository.saveAndFlush(roomType);
@@ -1033,6 +1148,7 @@ class RoomTypeResourceIT {
             .andExpect(jsonPath("$.[*].numberOfBeds").value(hasItem(DEFAULT_NUMBER_OF_BEDS)))
             .andExpect(jsonPath("$.[*].numberOfBathrooms").value(hasItem(DEFAULT_NUMBER_OF_BATHROOMS)))
             .andExpect(jsonPath("$.[*].roomRatePerNight").value(hasItem(DEFAULT_ROOM_RATE_PER_NIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].roomRateChildPerNight").value(hasItem(DEFAULT_ROOM_RATE_CHILD_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
@@ -1091,6 +1207,7 @@ class RoomTypeResourceIT {
             .numberOfBeds(UPDATED_NUMBER_OF_BEDS)
             .numberOfBathrooms(UPDATED_NUMBER_OF_BATHROOMS)
             .roomRatePerNight(UPDATED_ROOM_RATE_PER_NIGHT)
+            .roomRateChildPerNight(UPDATED_ROOM_RATE_CHILD_PER_NIGHT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1114,6 +1231,7 @@ class RoomTypeResourceIT {
         assertThat(testRoomType.getNumberOfBeds()).isEqualTo(UPDATED_NUMBER_OF_BEDS);
         assertThat(testRoomType.getNumberOfBathrooms()).isEqualTo(UPDATED_NUMBER_OF_BATHROOMS);
         assertThat(testRoomType.getRoomRatePerNight()).isEqualTo(UPDATED_ROOM_RATE_PER_NIGHT);
+        assertThat(testRoomType.getRoomRateChildPerNight()).isEqualTo(UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
         assertThat(testRoomType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testRoomType.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testRoomType.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
@@ -1192,9 +1310,9 @@ class RoomTypeResourceIT {
             .type(UPDATED_TYPE)
             .description(UPDATED_DESCRIPTION)
             .roomRatePerNight(UPDATED_ROOM_RATE_PER_NIGHT)
+            .roomRateChildPerNight(UPDATED_ROOM_RATE_CHILD_PER_NIGHT)
             .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .updatedBy(UPDATED_UPDATED_BY);
 
         restRoomTypeMockMvc
             .perform(
@@ -1214,10 +1332,11 @@ class RoomTypeResourceIT {
         assertThat(testRoomType.getNumberOfBeds()).isEqualTo(DEFAULT_NUMBER_OF_BEDS);
         assertThat(testRoomType.getNumberOfBathrooms()).isEqualTo(DEFAULT_NUMBER_OF_BATHROOMS);
         assertThat(testRoomType.getRoomRatePerNight()).isEqualTo(UPDATED_ROOM_RATE_PER_NIGHT);
+        assertThat(testRoomType.getRoomRateChildPerNight()).isEqualTo(UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
         assertThat(testRoomType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testRoomType.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
-        assertThat(testRoomType.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
-        assertThat(testRoomType.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
+        assertThat(testRoomType.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testRoomType.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testRoomType.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
     }
 
     @Test
@@ -1239,6 +1358,7 @@ class RoomTypeResourceIT {
             .numberOfBeds(UPDATED_NUMBER_OF_BEDS)
             .numberOfBathrooms(UPDATED_NUMBER_OF_BATHROOMS)
             .roomRatePerNight(UPDATED_ROOM_RATE_PER_NIGHT)
+            .roomRateChildPerNight(UPDATED_ROOM_RATE_CHILD_PER_NIGHT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1262,6 +1382,7 @@ class RoomTypeResourceIT {
         assertThat(testRoomType.getNumberOfBeds()).isEqualTo(UPDATED_NUMBER_OF_BEDS);
         assertThat(testRoomType.getNumberOfBathrooms()).isEqualTo(UPDATED_NUMBER_OF_BATHROOMS);
         assertThat(testRoomType.getRoomRatePerNight()).isEqualTo(UPDATED_ROOM_RATE_PER_NIGHT);
+        assertThat(testRoomType.getRoomRateChildPerNight()).isEqualTo(UPDATED_ROOM_RATE_CHILD_PER_NIGHT);
         assertThat(testRoomType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testRoomType.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testRoomType.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);

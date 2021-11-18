@@ -24,6 +24,7 @@
       "numberOfBeds": "Number Of Beds",
       "numberOfBathrooms": "Number Of Bathrooms",
       "roomRatePerNight": "Room Rate Per Night",
+      "roomRateChildPerNight": "Room Rate Child Per Night",
       "createdBy": "Created By",
       "createdDate": "Created Date",
       "updatedBy": "Updated By",

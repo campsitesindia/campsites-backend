@@ -45,6 +45,12 @@ public class ListingCriteria implements Serializable, Criteria {
 
     private DoubleFilter pricePerPerson;
 
+    private DoubleFilter pricePerChild;
+
+    private DoubleFilter discount;
+
+    private BooleanFilter isPublished;
+
     private StringFilter phone;
 
     private StringFilter email;
@@ -63,9 +69,9 @@ public class ListingCriteria implements Serializable, Criteria {
 
     private InstantFilter updateDate;
 
-    private LongFilter listingTypeId;
-
     private LongFilter locationId;
+
+    private LongFilter listingTypeId;
 
     private LongFilter ownerId;
 
@@ -82,6 +88,9 @@ public class ListingCriteria implements Serializable, Criteria {
         this.thumbnail = other.thumbnail == null ? null : other.thumbnail.copy();
         this.isFeatured = other.isFeatured == null ? null : other.isFeatured.copy();
         this.pricePerPerson = other.pricePerPerson == null ? null : other.pricePerPerson.copy();
+        this.pricePerChild = other.pricePerChild == null ? null : other.pricePerChild.copy();
+        this.discount = other.discount == null ? null : other.discount.copy();
+        this.isPublished = other.isPublished == null ? null : other.isPublished.copy();
         this.phone = other.phone == null ? null : other.phone.copy();
         this.email = other.email == null ? null : other.email.copy();
         this.website = other.website == null ? null : other.website.copy();
@@ -91,8 +100,8 @@ public class ListingCriteria implements Serializable, Criteria {
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.updatedBy = other.updatedBy == null ? null : other.updatedBy.copy();
         this.updateDate = other.updateDate == null ? null : other.updateDate.copy();
-        this.listingTypeId = other.listingTypeId == null ? null : other.listingTypeId.copy();
         this.locationId = other.locationId == null ? null : other.locationId.copy();
+        this.listingTypeId = other.listingTypeId == null ? null : other.listingTypeId.copy();
         this.ownerId = other.ownerId == null ? null : other.ownerId.copy();
     }
 
@@ -251,6 +260,51 @@ public class ListingCriteria implements Serializable, Criteria {
         this.pricePerPerson = pricePerPerson;
     }
 
+    public DoubleFilter getPricePerChild() {
+        return pricePerChild;
+    }
+
+    public DoubleFilter pricePerChild() {
+        if (pricePerChild == null) {
+            pricePerChild = new DoubleFilter();
+        }
+        return pricePerChild;
+    }
+
+    public void setPricePerChild(DoubleFilter pricePerChild) {
+        this.pricePerChild = pricePerChild;
+    }
+
+    public DoubleFilter getDiscount() {
+        return discount;
+    }
+
+    public DoubleFilter discount() {
+        if (discount == null) {
+            discount = new DoubleFilter();
+        }
+        return discount;
+    }
+
+    public void setDiscount(DoubleFilter discount) {
+        this.discount = discount;
+    }
+
+    public BooleanFilter getIsPublished() {
+        return isPublished;
+    }
+
+    public BooleanFilter isPublished() {
+        if (isPublished == null) {
+            isPublished = new BooleanFilter();
+        }
+        return isPublished;
+    }
+
+    public void setIsPublished(BooleanFilter isPublished) {
+        this.isPublished = isPublished;
+    }
+
     public StringFilter getPhone() {
         return phone;
     }
@@ -386,21 +440,6 @@ public class ListingCriteria implements Serializable, Criteria {
         this.updateDate = updateDate;
     }
 
-    public LongFilter getListingTypeId() {
-        return listingTypeId;
-    }
-
-    public LongFilter listingTypeId() {
-        if (listingTypeId == null) {
-            listingTypeId = new LongFilter();
-        }
-        return listingTypeId;
-    }
-
-    public void setListingTypeId(LongFilter listingTypeId) {
-        this.listingTypeId = listingTypeId;
-    }
-
     public LongFilter getLocationId() {
         return locationId;
     }
@@ -414,6 +453,21 @@ public class ListingCriteria implements Serializable, Criteria {
 
     public void setLocationId(LongFilter locationId) {
         this.locationId = locationId;
+    }
+
+    public LongFilter getListingTypeId() {
+        return listingTypeId;
+    }
+
+    public LongFilter listingTypeId() {
+        if (listingTypeId == null) {
+            listingTypeId = new LongFilter();
+        }
+        return listingTypeId;
+    }
+
+    public void setListingTypeId(LongFilter listingTypeId) {
+        this.listingTypeId = listingTypeId;
     }
 
     public LongFilter getOwnerId() {
@@ -451,6 +505,9 @@ public class ListingCriteria implements Serializable, Criteria {
             Objects.equals(thumbnail, that.thumbnail) &&
             Objects.equals(isFeatured, that.isFeatured) &&
             Objects.equals(pricePerPerson, that.pricePerPerson) &&
+            Objects.equals(pricePerChild, that.pricePerChild) &&
+            Objects.equals(discount, that.discount) &&
+            Objects.equals(isPublished, that.isPublished) &&
             Objects.equals(phone, that.phone) &&
             Objects.equals(email, that.email) &&
             Objects.equals(website, that.website) &&
@@ -460,8 +517,8 @@ public class ListingCriteria implements Serializable, Criteria {
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(updatedBy, that.updatedBy) &&
             Objects.equals(updateDate, that.updateDate) &&
-            Objects.equals(listingTypeId, that.listingTypeId) &&
             Objects.equals(locationId, that.locationId) &&
+            Objects.equals(listingTypeId, that.listingTypeId) &&
             Objects.equals(ownerId, that.ownerId)
         );
     }
@@ -479,6 +536,9 @@ public class ListingCriteria implements Serializable, Criteria {
             thumbnail,
             isFeatured,
             pricePerPerson,
+            pricePerChild,
+            discount,
+            isPublished,
             phone,
             email,
             website,
@@ -488,8 +548,8 @@ public class ListingCriteria implements Serializable, Criteria {
             createdDate,
             updatedBy,
             updateDate,
-            listingTypeId,
             locationId,
+            listingTypeId,
             ownerId
         );
     }
@@ -508,6 +568,9 @@ public class ListingCriteria implements Serializable, Criteria {
             (thumbnail != null ? "thumbnail=" + thumbnail + ", " : "") +
             (isFeatured != null ? "isFeatured=" + isFeatured + ", " : "") +
             (pricePerPerson != null ? "pricePerPerson=" + pricePerPerson + ", " : "") +
+            (pricePerChild != null ? "pricePerChild=" + pricePerChild + ", " : "") +
+            (discount != null ? "discount=" + discount + ", " : "") +
+            (isPublished != null ? "isPublished=" + isPublished + ", " : "") +
             (phone != null ? "phone=" + phone + ", " : "") +
             (email != null ? "email=" + email + ", " : "") +
             (website != null ? "website=" + website + ", " : "") +
@@ -517,8 +580,8 @@ public class ListingCriteria implements Serializable, Criteria {
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (updatedBy != null ? "updatedBy=" + updatedBy + ", " : "") +
             (updateDate != null ? "updateDate=" + updateDate + ", " : "") +
-            (listingTypeId != null ? "listingTypeId=" + listingTypeId + ", " : "") +
             (locationId != null ? "locationId=" + locationId + ", " : "") +
+            (listingTypeId != null ? "listingTypeId=" + listingTypeId + ", " : "") +
             (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
             "}";
     }

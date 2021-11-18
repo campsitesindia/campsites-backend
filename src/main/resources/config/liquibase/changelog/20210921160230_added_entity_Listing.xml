@@ -41,6 +41,15 @@
             <column name="price_per_person" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="price_per_child" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_published" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -71,10 +80,10 @@
             <column name="update_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="listing_type_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_listing__listing_type_id" />
-            </column>
             <column name="location_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="listing_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="owner_id" type="bigint">
@@ -112,6 +121,9 @@
             <column name="thumbnail" type="string"/>
             <column name="is_featured" type="boolean"/>
             <column name="price_per_person" type="numeric"/>
+            <column name="price_per_child" type="numeric"/>
+            <column name="discount" type="numeric"/>
+            <column name="is_published" type="boolean"/>
             <column name="phone" type="string"/>
             <column name="email" type="string"/>
             <column name="website" type="string"/>

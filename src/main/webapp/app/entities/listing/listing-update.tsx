@@ -4,10 +4,10 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { IListingType } from 'app/shared/model/listing-type.model';
-import { getEntities as getListingTypes } from 'app/entities/listing-type/listing-type.reducer';
 import { ILocation } from 'app/shared/model/location.model';
 import { getEntities as getLocations } from 'app/entities/location/location.reducer';
+import { IListingType } from 'app/shared/model/listing-type.model';
+import { getEntities as getListingTypes } from 'app/entities/listing-type/listing-type.reducer';
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './listing.reducer';
@@ -21,8 +21,8 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const listingTypes = useAppSelector(state => state.listingType.entities);
   const locations = useAppSelector(state => state.location.entities);
+  const listingTypes = useAppSelector(state => state.listingType.entities);
   const users = useAppSelector(state => state.userManagement.users);
   const listingEntity = useAppSelector(state => state.listing.entity);
   const loading = useAppSelector(state => state.listing.loading);
@@ -40,8 +40,8 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
       dispatch(getEntity(props.match.params.id));
     }
 
-    dispatch(getListingTypes({}));
     dispatch(getLocations({}));
+    dispatch(getListingTypes({}));
     dispatch(getUsers({}));
   }, []);
 
@@ -59,8 +59,8 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...listingEntity,
       ...values,
-      listingType: listingTypes.find(it => it.id.toString() === values.listingTypeId.toString()),
       location: locations.find(it => it.id.toString() === values.locationId.toString()),
+      listingType: listingTypes.find(it => it.id.toString() === values.listingTypeId.toString()),
       owner: users.find(it => it.id.toString() === values.ownerId.toString()),
     };
 
@@ -83,8 +83,8 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
           createdDate: convertDateTimeFromServer(listingEntity.createdDate),
           updatedBy: convertDateTimeFromServer(listingEntity.updatedBy),
           updateDate: convertDateTimeFromServer(listingEntity.updateDate),
-          listingTypeId: listingEntity?.listingType?.id,
           locationId: listingEntity?.location?.id,
+          listingTypeId: listingEntity?.listingType?.id,
           ownerId: listingEntity?.owner?.id,
         };
 
@@ -172,6 +172,28 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
+                label={translate('campsitesindiaApp.listing.pricePerChild')}
+                id="listing-pricePerChild"
+                name="pricePerChild"
+                data-cy="pricePerChild"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.listing.discount')}
+                id="listing-discount"
+                name="discount"
+                data-cy="discount"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.listing.isPublished')}
+                id="listing-isPublished"
+                name="isPublished"
+                data-cy="isPublished"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('campsitesindiaApp.listing.phone')}
                 id="listing-phone"
                 name="phone"
@@ -246,22 +268,6 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
-                id="listing-listingType"
-                name="listingTypeId"
-                data-cy="listingType"
-                label={translate('campsitesindiaApp.listing.listingType')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {listingTypes
-                  ? listingTypes.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.title}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
                 id="listing-location"
                 name="locationId"
                 data-cy="location"
@@ -271,6 +277,22 @@ export const ListingUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {locations
                   ? locations.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.title}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="listing-listingType"
+                name="listingTypeId"
+                data-cy="listingType"
+                label={translate('campsitesindiaApp.listing.listingType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {listingTypes
+                  ? listingTypes.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.title}
                       </option>

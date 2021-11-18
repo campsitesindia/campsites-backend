@@ -117,12 +117,11 @@ public class CampsitesindiaApp {
             env.getActiveProfiles()
         );
     }
-
-    @Bean
-    public CommonsMultipartResolver commonsMultipartResolver() {
-        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-        commonsMultipartResolver.setMaxUploadSize(DataSize.parse(maxRequestSize).toBytes());
-        commonsMultipartResolver.setMaxUploadSizePerFile(DataSize.parse(maxFileSize).toBytes());
-        return commonsMultipartResolver;
-    }
+    //    @Bean
+    //    public CommonsMultipartResolver commonsMultipartResolver() {
+    //        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+    //        commonsMultipartResolver.setMaxUploadSize(DataSize.parse(maxRequestSize).toBytes());
+    //        commonsMultipartResolver.setMaxUploadSizePerFile(DataSize.parse(maxFileSize).toBytes());
+    //        return commonsMultipartResolver;
+    //    }
 }

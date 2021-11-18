@@ -27,6 +27,9 @@
       "thumbnail": "Thumbnail",
       "isFeatured": "Is Featured",
       "pricePerPerson": "Price Per Person",
+      "pricePerChild": "Price Per Child",
+      "discount": "Discount",
+      "isPublished": "Is Published",
       "phone": "Phone",
       "email": "Email",
       "website": "Website",
@@ -37,8 +40,8 @@
       "createdDate": "Created Date",
       "updatedBy": "Updated By",
       "updateDate": "Update Date",
-      "listingType": "Listing Type",
       "location": "Location",
+      "listingType": "Listing Type",
       "owner": "Owner"
     }
   }

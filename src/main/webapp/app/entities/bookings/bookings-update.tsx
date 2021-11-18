@@ -144,10 +144,24 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
+                label={translate('campsitesindiaApp.bookings.childPricePerNight')}
+                id="bookings-childPricePerNight"
+                name="childPricePerNight"
+                data-cy="childPricePerNight"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('campsitesindiaApp.bookings.numOfNights')}
                 id="bookings-numOfNights"
                 name="numOfNights"
                 data-cy="numOfNights"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.bookings.totalAmount')}
+                id="bookings-totalAmount"
+                name="totalAmount"
+                data-cy="totalAmount"
                 type="text"
               />
               <ValidatedField

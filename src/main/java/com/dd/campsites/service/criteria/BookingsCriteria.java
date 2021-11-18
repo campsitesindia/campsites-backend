@@ -35,7 +35,11 @@ public class BookingsCriteria implements Serializable, Criteria {
 
     private DoubleFilter pricePerNight;
 
+    private DoubleFilter childPricePerNight;
+
     private IntegerFilter numOfNights;
+
+    private DoubleFilter totalAmount;
 
     private StringFilter createdBy;
 
@@ -59,7 +63,9 @@ public class BookingsCriteria implements Serializable, Criteria {
         this.checkInDate = other.checkInDate == null ? null : other.checkInDate.copy();
         this.checkOutDate = other.checkOutDate == null ? null : other.checkOutDate.copy();
         this.pricePerNight = other.pricePerNight == null ? null : other.pricePerNight.copy();
+        this.childPricePerNight = other.childPricePerNight == null ? null : other.childPricePerNight.copy();
         this.numOfNights = other.numOfNights == null ? null : other.numOfNights.copy();
+        this.totalAmount = other.totalAmount == null ? null : other.totalAmount.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.updatedBy = other.updatedBy == null ? null : other.updatedBy.copy();
@@ -149,6 +155,21 @@ public class BookingsCriteria implements Serializable, Criteria {
         this.pricePerNight = pricePerNight;
     }
 
+    public DoubleFilter getChildPricePerNight() {
+        return childPricePerNight;
+    }
+
+    public DoubleFilter childPricePerNight() {
+        if (childPricePerNight == null) {
+            childPricePerNight = new DoubleFilter();
+        }
+        return childPricePerNight;
+    }
+
+    public void setChildPricePerNight(DoubleFilter childPricePerNight) {
+        this.childPricePerNight = childPricePerNight;
+    }
+
     public IntegerFilter getNumOfNights() {
         return numOfNights;
     }
@@ -162,6 +183,21 @@ public class BookingsCriteria implements Serializable, Criteria {
 
     public void setNumOfNights(IntegerFilter numOfNights) {
         this.numOfNights = numOfNights;
+    }
+
+    public DoubleFilter getTotalAmount() {
+        return totalAmount;
+    }
+
+    public DoubleFilter totalAmount() {
+        if (totalAmount == null) {
+            totalAmount = new DoubleFilter();
+        }
+        return totalAmount;
+    }
+
+    public void setTotalAmount(DoubleFilter totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public StringFilter getCreatedBy() {
@@ -284,7 +320,9 @@ public class BookingsCriteria implements Serializable, Criteria {
             Objects.equals(checkInDate, that.checkInDate) &&
             Objects.equals(checkOutDate, that.checkOutDate) &&
             Objects.equals(pricePerNight, that.pricePerNight) &&
+            Objects.equals(childPricePerNight, that.childPricePerNight) &&
             Objects.equals(numOfNights, that.numOfNights) &&
+            Objects.equals(totalAmount, that.totalAmount) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(updatedBy, that.updatedBy) &&
@@ -303,7 +341,9 @@ public class BookingsCriteria implements Serializable, Criteria {
             checkInDate,
             checkOutDate,
             pricePerNight,
+            childPricePerNight,
             numOfNights,
+            totalAmount,
             createdBy,
             createdDate,
             updatedBy,
@@ -323,7 +363,9 @@ public class BookingsCriteria implements Serializable, Criteria {
             (checkInDate != null ? "checkInDate=" + checkInDate + ", " : "") +
             (checkOutDate != null ? "checkOutDate=" + checkOutDate + ", " : "") +
             (pricePerNight != null ? "pricePerNight=" + pricePerNight + ", " : "") +
+            (childPricePerNight != null ? "childPricePerNight=" + childPricePerNight + ", " : "") +
             (numOfNights != null ? "numOfNights=" + numOfNights + ", " : "") +
+            (totalAmount != null ? "totalAmount=" + totalAmount + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (updatedBy != null ? "updatedBy=" + updatedBy + ", " : "") +

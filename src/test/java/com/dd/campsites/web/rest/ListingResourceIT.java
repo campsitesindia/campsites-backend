@@ -66,6 +66,17 @@ class ListingResourceIT {
     private static final Double UPDATED_PRICE_PER_PERSON = 2D;
     private static final Double SMALLER_PRICE_PER_PERSON = 1D - 1D;
 
+    private static final Double DEFAULT_PRICE_PER_CHILD = 1D;
+    private static final Double UPDATED_PRICE_PER_CHILD = 2D;
+    private static final Double SMALLER_PRICE_PER_CHILD = 1D - 1D;
+
+    private static final Double DEFAULT_DISCOUNT = 1D;
+    private static final Double UPDATED_DISCOUNT = 2D;
+    private static final Double SMALLER_DISCOUNT = 1D - 1D;
+
+    private static final Boolean DEFAULT_IS_PUBLISHED = false;
+    private static final Boolean UPDATED_IS_PUBLISHED = true;
+
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
 
@@ -131,6 +142,9 @@ class ListingResourceIT {
             .thumbnail(DEFAULT_THUMBNAIL)
             .isFeatured(DEFAULT_IS_FEATURED)
             .pricePerPerson(DEFAULT_PRICE_PER_PERSON)
+            .pricePerChild(DEFAULT_PRICE_PER_CHILD)
+            .discount(DEFAULT_DISCOUNT)
+            .isPublished(DEFAULT_IS_PUBLISHED)
             .phone(DEFAULT_PHONE)
             .email(DEFAULT_EMAIL)
             .website(DEFAULT_WEBSITE)
@@ -161,6 +175,9 @@ class ListingResourceIT {
             .thumbnail(UPDATED_THUMBNAIL)
             .isFeatured(UPDATED_IS_FEATURED)
             .pricePerPerson(UPDATED_PRICE_PER_PERSON)
+            .pricePerChild(UPDATED_PRICE_PER_CHILD)
+            .discount(UPDATED_DISCOUNT)
+            .isPublished(UPDATED_IS_PUBLISHED)
             .phone(UPDATED_PHONE)
             .email(UPDATED_EMAIL)
             .website(UPDATED_WEBSITE)
@@ -201,6 +218,9 @@ class ListingResourceIT {
         assertThat(testListing.getThumbnail()).isEqualTo(DEFAULT_THUMBNAIL);
         assertThat(testListing.getIsFeatured()).isEqualTo(DEFAULT_IS_FEATURED);
         assertThat(testListing.getPricePerPerson()).isEqualTo(DEFAULT_PRICE_PER_PERSON);
+        assertThat(testListing.getPricePerChild()).isEqualTo(DEFAULT_PRICE_PER_CHILD);
+        assertThat(testListing.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
+        assertThat(testListing.getIsPublished()).isEqualTo(DEFAULT_IS_PUBLISHED);
         assertThat(testListing.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testListing.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testListing.getWebsite()).isEqualTo(DEFAULT_WEBSITE);
@@ -252,6 +272,9 @@ class ListingResourceIT {
             .andExpect(jsonPath("$.[*].thumbnail").value(hasItem(DEFAULT_THUMBNAIL)))
             .andExpect(jsonPath("$.[*].isFeatured").value(hasItem(DEFAULT_IS_FEATURED.booleanValue())))
             .andExpect(jsonPath("$.[*].pricePerPerson").value(hasItem(DEFAULT_PRICE_PER_PERSON.doubleValue())))
+            .andExpect(jsonPath("$.[*].pricePerChild").value(hasItem(DEFAULT_PRICE_PER_CHILD.doubleValue())))
+            .andExpect(jsonPath("$.[*].discount").value(hasItem(DEFAULT_DISCOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].isPublished").value(hasItem(DEFAULT_IS_PUBLISHED.booleanValue())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE)))
@@ -285,6 +308,9 @@ class ListingResourceIT {
             .andExpect(jsonPath("$.thumbnail").value(DEFAULT_THUMBNAIL))
             .andExpect(jsonPath("$.isFeatured").value(DEFAULT_IS_FEATURED.booleanValue()))
             .andExpect(jsonPath("$.pricePerPerson").value(DEFAULT_PRICE_PER_PERSON.doubleValue()))
+            .andExpect(jsonPath("$.pricePerChild").value(DEFAULT_PRICE_PER_CHILD.doubleValue()))
+            .andExpect(jsonPath("$.discount").value(DEFAULT_DISCOUNT.doubleValue()))
+            .andExpect(jsonPath("$.isPublished").value(DEFAULT_IS_PUBLISHED.booleanValue()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.website").value(DEFAULT_WEBSITE))
@@ -1071,6 +1097,266 @@ class ListingResourceIT {
 
     @Test
     @Transactional
+    void getAllListingsByPricePerChildIsEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild equals to DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.equals=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild equals to UPDATED_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.equals=" + UPDATED_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild not equals to DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.notEquals=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild not equals to UPDATED_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.notEquals=" + UPDATED_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsInShouldWork() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild in DEFAULT_PRICE_PER_CHILD or UPDATED_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.in=" + DEFAULT_PRICE_PER_CHILD + "," + UPDATED_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild equals to UPDATED_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.in=" + UPDATED_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild is not null
+        defaultListingShouldBeFound("pricePerChild.specified=true");
+
+        // Get all the listingList where pricePerChild is null
+        defaultListingShouldNotBeFound("pricePerChild.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild is greater than or equal to DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.greaterThanOrEqual=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild is greater than or equal to UPDATED_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.greaterThanOrEqual=" + UPDATED_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild is less than or equal to DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.lessThanOrEqual=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild is less than or equal to SMALLER_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.lessThanOrEqual=" + SMALLER_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsLessThanSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild is less than DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.lessThan=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild is less than UPDATED_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.lessThan=" + UPDATED_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByPricePerChildIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where pricePerChild is greater than DEFAULT_PRICE_PER_CHILD
+        defaultListingShouldNotBeFound("pricePerChild.greaterThan=" + DEFAULT_PRICE_PER_CHILD);
+
+        // Get all the listingList where pricePerChild is greater than SMALLER_PRICE_PER_CHILD
+        defaultListingShouldBeFound("pricePerChild.greaterThan=" + SMALLER_PRICE_PER_CHILD);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount equals to DEFAULT_DISCOUNT
+        defaultListingShouldBeFound("discount.equals=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount equals to UPDATED_DISCOUNT
+        defaultListingShouldNotBeFound("discount.equals=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount not equals to DEFAULT_DISCOUNT
+        defaultListingShouldNotBeFound("discount.notEquals=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount not equals to UPDATED_DISCOUNT
+        defaultListingShouldBeFound("discount.notEquals=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsInShouldWork() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount in DEFAULT_DISCOUNT or UPDATED_DISCOUNT
+        defaultListingShouldBeFound("discount.in=" + DEFAULT_DISCOUNT + "," + UPDATED_DISCOUNT);
+
+        // Get all the listingList where discount equals to UPDATED_DISCOUNT
+        defaultListingShouldNotBeFound("discount.in=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount is not null
+        defaultListingShouldBeFound("discount.specified=true");
+
+        // Get all the listingList where discount is null
+        defaultListingShouldNotBeFound("discount.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount is greater than or equal to DEFAULT_DISCOUNT
+        defaultListingShouldBeFound("discount.greaterThanOrEqual=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount is greater than or equal to UPDATED_DISCOUNT
+        defaultListingShouldNotBeFound("discount.greaterThanOrEqual=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount is less than or equal to DEFAULT_DISCOUNT
+        defaultListingShouldBeFound("discount.lessThanOrEqual=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount is less than or equal to SMALLER_DISCOUNT
+        defaultListingShouldNotBeFound("discount.lessThanOrEqual=" + SMALLER_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsLessThanSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount is less than DEFAULT_DISCOUNT
+        defaultListingShouldNotBeFound("discount.lessThan=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount is less than UPDATED_DISCOUNT
+        defaultListingShouldBeFound("discount.lessThan=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByDiscountIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where discount is greater than DEFAULT_DISCOUNT
+        defaultListingShouldNotBeFound("discount.greaterThan=" + DEFAULT_DISCOUNT);
+
+        // Get all the listingList where discount is greater than SMALLER_DISCOUNT
+        defaultListingShouldBeFound("discount.greaterThan=" + SMALLER_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByIsPublishedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where isPublished equals to DEFAULT_IS_PUBLISHED
+        defaultListingShouldBeFound("isPublished.equals=" + DEFAULT_IS_PUBLISHED);
+
+        // Get all the listingList where isPublished equals to UPDATED_IS_PUBLISHED
+        defaultListingShouldNotBeFound("isPublished.equals=" + UPDATED_IS_PUBLISHED);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByIsPublishedIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where isPublished not equals to DEFAULT_IS_PUBLISHED
+        defaultListingShouldNotBeFound("isPublished.notEquals=" + DEFAULT_IS_PUBLISHED);
+
+        // Get all the listingList where isPublished not equals to UPDATED_IS_PUBLISHED
+        defaultListingShouldBeFound("isPublished.notEquals=" + UPDATED_IS_PUBLISHED);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByIsPublishedIsInShouldWork() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where isPublished in DEFAULT_IS_PUBLISHED or UPDATED_IS_PUBLISHED
+        defaultListingShouldBeFound("isPublished.in=" + DEFAULT_IS_PUBLISHED + "," + UPDATED_IS_PUBLISHED);
+
+        // Get all the listingList where isPublished equals to UPDATED_IS_PUBLISHED
+        defaultListingShouldNotBeFound("isPublished.in=" + UPDATED_IS_PUBLISHED);
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByIsPublishedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+
+        // Get all the listingList where isPublished is not null
+        defaultListingShouldBeFound("isPublished.specified=true");
+
+        // Get all the listingList where isPublished is null
+        defaultListingShouldNotBeFound("isPublished.specified=false");
+    }
+
+    @Test
+    @Transactional
     void getAllListingsByPhoneIsEqualToSomething() throws Exception {
         // Initialize the database
         listingRepository.saveAndFlush(listing);
@@ -1695,25 +1981,6 @@ class ListingResourceIT {
 
     @Test
     @Transactional
-    void getAllListingsByListingTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        listingRepository.saveAndFlush(listing);
-        ListingType listingType = ListingTypeResourceIT.createEntity(em);
-        em.persist(listingType);
-        em.flush();
-        listing.setListingType(listingType);
-        listingRepository.saveAndFlush(listing);
-        Long listingTypeId = listingType.getId();
-
-        // Get all the listingList where listingType equals to listingTypeId
-        defaultListingShouldBeFound("listingTypeId.equals=" + listingTypeId);
-
-        // Get all the listingList where listingType equals to (listingTypeId + 1)
-        defaultListingShouldNotBeFound("listingTypeId.equals=" + (listingTypeId + 1));
-    }
-
-    @Test
-    @Transactional
     void getAllListingsByLocationIsEqualToSomething() throws Exception {
         // Initialize the database
         listingRepository.saveAndFlush(listing);
@@ -1729,6 +1996,25 @@ class ListingResourceIT {
 
         // Get all the listingList where location equals to (locationId + 1)
         defaultListingShouldNotBeFound("locationId.equals=" + (locationId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllListingsByListingTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        listingRepository.saveAndFlush(listing);
+        ListingType listingType = ListingTypeResourceIT.createEntity(em);
+        em.persist(listingType);
+        em.flush();
+        listing.setListingType(listingType);
+        listingRepository.saveAndFlush(listing);
+        Long listingTypeId = listingType.getId();
+
+        // Get all the listingList where listingType equals to listingTypeId
+        defaultListingShouldBeFound("listingTypeId.equals=" + listingTypeId);
+
+        // Get all the listingList where listingType equals to (listingTypeId + 1)
+        defaultListingShouldNotBeFound("listingTypeId.equals=" + (listingTypeId + 1));
     }
 
     @Test
@@ -1768,6 +2054,9 @@ class ListingResourceIT {
             .andExpect(jsonPath("$.[*].thumbnail").value(hasItem(DEFAULT_THUMBNAIL)))
             .andExpect(jsonPath("$.[*].isFeatured").value(hasItem(DEFAULT_IS_FEATURED.booleanValue())))
             .andExpect(jsonPath("$.[*].pricePerPerson").value(hasItem(DEFAULT_PRICE_PER_PERSON.doubleValue())))
+            .andExpect(jsonPath("$.[*].pricePerChild").value(hasItem(DEFAULT_PRICE_PER_CHILD.doubleValue())))
+            .andExpect(jsonPath("$.[*].discount").value(hasItem(DEFAULT_DISCOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].isPublished").value(hasItem(DEFAULT_IS_PUBLISHED.booleanValue())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE)))
@@ -1835,6 +2124,9 @@ class ListingResourceIT {
             .thumbnail(UPDATED_THUMBNAIL)
             .isFeatured(UPDATED_IS_FEATURED)
             .pricePerPerson(UPDATED_PRICE_PER_PERSON)
+            .pricePerChild(UPDATED_PRICE_PER_CHILD)
+            .discount(UPDATED_DISCOUNT)
+            .isPublished(UPDATED_IS_PUBLISHED)
             .phone(UPDATED_PHONE)
             .email(UPDATED_EMAIL)
             .website(UPDATED_WEBSITE)
@@ -1867,6 +2159,9 @@ class ListingResourceIT {
         assertThat(testListing.getThumbnail()).isEqualTo(UPDATED_THUMBNAIL);
         assertThat(testListing.getIsFeatured()).isEqualTo(UPDATED_IS_FEATURED);
         assertThat(testListing.getPricePerPerson()).isEqualTo(UPDATED_PRICE_PER_PERSON);
+        assertThat(testListing.getPricePerChild()).isEqualTo(UPDATED_PRICE_PER_CHILD);
+        assertThat(testListing.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
+        assertThat(testListing.getIsPublished()).isEqualTo(UPDATED_IS_PUBLISHED);
         assertThat(testListing.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testListing.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testListing.getWebsite()).isEqualTo(UPDATED_WEBSITE);
@@ -1952,10 +2247,11 @@ class ListingResourceIT {
             .longitude(UPDATED_LONGITUDE)
             .title(UPDATED_TITLE)
             .content(UPDATED_CONTENT)
+            .phone(UPDATED_PHONE)
+            .email(UPDATED_EMAIL)
             .comment(UPDATED_COMMENT)
-            .disableBooking(UPDATED_DISABLE_BOOKING)
             .createdBy(UPDATED_CREATED_BY)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .createdDate(UPDATED_CREATED_DATE);
 
         restListingMockMvc
             .perform(
@@ -1978,16 +2274,19 @@ class ListingResourceIT {
         assertThat(testListing.getThumbnail()).isEqualTo(DEFAULT_THUMBNAIL);
         assertThat(testListing.getIsFeatured()).isEqualTo(DEFAULT_IS_FEATURED);
         assertThat(testListing.getPricePerPerson()).isEqualTo(DEFAULT_PRICE_PER_PERSON);
-        assertThat(testListing.getPhone()).isEqualTo(DEFAULT_PHONE);
-        assertThat(testListing.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testListing.getPricePerChild()).isEqualTo(DEFAULT_PRICE_PER_CHILD);
+        assertThat(testListing.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
+        assertThat(testListing.getIsPublished()).isEqualTo(DEFAULT_IS_PUBLISHED);
+        assertThat(testListing.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testListing.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testListing.getWebsite()).isEqualTo(DEFAULT_WEBSITE);
         assertThat(testListing.getComment()).isEqualTo(UPDATED_COMMENT);
-        assertThat(testListing.getDisableBooking()).isEqualTo(UPDATED_DISABLE_BOOKING);
+        assertThat(testListing.getDisableBooking()).isEqualTo(DEFAULT_DISABLE_BOOKING);
         assertThat(testListing.getViewCount()).isEqualTo(DEFAULT_VIEW_COUNT);
         assertThat(testListing.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testListing.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testListing.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testListing.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
-        assertThat(testListing.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
+        assertThat(testListing.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
     }
 
     @Test
@@ -2012,6 +2311,9 @@ class ListingResourceIT {
             .thumbnail(UPDATED_THUMBNAIL)
             .isFeatured(UPDATED_IS_FEATURED)
             .pricePerPerson(UPDATED_PRICE_PER_PERSON)
+            .pricePerChild(UPDATED_PRICE_PER_CHILD)
+            .discount(UPDATED_DISCOUNT)
+            .isPublished(UPDATED_IS_PUBLISHED)
             .phone(UPDATED_PHONE)
             .email(UPDATED_EMAIL)
             .website(UPDATED_WEBSITE)
@@ -2044,6 +2346,9 @@ class ListingResourceIT {
         assertThat(testListing.getThumbnail()).isEqualTo(UPDATED_THUMBNAIL);
         assertThat(testListing.getIsFeatured()).isEqualTo(UPDATED_IS_FEATURED);
         assertThat(testListing.getPricePerPerson()).isEqualTo(UPDATED_PRICE_PER_PERSON);
+        assertThat(testListing.getPricePerChild()).isEqualTo(UPDATED_PRICE_PER_CHILD);
+        assertThat(testListing.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
+        assertThat(testListing.getIsPublished()).isEqualTo(UPDATED_IS_PUBLISHED);
         assertThat(testListing.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testListing.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testListing.getWebsite()).isEqualTo(UPDATED_WEBSITE);

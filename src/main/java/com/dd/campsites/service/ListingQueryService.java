@@ -108,6 +108,15 @@ public class ListingQueryService extends QueryService<Listing> {
             if (criteria.getPricePerPerson() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPricePerPerson(), Listing_.pricePerPerson));
             }
+            if (criteria.getPricePerChild() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPricePerChild(), Listing_.pricePerChild));
+            }
+            if (criteria.getDiscount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDiscount(), Listing_.discount));
+            }
+            if (criteria.getIsPublished() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsPublished(), Listing_.isPublished));
+            }
             if (criteria.getPhone() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPhone(), Listing_.phone));
             }
@@ -135,6 +144,12 @@ public class ListingQueryService extends QueryService<Listing> {
             if (criteria.getUpdateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getUpdateDate(), Listing_.updateDate));
             }
+            if (criteria.getLocationId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getLocationId(), root -> root.join(Listing_.location, JoinType.LEFT).get(Location_.id))
+                    );
+            }
             if (criteria.getListingTypeId() != null) {
                 specification =
                     specification.and(
@@ -142,12 +157,6 @@ public class ListingQueryService extends QueryService<Listing> {
                             criteria.getListingTypeId(),
                             root -> root.join(Listing_.listingType, JoinType.LEFT).get(ListingType_.id)
                         )
-                    );
-            }
-            if (criteria.getLocationId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(criteria.getLocationId(), root -> root.join(Listing_.location, JoinType.LEFT).get(Location_.id))
                     );
             }
             if (criteria.getOwnerId() != null) {

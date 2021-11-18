@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { IListingType } from 'app/shared/model/listing-type.model';
 import { ILocation } from 'app/shared/model/location.model';
+import { IListingType } from 'app/shared/model/listing-type.model';
 import { IUser } from 'app/shared/model/user.model';
 
 export interface IListing {
@@ -14,6 +14,9 @@ export interface IListing {
   thumbnail?: string | null;
   isFeatured?: boolean | null;
   pricePerPerson?: number | null;
+  pricePerChild?: number | null;
+  discount?: number | null;
+  isPublished?: boolean | null;
   phone?: string | null;
   email?: string | null;
   website?: string | null;
@@ -24,12 +27,13 @@ export interface IListing {
   createdDate?: string | null;
   updatedBy?: string | null;
   updateDate?: string | null;
-  listingType?: IListingType | null;
   location?: ILocation | null;
+  listingType?: IListingType | null;
   owner?: IUser | null;
 }
 
 export const defaultValue: Readonly<IListing> = {
   isFeatured: false,
+  isPublished: false,
   disableBooking: false,
 };

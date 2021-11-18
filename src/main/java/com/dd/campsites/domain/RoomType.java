@@ -39,6 +39,9 @@ public class RoomType implements Serializable {
     @Column(name = "room_rate_per_night")
     private Double roomRatePerNight;
 
+    @Column(name = "room_rate_child_per_night")
+    private Double roomRateChildPerNight;
+
     @Column(name = "created_by")
     private String createdBy;
 
@@ -143,6 +146,19 @@ public class RoomType implements Serializable {
         this.roomRatePerNight = roomRatePerNight;
     }
 
+    public Double getRoomRateChildPerNight() {
+        return this.roomRateChildPerNight;
+    }
+
+    public RoomType roomRateChildPerNight(Double roomRateChildPerNight) {
+        this.roomRateChildPerNight = roomRateChildPerNight;
+        return this;
+    }
+
+    public void setRoomRateChildPerNight(Double roomRateChildPerNight) {
+        this.roomRateChildPerNight = roomRateChildPerNight;
+    }
+
     public String getCreatedBy() {
         return this.createdBy;
     }
@@ -225,6 +241,7 @@ public class RoomType implements Serializable {
             ", numberOfBeds=" + getNumberOfBeds() +
             ", numberOfBathrooms=" + getNumberOfBathrooms() +
             ", roomRatePerNight=" + getRoomRatePerNight() +
+            ", roomRateChildPerNight=" + getRoomRateChildPerNight() +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", updatedBy='" + getUpdatedBy() + "'" +

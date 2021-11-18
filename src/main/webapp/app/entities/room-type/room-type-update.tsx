@@ -137,6 +137,13 @@ export const RoomTypeUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
+                label={translate('campsitesindiaApp.roomType.roomRateChildPerNight')}
+                id="room-type-roomRateChildPerNight"
+                name="roomRateChildPerNight"
+                data-cy="roomRateChildPerNight"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('campsitesindiaApp.roomType.createdBy')}
                 id="room-type-createdBy"
                 name="createdBy"

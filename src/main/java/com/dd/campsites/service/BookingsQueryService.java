@@ -93,8 +93,14 @@ public class BookingsQueryService extends QueryService<Bookings> {
             if (criteria.getPricePerNight() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPricePerNight(), Bookings_.pricePerNight));
             }
+            if (criteria.getChildPricePerNight() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getChildPricePerNight(), Bookings_.childPricePerNight));
+            }
             if (criteria.getNumOfNights() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNumOfNights(), Bookings_.numOfNights));
+            }
+            if (criteria.getTotalAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalAmount(), Bookings_.totalAmount));
             }
             if (criteria.getCreatedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), Bookings_.createdBy));

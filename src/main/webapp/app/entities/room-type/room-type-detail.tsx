@@ -66,6 +66,12 @@ export const RoomTypeDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{roomTypeEntity.roomRatePerNight}</dd>
           <dt>
+            <span id="roomRateChildPerNight">
+              <Translate contentKey="campsitesindiaApp.roomType.roomRateChildPerNight">Room Rate Child Per Night</Translate>
+            </span>
+          </dt>
+          <dd>{roomTypeEntity.roomRateChildPerNight}</dd>
+          <dt>
             <span id="createdBy">
               <Translate contentKey="campsitesindiaApp.roomType.createdBy">Created By</Translate>
             </span>

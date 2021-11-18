@@ -58,11 +58,23 @@ export const BookingsDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{bookingsEntity.pricePerNight}</dd>
           <dt>
+            <span id="childPricePerNight">
+              <Translate contentKey="campsitesindiaApp.bookings.childPricePerNight">Child Price Per Night</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.childPricePerNight}</dd>
+          <dt>
             <span id="numOfNights">
               <Translate contentKey="campsitesindiaApp.bookings.numOfNights">Num Of Nights</Translate>
             </span>
           </dt>
           <dd>{bookingsEntity.numOfNights}</dd>
+          <dt>
+            <span id="totalAmount">
+              <Translate contentKey="campsitesindiaApp.bookings.totalAmount">Total Amount</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.totalAmount}</dd>
           <dt>
             <span id="createdBy">
               <Translate contentKey="campsitesindiaApp.bookings.createdBy">Created By</Translate>

@@ -32,6 +32,9 @@
             <column name="room_rate_per_night" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="room_rate_child_per_night" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -73,6 +76,7 @@
             <column name="number_of_beds" type="numeric"/>
             <column name="number_of_bathrooms" type="numeric"/>
             <column name="room_rate_per_night" type="numeric"/>
+            <column name="room_rate_child_per_night" type="numeric"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>
             <column name="updated_by" type="${datetimeType}"/>

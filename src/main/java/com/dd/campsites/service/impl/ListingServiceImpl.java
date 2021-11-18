@@ -67,6 +67,15 @@ public class ListingServiceImpl implements ListingService {
                     if (listing.getPricePerPerson() != null) {
                         existingListing.setPricePerPerson(listing.getPricePerPerson());
                     }
+                    if (listing.getPricePerChild() != null) {
+                        existingListing.setPricePerChild(listing.getPricePerChild());
+                    }
+                    if (listing.getDiscount() != null) {
+                        existingListing.setDiscount(listing.getDiscount());
+                    }
+                    if (listing.getIsPublished() != null) {
+                        existingListing.setIsPublished(listing.getIsPublished());
+                    }
                     if (listing.getPhone() != null) {
                         existingListing.setPhone(listing.getPhone());
                     }

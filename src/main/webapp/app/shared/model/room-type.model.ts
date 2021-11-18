@@ -8,6 +8,7 @@ export interface IRoomType {
   numberOfBeds?: number | null;
   numberOfBathrooms?: number | null;
   roomRatePerNight?: number | null;
+  roomRateChildPerNight?: number | null;
   createdBy?: string | null;
   createdDate?: string | null;
   updatedBy?: string | null;

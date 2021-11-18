@@ -9,7 +9,9 @@ export interface IBookings {
   checkInDate?: string | null;
   checkOutDate?: string | null;
   pricePerNight?: number | null;
+  childPricePerNight?: number | null;
   numOfNights?: number | null;
+  totalAmount?: number | null;
   createdBy?: string | null;
   createdDate?: string | null;
   updatedBy?: string | null;

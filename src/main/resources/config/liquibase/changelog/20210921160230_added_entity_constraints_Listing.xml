@@ -8,17 +8,17 @@
     -->
     <changeSet id="20210921160230-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="listing_type_id"
-                                 baseTableName="listing"
-                                 constraintName="fk_listing__listing_type_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="listing_type"/>
-
         <addForeignKeyConstraint baseColumnNames="location_id"
                                  baseTableName="listing"
                                  constraintName="fk_listing__location_id"
                                  referencedColumnNames="id"
                                  referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="listing_type_id"
+                                 baseTableName="listing"
+                                 constraintName="fk_listing__listing_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="listing_type"/>
 
         <addForeignKeyConstraint baseColumnNames="owner_id"
                                  baseTableName="listing"

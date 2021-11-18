@@ -90,6 +90,9 @@ entity Listing{
     thumbnail String,
     isFeatured Boolean,
     pricePerPerson Double,
+    pricePerChild Double,
+    discount Double,
+    isPublished Boolean,
 	phone String,
 	email  String,
 	website String,
@@ -114,6 +117,12 @@ entity Photos {
   createdDate Instant,
   updatedBy Instant,
   updateDate Instant
+}
+
+entity Album {
+  title String required
+  description TextBlob
+  created Instant
 }
 
 entity Videos {
@@ -151,7 +160,9 @@ entity  Bookings {
   checkInDate Instant ,
   checkOutDate Instant,
   pricePerNight Double,
+  childPricePerNight Double,
   numOfNights Integer,
+  totalAmount Double,
   createdBy String,
   createdDate Instant,
   updatedBy Instant,
@@ -192,6 +203,7 @@ entity RoomType{
     numberOfBeds Integer,
     numberOfBathrooms Integer,
     roomRatePerNight Double,
+    roomRateChildPerNight Double,
     createdBy String,
   createdDate Instant,
   updatedBy Instant,
@@ -227,6 +239,10 @@ entity Followers{
   updatedBy Instant,
   updateDate Instant
 }
+
+entity Tag {
+  name String required minlength(2)
+}
 entity FeaturesListing {
 
 }
@@ -244,7 +260,7 @@ relationship OneToOne {
   Like to Post
   Like {user(firstName)} to User
   Like to Images
-  Listing{listingType(title)} to ListingType
+  //Listing{listingType(title)} to ListingType
   ListingType{Parent(title)} to ListingType
   Location{Parent(title)} to Location
   Rating  {listing(title)} to Listing
@@ -252,8 +268,16 @@ relationship OneToOne {
 
 }
 
+relationship ManyToOne {
+  Album{user(login)} to User
+  Photo{album(title)} to Album
+}
 
 
+
+relationship ManyToMany {
+  Photo{tag(name)} to Tag{photo}
+}
 relationship ManyToOne {
 Post{user(email)}  to User
 Followers{followedBy(email)}  to User
@@ -281,7 +305,7 @@ RoomsForListing {room(roomNumber)} to Room
 RoomsInBooking {Bookings(name)} to Bookings
 RoomsInBooking {Room(roomNumber)} to Room
 Review {booking(name)} to Bookings
-
+Listing {ListingType(title)} to ListingType
 Listing {Owner(email)} to User
 Invoice to Bookings
 Invoice{Customer(email)} to User
@@ -292,6 +316,8 @@ Invoice{Customer(email)} to User
 
 
 paginate * with pagination
+paginate Photo, Tag with infinite-scroll
+
 filter *
 service * with serviceClass
 service all with serviceImpl

@@ -58,6 +58,9 @@ public class RoomTypeServiceImpl implements RoomTypeService {
                     if (roomType.getRoomRatePerNight() != null) {
                         existingRoomType.setRoomRatePerNight(roomType.getRoomRatePerNight());
                     }
+                    if (roomType.getRoomRateChildPerNight() != null) {
+                        existingRoomType.setRoomRateChildPerNight(roomType.getRoomRateChildPerNight());
+                    }
                     if (roomType.getCreatedBy() != null) {
                         existingRoomType.setCreatedBy(roomType.getCreatedBy());
                     }

@@ -50,6 +50,15 @@ public class Listing implements Serializable {
     @Column(name = "price_per_person")
     private Double pricePerPerson;
 
+    @Column(name = "price_per_child")
+    private Double pricePerChild;
+
+    @Column(name = "discount")
+    private Double discount;
+
+    @Column(name = "is_published")
+    private Boolean isPublished;
+
     @Column(name = "phone")
     private String phone;
 
@@ -82,14 +91,13 @@ public class Listing implements Serializable {
     @Column(name = "update_date")
     private Instant updateDate;
 
-    @JsonIgnoreProperties(value = { "parent" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ListingType listingType;
-
     @ManyToOne
     @JsonIgnoreProperties(value = { "parent" }, allowSetters = true)
     private Location location;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "parent" }, allowSetters = true)
+    private ListingType listingType;
 
     @ManyToOne
     private User owner;
@@ -225,6 +233,45 @@ public class Listing implements Serializable {
         this.pricePerPerson = pricePerPerson;
     }
 
+    public Double getPricePerChild() {
+        return this.pricePerChild;
+    }
+
+    public Listing pricePerChild(Double pricePerChild) {
+        this.pricePerChild = pricePerChild;
+        return this;
+    }
+
+    public void setPricePerChild(Double pricePerChild) {
+        this.pricePerChild = pricePerChild;
+    }
+
+    public Double getDiscount() {
+        return this.discount;
+    }
+
+    public Listing discount(Double discount) {
+        this.discount = discount;
+        return this;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Boolean getIsPublished() {
+        return this.isPublished;
+    }
+
+    public Listing isPublished(Boolean isPublished) {
+        this.isPublished = isPublished;
+        return this;
+    }
+
+    public void setIsPublished(Boolean isPublished) {
+        this.isPublished = isPublished;
+    }
+
     public String getPhone() {
         return this.phone;
     }
@@ -355,19 +402,6 @@ public class Listing implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public ListingType getListingType() {
-        return this.listingType;
-    }
-
-    public Listing listingType(ListingType listingType) {
-        this.setListingType(listingType);
-        return this;
-    }
-
-    public void setListingType(ListingType listingType) {
-        this.listingType = listingType;
-    }
-
     public Location getLocation() {
         return this.location;
     }
@@ -379,6 +413,19 @@ public class Listing implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public ListingType getListingType() {
+        return this.listingType;
+    }
+
+    public Listing listingType(ListingType listingType) {
+        this.setListingType(listingType);
+        return this;
+    }
+
+    public void setListingType(ListingType listingType) {
+        this.listingType = listingType;
     }
 
     public User getOwner() {
@@ -427,6 +474,9 @@ public class Listing implements Serializable {
             ", thumbnail='" + getThumbnail() + "'" +
             ", isFeatured='" + getIsFeatured() + "'" +
             ", pricePerPerson=" + getPricePerPerson() +
+            ", pricePerChild=" + getPricePerChild() +
+            ", discount=" + getDiscount() +
+            ", isPublished='" + getIsPublished() + "'" +
             ", phone='" + getPhone() + "'" +
             ", email='" + getEmail() + "'" +
             ", website='" + getWebsite() + "'" +

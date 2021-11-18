@@ -123,6 +123,10 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="campsitesindiaApp.roomType.roomRatePerNight">Room Rate Per Night</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('roomRateChildPerNight')}>
+                  <Translate contentKey="campsitesindiaApp.roomType.roomRateChildPerNight">Room Rate Child Per Night</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('createdBy')}>
                   <Translate contentKey="campsitesindiaApp.roomType.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -152,6 +156,7 @@ export const RoomType = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{roomType.numberOfBeds}</td>
                   <td>{roomType.numberOfBathrooms}</td>
                   <td>{roomType.roomRatePerNight}</td>
+                  <td>{roomType.roomRateChildPerNight}</td>
                   <td>{roomType.createdBy}</td>
                   <td>{roomType.createdDate ? <TextFormat type="date" value={roomType.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{roomType.updatedBy ? <TextFormat type="date" value={roomType.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>

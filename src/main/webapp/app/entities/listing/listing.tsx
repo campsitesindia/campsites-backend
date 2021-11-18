@@ -131,6 +131,16 @@ export const Listing = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="campsitesindiaApp.listing.pricePerPerson">Price Per Person</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('pricePerChild')}>
+                  <Translate contentKey="campsitesindiaApp.listing.pricePerChild">Price Per Child</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('discount')}>
+                  <Translate contentKey="campsitesindiaApp.listing.discount">Discount</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('isPublished')}>
+                  <Translate contentKey="campsitesindiaApp.listing.isPublished">Is Published</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('phone')}>
                   <Translate contentKey="campsitesindiaApp.listing.phone">Phone</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -163,10 +173,10 @@ export const Listing = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="campsitesindiaApp.listing.updateDate">Update Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="campsitesindiaApp.listing.listingType">Listing Type</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listing.location">Location</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="campsitesindiaApp.listing.location">Location</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="campsitesindiaApp.listing.listingType">Listing Type</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="campsitesindiaApp.listing.owner">Owner</Translate> <FontAwesomeIcon icon="sort" />
@@ -191,6 +201,9 @@ export const Listing = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{listing.thumbnail}</td>
                   <td>{listing.isFeatured ? 'true' : 'false'}</td>
                   <td>{listing.pricePerPerson}</td>
+                  <td>{listing.pricePerChild}</td>
+                  <td>{listing.discount}</td>
+                  <td>{listing.isPublished ? 'true' : 'false'}</td>
                   <td>{listing.phone}</td>
                   <td>{listing.email}</td>
                   <td>{listing.website}</td>
@@ -201,10 +214,10 @@ export const Listing = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{listing.createdDate ? <TextFormat type="date" value={listing.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{listing.updatedBy ? <TextFormat type="date" value={listing.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{listing.updateDate ? <TextFormat type="date" value={listing.updateDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{listing.location ? <Link to={`location/${listing.location.id}`}>{listing.location.title}</Link> : ''}</td>
                   <td>
                     {listing.listingType ? <Link to={`listing-type/${listing.listingType.id}`}>{listing.listingType.title}</Link> : ''}
                   </td>
-                  <td>{listing.location ? <Link to={`location/${listing.location.id}`}>{listing.location.title}</Link> : ''}</td>
                   <td>{listing.owner ? listing.owner.email : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

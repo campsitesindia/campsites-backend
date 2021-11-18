@@ -116,8 +116,15 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="campsitesindiaApp.bookings.pricePerNight">Price Per Night</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('childPricePerNight')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.childPricePerNight">Child Price Per Night</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('numOfNights')}>
                   <Translate contentKey="campsitesindiaApp.bookings.numOfNights">Num Of Nights</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('totalAmount')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.totalAmount">Total Amount</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('createdBy')}>
                   <Translate contentKey="campsitesindiaApp.bookings.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
@@ -154,7 +161,9 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
                     {bookings.checkOutDate ? <TextFormat type="date" value={bookings.checkOutDate} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>{bookings.pricePerNight}</td>
+                  <td>{bookings.childPricePerNight}</td>
                   <td>{bookings.numOfNights}</td>
+                  <td>{bookings.totalAmount}</td>
                   <td>{bookings.createdBy}</td>
                   <td>{bookings.createdDate ? <TextFormat type="date" value={bookings.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{bookings.updatedBy ? <TextFormat type="date" value={bookings.updatedBy} format={APP_DATE_FORMAT} /> : null}</td>

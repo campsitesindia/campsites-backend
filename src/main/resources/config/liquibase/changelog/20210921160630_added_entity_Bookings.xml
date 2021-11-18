@@ -26,7 +26,13 @@
             <column name="price_per_night" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="child_price_per_night" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="num_of_nights" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_amount" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="created_by" type="varchar(255)">
@@ -76,7 +82,9 @@
             <column name="check_in_date" type="${datetimeType}"/>
             <column name="check_out_date" type="${datetimeType}"/>
             <column name="price_per_night" type="numeric"/>
+            <column name="child_price_per_night" type="numeric"/>
             <column name="num_of_nights" type="numeric"/>
+            <column name="total_amount" type="numeric"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>
             <column name="updated_by" type="${datetimeType}"/>

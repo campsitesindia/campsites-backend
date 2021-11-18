@@ -48,9 +48,17 @@ class BookingsResourceIT {
     private static final Double UPDATED_PRICE_PER_NIGHT = 2D;
     private static final Double SMALLER_PRICE_PER_NIGHT = 1D - 1D;
 
+    private static final Double DEFAULT_CHILD_PRICE_PER_NIGHT = 1D;
+    private static final Double UPDATED_CHILD_PRICE_PER_NIGHT = 2D;
+    private static final Double SMALLER_CHILD_PRICE_PER_NIGHT = 1D - 1D;
+
     private static final Integer DEFAULT_NUM_OF_NIGHTS = 1;
     private static final Integer UPDATED_NUM_OF_NIGHTS = 2;
     private static final Integer SMALLER_NUM_OF_NIGHTS = 1 - 1;
+
+    private static final Double DEFAULT_TOTAL_AMOUNT = 1D;
+    private static final Double UPDATED_TOTAL_AMOUNT = 2D;
+    private static final Double SMALLER_TOTAL_AMOUNT = 1D - 1D;
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
@@ -93,7 +101,9 @@ class BookingsResourceIT {
             .checkInDate(DEFAULT_CHECK_IN_DATE)
             .checkOutDate(DEFAULT_CHECK_OUT_DATE)
             .pricePerNight(DEFAULT_PRICE_PER_NIGHT)
+            .childPricePerNight(DEFAULT_CHILD_PRICE_PER_NIGHT)
             .numOfNights(DEFAULT_NUM_OF_NIGHTS)
+            .totalAmount(DEFAULT_TOTAL_AMOUNT)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .updatedBy(DEFAULT_UPDATED_BY)
@@ -113,7 +123,9 @@ class BookingsResourceIT {
             .checkInDate(UPDATED_CHECK_IN_DATE)
             .checkOutDate(UPDATED_CHECK_OUT_DATE)
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
+            .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -143,7 +155,9 @@ class BookingsResourceIT {
         assertThat(testBookings.getCheckInDate()).isEqualTo(DEFAULT_CHECK_IN_DATE);
         assertThat(testBookings.getCheckOutDate()).isEqualTo(DEFAULT_CHECK_OUT_DATE);
         assertThat(testBookings.getPricePerNight()).isEqualTo(DEFAULT_PRICE_PER_NIGHT);
+        assertThat(testBookings.getChildPricePerNight()).isEqualTo(DEFAULT_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(DEFAULT_NUM_OF_NIGHTS);
+        assertThat(testBookings.getTotalAmount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testBookings.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
@@ -184,7 +198,9 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.[*].checkInDate").value(hasItem(DEFAULT_CHECK_IN_DATE.toString())))
             .andExpect(jsonPath("$.[*].checkOutDate").value(hasItem(DEFAULT_CHECK_OUT_DATE.toString())))
             .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].childPricePerNight").value(hasItem(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].numOfNights").value(hasItem(DEFAULT_NUM_OF_NIGHTS)))
+            .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
@@ -207,7 +223,9 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.checkInDate").value(DEFAULT_CHECK_IN_DATE.toString()))
             .andExpect(jsonPath("$.checkOutDate").value(DEFAULT_CHECK_OUT_DATE.toString()))
             .andExpect(jsonPath("$.pricePerNight").value(DEFAULT_PRICE_PER_NIGHT.doubleValue()))
+            .andExpect(jsonPath("$.childPricePerNight").value(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue()))
             .andExpect(jsonPath("$.numOfNights").value(DEFAULT_NUM_OF_NIGHTS))
+            .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
@@ -520,6 +538,110 @@ class BookingsResourceIT {
 
     @Test
     @Transactional
+    void getAllBookingsByChildPricePerNightIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight equals to DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.equals=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight equals to UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.equals=" + UPDATED_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight not equals to DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.notEquals=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight not equals to UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.notEquals=" + UPDATED_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight in DEFAULT_CHILD_PRICE_PER_NIGHT or UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.in=" + DEFAULT_CHILD_PRICE_PER_NIGHT + "," + UPDATED_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight equals to UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.in=" + UPDATED_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight is not null
+        defaultBookingsShouldBeFound("childPricePerNight.specified=true");
+
+        // Get all the bookingsList where childPricePerNight is null
+        defaultBookingsShouldNotBeFound("childPricePerNight.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight is greater than or equal to DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.greaterThanOrEqual=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight is greater than or equal to UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.greaterThanOrEqual=" + UPDATED_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight is less than or equal to DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.lessThanOrEqual=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight is less than or equal to SMALLER_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.lessThanOrEqual=" + SMALLER_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsLessThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight is less than DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.lessThan=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight is less than UPDATED_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.lessThan=" + UPDATED_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByChildPricePerNightIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where childPricePerNight is greater than DEFAULT_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldNotBeFound("childPricePerNight.greaterThan=" + DEFAULT_CHILD_PRICE_PER_NIGHT);
+
+        // Get all the bookingsList where childPricePerNight is greater than SMALLER_CHILD_PRICE_PER_NIGHT
+        defaultBookingsShouldBeFound("childPricePerNight.greaterThan=" + SMALLER_CHILD_PRICE_PER_NIGHT);
+    }
+
+    @Test
+    @Transactional
     void getAllBookingsByNumOfNightsIsEqualToSomething() throws Exception {
         // Initialize the database
         bookingsRepository.saveAndFlush(bookings);
@@ -620,6 +742,110 @@ class BookingsResourceIT {
 
         // Get all the bookingsList where numOfNights is greater than SMALLER_NUM_OF_NIGHTS
         defaultBookingsShouldBeFound("numOfNights.greaterThan=" + SMALLER_NUM_OF_NIGHTS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount equals to DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.equals=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount equals to UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.equals=" + UPDATED_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount not equals to DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.notEquals=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount not equals to UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.notEquals=" + UPDATED_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount in DEFAULT_TOTAL_AMOUNT or UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.in=" + DEFAULT_TOTAL_AMOUNT + "," + UPDATED_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount equals to UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.in=" + UPDATED_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount is not null
+        defaultBookingsShouldBeFound("totalAmount.specified=true");
+
+        // Get all the bookingsList where totalAmount is null
+        defaultBookingsShouldNotBeFound("totalAmount.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount is greater than or equal to DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.greaterThanOrEqual=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount is greater than or equal to UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.greaterThanOrEqual=" + UPDATED_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount is less than or equal to DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.lessThanOrEqual=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount is less than or equal to SMALLER_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.lessThanOrEqual=" + SMALLER_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsLessThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount is less than DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.lessThan=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount is less than UPDATED_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.lessThan=" + UPDATED_TOTAL_AMOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByTotalAmountIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where totalAmount is greater than DEFAULT_TOTAL_AMOUNT
+        defaultBookingsShouldNotBeFound("totalAmount.greaterThan=" + DEFAULT_TOTAL_AMOUNT);
+
+        // Get all the bookingsList where totalAmount is greater than SMALLER_TOTAL_AMOUNT
+        defaultBookingsShouldBeFound("totalAmount.greaterThan=" + SMALLER_TOTAL_AMOUNT);
     }
 
     @Test
@@ -926,7 +1152,9 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.[*].checkInDate").value(hasItem(DEFAULT_CHECK_IN_DATE.toString())))
             .andExpect(jsonPath("$.[*].checkOutDate").value(hasItem(DEFAULT_CHECK_OUT_DATE.toString())))
             .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].childPricePerNight").value(hasItem(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].numOfNights").value(hasItem(DEFAULT_NUM_OF_NIGHTS)))
+            .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
@@ -983,7 +1211,9 @@ class BookingsResourceIT {
             .checkInDate(UPDATED_CHECK_IN_DATE)
             .checkOutDate(UPDATED_CHECK_OUT_DATE)
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
+            .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1005,7 +1235,9 @@ class BookingsResourceIT {
         assertThat(testBookings.getCheckInDate()).isEqualTo(UPDATED_CHECK_IN_DATE);
         assertThat(testBookings.getCheckOutDate()).isEqualTo(UPDATED_CHECK_OUT_DATE);
         assertThat(testBookings.getPricePerNight()).isEqualTo(UPDATED_PRICE_PER_NIGHT);
+        assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(UPDATED_NUM_OF_NIGHTS);
+        assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testBookings.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
@@ -1082,9 +1314,9 @@ class BookingsResourceIT {
 
         partialUpdatedBookings
             .checkOutDate(UPDATED_CHECK_OUT_DATE)
-            .numOfNights(UPDATED_NUM_OF_NIGHTS)
-            .createdDate(UPDATED_CREATED_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
+            .totalAmount(UPDATED_TOTAL_AMOUNT)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restBookingsMockMvc
             .perform(
@@ -1102,11 +1334,13 @@ class BookingsResourceIT {
         assertThat(testBookings.getCheckInDate()).isEqualTo(DEFAULT_CHECK_IN_DATE);
         assertThat(testBookings.getCheckOutDate()).isEqualTo(UPDATED_CHECK_OUT_DATE);
         assertThat(testBookings.getPricePerNight()).isEqualTo(DEFAULT_PRICE_PER_NIGHT);
-        assertThat(testBookings.getNumOfNights()).isEqualTo(UPDATED_NUM_OF_NIGHTS);
+        assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
+        assertThat(testBookings.getNumOfNights()).isEqualTo(DEFAULT_NUM_OF_NIGHTS);
+        assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testBookings.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
-        assertThat(testBookings.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
+        assertThat(testBookings.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
     }
 
     @Test
@@ -1126,7 +1360,9 @@ class BookingsResourceIT {
             .checkInDate(UPDATED_CHECK_IN_DATE)
             .checkOutDate(UPDATED_CHECK_OUT_DATE)
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
+            .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1148,7 +1384,9 @@ class BookingsResourceIT {
         assertThat(testBookings.getCheckInDate()).isEqualTo(UPDATED_CHECK_IN_DATE);
         assertThat(testBookings.getCheckOutDate()).isEqualTo(UPDATED_CHECK_OUT_DATE);
         assertThat(testBookings.getPricePerNight()).isEqualTo(UPDATED_PRICE_PER_NIGHT);
+        assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(UPDATED_NUM_OF_NIGHTS);
+        assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testBookings.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);

@@ -36,8 +36,14 @@ public class Bookings implements Serializable {
     @Column(name = "price_per_night")
     private Double pricePerNight;
 
+    @Column(name = "child_price_per_night")
+    private Double childPricePerNight;
+
     @Column(name = "num_of_nights")
     private Integer numOfNights;
+
+    @Column(name = "total_amount")
+    private Double totalAmount;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -55,7 +61,7 @@ public class Bookings implements Serializable {
     private User user;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "listingType", "location", "owner" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "location", "owner" }, allowSetters = true)
     private Listing listing;
 
     @OneToMany(mappedBy = "bookings")
@@ -129,6 +135,19 @@ public class Bookings implements Serializable {
         this.pricePerNight = pricePerNight;
     }
 
+    public Double getChildPricePerNight() {
+        return this.childPricePerNight;
+    }
+
+    public Bookings childPricePerNight(Double childPricePerNight) {
+        this.childPricePerNight = childPricePerNight;
+        return this;
+    }
+
+    public void setChildPricePerNight(Double childPricePerNight) {
+        this.childPricePerNight = childPricePerNight;
+    }
+
     public Integer getNumOfNights() {
         return this.numOfNights;
     }
@@ -140,6 +159,19 @@ public class Bookings implements Serializable {
 
     public void setNumOfNights(Integer numOfNights) {
         this.numOfNights = numOfNights;
+    }
+
+    public Double getTotalAmount() {
+        return this.totalAmount;
+    }
+
+    public Bookings totalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+        return this;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public String getCreatedBy() {
@@ -279,7 +311,9 @@ public class Bookings implements Serializable {
             ", checkInDate='" + getCheckInDate() + "'" +
             ", checkOutDate='" + getCheckOutDate() + "'" +
             ", pricePerNight=" + getPricePerNight() +
+            ", childPricePerNight=" + getChildPricePerNight() +
             ", numOfNights=" + getNumOfNights() +
+            ", totalAmount=" + getTotalAmount() +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", updatedBy='" + getUpdatedBy() + "'" +

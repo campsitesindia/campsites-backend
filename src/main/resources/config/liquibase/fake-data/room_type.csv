@@ -1,11 +1,11 @@
-id;type;description;max_capacity;number_of_beds;number_of_bathrooms;room_rate_per_night;created_by;created_date;updated_by;update_date
-1;Guyana Streamlined Generic;AI Connecticut;wireless Beauty;70426;14670;74919;Jamaica AI;2021-09-21T16:04:43;2021-09-21T03:33:50;2021-09-20T20:26:54
-2;e-tailers;Lesotho Chief;Dollar Group;75493;39734;27060;Plastic;2021-09-21T16:08:43;2021-09-21T12:21:30;2021-09-21T16:07:39
-3;Solutions online mission-critical;Factors;Small Account;94216;66922;17577;Industrial networks application;2021-09-20T16:47:49;2021-09-21T06:08:37;2021-09-20T21:56:28
-4;feed Account;Bedfordshire override;online;51884;20964;49934;Representative Sausages;2021-09-20T17:04:06;2021-09-21T04:52:41;2021-09-21T08:59:35
-5;Caribbean Ergonomic digital;invoice;PCI payment;36821;24694;70014;El Cotton pink;2021-09-21T03:13:41;2021-09-20T17:03:26;2021-09-20T18:22:29
-6;Gloves customized Liaison;Innovative Loan SSL;unleash deposit;70615;16445;91990;copying Home Account;2021-09-21T05:01:44;2021-09-20T19:06:23;2021-09-21T08:41:19
-7;heuristic Computers;iterate turn-key Fresh;quantifying Towels;31002;82945;58250;logistical;2021-09-21T07:10:36;2021-09-21T10:54:09;2021-09-21T03:00:04
-8;Interactions;matrix;Islands;40988;8628;623;sky strategic;2021-09-21T06:03:20;2021-09-21T09:59:57;2021-09-21T15:37:59
-9;front-end;Loan logistical base;monitor teal Dynamic;96574;88162;26557;Franc SDD;2021-09-20T21:26:31;2021-09-21T10:59:04;2021-09-21T00:36:49
-10;program open-source up;Gorgeous SDD;Administrator analyzer;23711;40566;30352;Buckinghamshire;2021-09-20T23:28:01;2021-09-21T10:06:43;2021-09-20T16:11:06
+id;type;description;max_capacity;number_of_beds;number_of_bathrooms;room_rate_per_night;room_rate_child_per_night;created_by;created_date;updated_by;update_date
+1;Guyana Streamlined Generic;AI Connecticut;wireless Beauty;70426;14670;74919;38632;paradigms extend;2021-09-21T03:33:50;2021-09-20T20:26:54;2021-09-21T10:05:06
+2;area Lesotho;Direct Dollar Group;morph Plastic Games;87228;96021;599;78957;Berkshire yellow Factors;2021-09-21T05:27:17;2021-09-21T13:34:34;2021-09-21T16:00:41
+3;Account Branding;Industrial networks application;users feed Account;54895;48153;22593;47712;lavender online Cote;2021-09-21T06:18:22;2021-09-20T16:19:06;2021-09-20T17:33:04
+4;Sausages Applications;Caribbean Ergonomic digital;invoice;45368;85560;36138;90070;Buckinghamshire Reactive;2021-09-20T23:59:14;2021-09-20T22:00:29;2021-09-21T13:26:20
+5;maximize;payment;auxiliary encryption customized;96740;13101;60273;84785;maximize;2021-09-21T02:39:00;2021-09-21T07:20:28;2021-09-20T19:15:16
+6;Profound;payment Clothing Internal;implement generating;96371;46370;87715;31122;heuristic Computers;2021-09-20T22:05:26;2021-09-21T07:12:55;2021-09-20T18:18:34
+7;turn-key Fresh Loan;Towels service-desk Computers;architect Tasty Chair;98496;78006;9390;44852;technologies Baby;2021-09-21T03:26:40;2021-09-21T11:57:06;2021-09-21T08:06:17
+8;Practical;Montana Loan;Oregon;56100;91701;70883;73389;composite invoice Wisconsin;2021-09-21T09:47:03;2021-09-21T01:09:44;2021-09-20T23:26:28
+9;Utah;digital synthesizing Pa'anga;up Checking visionary;17743;43384;98020;41249;analyzer;2021-09-21T10:28:02;2021-09-21T06:25:20;2021-09-21T08:52:24
+10;Buckinghamshire;Vision-oriented Quality Games;District Cambridgeshire;5222;76015;76445;17944;contextually-based withdrawal Distributed;2021-09-21T06:56:08;2021-09-20T21:13:17;2021-09-21T02:35:51

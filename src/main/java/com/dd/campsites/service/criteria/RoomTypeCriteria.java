@@ -39,6 +39,8 @@ public class RoomTypeCriteria implements Serializable, Criteria {
 
     private DoubleFilter roomRatePerNight;
 
+    private DoubleFilter roomRateChildPerNight;
+
     private StringFilter createdBy;
 
     private InstantFilter createdDate;
@@ -57,6 +59,7 @@ public class RoomTypeCriteria implements Serializable, Criteria {
         this.numberOfBeds = other.numberOfBeds == null ? null : other.numberOfBeds.copy();
         this.numberOfBathrooms = other.numberOfBathrooms == null ? null : other.numberOfBathrooms.copy();
         this.roomRatePerNight = other.roomRatePerNight == null ? null : other.roomRatePerNight.copy();
+        this.roomRateChildPerNight = other.roomRateChildPerNight == null ? null : other.roomRateChildPerNight.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.updatedBy = other.updatedBy == null ? null : other.updatedBy.copy();
@@ -173,6 +176,21 @@ public class RoomTypeCriteria implements Serializable, Criteria {
         this.roomRatePerNight = roomRatePerNight;
     }
 
+    public DoubleFilter getRoomRateChildPerNight() {
+        return roomRateChildPerNight;
+    }
+
+    public DoubleFilter roomRateChildPerNight() {
+        if (roomRateChildPerNight == null) {
+            roomRateChildPerNight = new DoubleFilter();
+        }
+        return roomRateChildPerNight;
+    }
+
+    public void setRoomRateChildPerNight(DoubleFilter roomRateChildPerNight) {
+        this.roomRateChildPerNight = roomRateChildPerNight;
+    }
+
     public StringFilter getCreatedBy() {
         return createdBy;
     }
@@ -250,6 +268,7 @@ public class RoomTypeCriteria implements Serializable, Criteria {
             Objects.equals(numberOfBeds, that.numberOfBeds) &&
             Objects.equals(numberOfBathrooms, that.numberOfBathrooms) &&
             Objects.equals(roomRatePerNight, that.roomRatePerNight) &&
+            Objects.equals(roomRateChildPerNight, that.roomRateChildPerNight) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(updatedBy, that.updatedBy) &&
@@ -267,6 +286,7 @@ public class RoomTypeCriteria implements Serializable, Criteria {
             numberOfBeds,
             numberOfBathrooms,
             roomRatePerNight,
+            roomRateChildPerNight,
             createdBy,
             createdDate,
             updatedBy,
@@ -285,6 +305,7 @@ public class RoomTypeCriteria implements Serializable, Criteria {
             (numberOfBeds != null ? "numberOfBeds=" + numberOfBeds + ", " : "") +
             (numberOfBathrooms != null ? "numberOfBathrooms=" + numberOfBathrooms + ", " : "") +
             (roomRatePerNight != null ? "roomRatePerNight=" + roomRatePerNight + ", " : "") +
+            (roomRateChildPerNight != null ? "roomRateChildPerNight=" + roomRateChildPerNight + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (updatedBy != null ? "updatedBy=" + updatedBy + ", " : "") +

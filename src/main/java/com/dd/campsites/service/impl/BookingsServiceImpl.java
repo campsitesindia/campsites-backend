@@ -52,8 +52,14 @@ public class BookingsServiceImpl implements BookingsService {
                     if (bookings.getPricePerNight() != null) {
                         existingBookings.setPricePerNight(bookings.getPricePerNight());
                     }
+                    if (bookings.getChildPricePerNight() != null) {
+                        existingBookings.setChildPricePerNight(bookings.getChildPricePerNight());
+                    }
                     if (bookings.getNumOfNights() != null) {
                         existingBookings.setNumOfNights(bookings.getNumOfNights());
+                    }
+                    if (bookings.getTotalAmount() != null) {
+                        existingBookings.setTotalAmount(bookings.getTotalAmount());
                     }
                     if (bookings.getCreatedBy() != null) {
                         existingBookings.setCreatedBy(bookings.getCreatedBy());

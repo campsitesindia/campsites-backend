@@ -84,6 +84,24 @@ export const ListingDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{listingEntity.pricePerPerson}</dd>
           <dt>
+            <span id="pricePerChild">
+              <Translate contentKey="campsitesindiaApp.listing.pricePerChild">Price Per Child</Translate>
+            </span>
+          </dt>
+          <dd>{listingEntity.pricePerChild}</dd>
+          <dt>
+            <span id="discount">
+              <Translate contentKey="campsitesindiaApp.listing.discount">Discount</Translate>
+            </span>
+          </dt>
+          <dd>{listingEntity.discount}</dd>
+          <dt>
+            <span id="isPublished">
+              <Translate contentKey="campsitesindiaApp.listing.isPublished">Is Published</Translate>
+            </span>
+          </dt>
+          <dd>{listingEntity.isPublished ? 'true' : 'false'}</dd>
+          <dt>
             <span id="phone">
               <Translate contentKey="campsitesindiaApp.listing.phone">Phone</Translate>
             </span>
@@ -146,13 +164,13 @@ export const ListingDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{listingEntity.updateDate ? <TextFormat value={listingEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="campsitesindiaApp.listing.listingType">Listing Type</Translate>
-          </dt>
-          <dd>{listingEntity.listingType ? listingEntity.listingType.title : ''}</dd>
-          <dt>
             <Translate contentKey="campsitesindiaApp.listing.location">Location</Translate>
           </dt>
           <dd>{listingEntity.location ? listingEntity.location.title : ''}</dd>
+          <dt>
+            <Translate contentKey="campsitesindiaApp.listing.listingType">Listing Type</Translate>
+          </dt>
+          <dd>{listingEntity.listingType ? listingEntity.listingType.title : ''}</dd>
           <dt>
             <Translate contentKey="campsitesindiaApp.listing.owner">Owner</Translate>
           </dt>

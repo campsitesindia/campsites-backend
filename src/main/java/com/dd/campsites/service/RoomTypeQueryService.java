@@ -99,6 +99,10 @@ public class RoomTypeQueryService extends QueryService<RoomType> {
             if (criteria.getRoomRatePerNight() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRoomRatePerNight(), RoomType_.roomRatePerNight));
             }
+            if (criteria.getRoomRateChildPerNight() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getRoomRateChildPerNight(), RoomType_.roomRateChildPerNight));
+            }
             if (criteria.getCreatedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), RoomType_.createdBy));
             }
