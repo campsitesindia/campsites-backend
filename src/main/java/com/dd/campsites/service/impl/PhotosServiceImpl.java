@@ -58,6 +58,27 @@ public class PhotosServiceImpl implements PhotosService {
                     if (photos.getTitle() != null) {
                         existingPhotos.setTitle(photos.getTitle());
                     }
+                    if (photos.getImage() != null) {
+                        existingPhotos.setImage(photos.getImage());
+                    }
+                    if (photos.getImageContentType() != null) {
+                        existingPhotos.setImageContentType(photos.getImageContentType());
+                    }
+                    if (photos.getIsCoverImage() != null) {
+                        existingPhotos.setIsCoverImage(photos.getIsCoverImage());
+                    }
+                    if (photos.getHeight() != null) {
+                        existingPhotos.setHeight(photos.getHeight());
+                    }
+                    if (photos.getWidth() != null) {
+                        existingPhotos.setWidth(photos.getWidth());
+                    }
+                    if (photos.getTaken() != null) {
+                        existingPhotos.setTaken(photos.getTaken());
+                    }
+                    if (photos.getUploaded() != null) {
+                        existingPhotos.setUploaded(photos.getUploaded());
+                    }
                     if (photos.getCreatedBy() != null) {
                         existingPhotos.setCreatedBy(photos.getCreatedBy());
                     }
@@ -84,11 +105,15 @@ public class PhotosServiceImpl implements PhotosService {
         return photosRepository.findAll(pageable);
     }
 
+    public Page<Photos> findAllWithEagerRelationships(Pageable pageable) {
+        return photosRepository.findAllWithEagerRelationships(pageable);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Photos> findOne(Long id) {
         log.debug("Request to get Photos : {}", id);
-        return photosRepository.findById(id);
+        return photosRepository.findOneWithEagerRelationships(id);
     }
 
     @Override

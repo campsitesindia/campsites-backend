@@ -20,6 +20,7 @@
       "id": "ID",
       "firstName": "First Name",
       "lastName": "Last Name",
+      "provider": "Provider",
       "authTimestamp": "Auth Timestamp",
       "user": "User"
     }

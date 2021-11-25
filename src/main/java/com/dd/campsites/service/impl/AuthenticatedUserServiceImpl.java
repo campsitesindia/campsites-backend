@@ -46,6 +46,9 @@ public class AuthenticatedUserServiceImpl implements AuthenticatedUserService {
                     if (authenticatedUser.getLastName() != null) {
                         existingAuthenticatedUser.setLastName(authenticatedUser.getLastName());
                     }
+                    if (authenticatedUser.getProvider() != null) {
+                        existingAuthenticatedUser.setProvider(authenticatedUser.getProvider());
+                    }
                     if (authenticatedUser.getAuthTimestamp() != null) {
                         existingAuthenticatedUser.setAuthTimestamp(authenticatedUser.getAuthTimestamp());
                     }

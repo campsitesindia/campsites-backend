@@ -18,7 +18,7 @@ export const PhotosDeleteDialog = (props: RouteComponentProps<{ id: string }>) =
   const updateSuccess = useAppSelector(state => state.photos.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/photos' + props.location.search);
+    props.history.push('/photos');
   };
 
   useEffect(() => {

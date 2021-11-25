@@ -1,0 +1,10 @@
+{
+  "campsitesindiaApp": {
+    "AuthProvider": {
+      "null": "",
+      "LOCAL": "LOCAL",
+      "FAEBOOK": "FAEBOOK",
+      "GOOGLE": "GOOGLE"
+    }
+  }
+}

@@ -26,6 +26,8 @@ import FeaturesListing from './features-listing';
 import FeaturesInRoom from './features-in-room';
 import RoomsForListing from './rooms-for-listing';
 import RoomsInBooking from './rooms-in-booking';
+import Album from './album';
+import Tag from './tag';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -54,6 +56,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}features-in-room`} component={FeaturesInRoom} />
       <ErrorBoundaryRoute path={`${match.url}rooms-for-listing`} component={RoomsForListing} />
       <ErrorBoundaryRoute path={`${match.url}rooms-in-booking`} component={RoomsInBooking} />
+      <ErrorBoundaryRoute path={`${match.url}album`} component={Album} />
+      <ErrorBoundaryRoute path={`${match.url}tag`} component={Tag} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

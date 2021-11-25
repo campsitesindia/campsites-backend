@@ -1,5 +1,9 @@
 package com.dd.campsites.config;
 
+import com.dd.campsites.campsitesindia.security.oauth2.CustomOAuth2UserService;
+import com.dd.campsites.campsitesindia.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.dd.campsites.campsitesindia.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.dd.campsites.campsitesindia.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import com.dd.campsites.security.*;
 import com.dd.campsites.security.jwt.*;
 import org.springframework.context.annotation.Bean;
@@ -31,16 +35,42 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
     private final SecurityProblemSupport problemSupport;
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
+    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+
+    /*
+         By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
+         the authorization request. But, since our service is stateless, we can't save it in
+         the session. We'll save the request in a Base64 encoded cookie instead.
+       */
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
+    }
+
     public SecurityConfiguration(
         TokenProvider tokenProvider,
         CorsFilter corsFilter,
         JHipsterProperties jHipsterProperties,
-        SecurityProblemSupport problemSupport
+        SecurityProblemSupport problemSupport,
+        CustomOAuth2UserService customOAuth2UserService,
+        OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler,
+        OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler,
+        HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository
     ) {
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
         this.jHipsterProperties = jHipsterProperties;
+        this.customOAuth2UserService = customOAuth2UserService;
+        this.oAuth2AuthenticationSuccessHandler = oAuth2AuthenticationSuccessHandler;
+        this.oAuth2AuthenticationFailureHandler = oAuth2AuthenticationFailureHandler;
+        this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
     }
 
     @Bean
@@ -98,6 +128,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/listings**/**").permitAll()
             .antMatchers("/api/features/**").permitAll()
             .antMatchers("/api/photos/**").permitAll()
+            .antMatchers("/api//payment/getPaymentForm").permitAll()
             .antMatchers("/api/room/**").permitAll()
             .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/**").authenticated()
@@ -110,7 +141,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .httpBasic()
         .and()
-            .apply(securityConfigurerAdapter());
+            .apply(securityConfigurerAdapter())
+        .and()
+            .oauth2Login()
+            .authorizationEndpoint()
+            .baseUri("/oauth2/authorize")
+            .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+            .and()
+            .redirectionEndpoint()
+            .baseUri("/oauth2/callback/*")
+            .and()
+            .userInfoEndpoint()
+                .userService(customOAuth2UserService)
+            .and()
+            .successHandler(oAuth2AuthenticationSuccessHandler)
+            .failureHandler(oAuth2AuthenticationFailureHandler);
         // @formatter:on
     }
 

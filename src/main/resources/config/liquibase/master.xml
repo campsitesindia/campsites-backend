@@ -37,6 +37,8 @@
     <include file="config/liquibase/changelog/20210921161430_added_entity_FeaturesInRoom.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210921161530_added_entity_RoomsForListing.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210921161630_added_entity_RoomsInBooking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211118183230_added_entity_Album.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211118183231_added_entity_Tag.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210921155530_added_entity_constraints_AuthenticatedUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210921155630_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
@@ -58,6 +60,7 @@
     <include file="config/liquibase/changelog/20210921161430_added_entity_constraints_FeaturesInRoom.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210921161530_added_entity_constraints_RoomsForListing.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210921161630_added_entity_constraints_RoomsInBooking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211118183230_added_entity_constraints_Album.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

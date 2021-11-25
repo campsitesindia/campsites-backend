@@ -32,6 +32,27 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="image" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="image_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_cover_image" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="height" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="width" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="taken" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="uploaded" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -44,14 +65,33 @@
             <column name="update_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="album_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="listing_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="photos" columnName="taken" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="photos" columnName="uploaded" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="photos" columnName="created_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="photos" columnName="updated_by" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="photos" columnName="update_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20210921160330-1-relations" author="jhipster">
+
+        <createTable tableName="rel_photos__tag">
+            <column name="tag_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photos_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="photos_id, tag_id" tableName="rel_photos__tag"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -76,6 +116,13 @@
             <column name="href" type="string"/>
             <column name="src" type="string"/>
             <column name="title" type="string"/>
+            <column name="image" type="blob"/>
+            <column name="image_content_type" type="string"/>
+            <column name="is_cover_image" type="boolean"/>
+            <column name="height" type="numeric"/>
+            <column name="width" type="numeric"/>
+            <column name="taken" type="${datetimeType}"/>
+            <column name="uploaded" type="${datetimeType}"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>
             <column name="updated_by" type="${datetimeType}"/>

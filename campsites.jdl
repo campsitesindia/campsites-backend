@@ -14,10 +14,16 @@ application {
   }
   entities *
 }
+ enum AuthProvider {
+    LOCAL,
+    FAEBOOK,
+    GOOGLE
+}
 
 entity AuthenticatedUser {
  firstName String ,
  lastName String ,
+ provider AuthProvider,
  authTimestamp Instant
 }
 
@@ -113,6 +119,12 @@ entity Photos {
 	href  String,
 	src  String,
 	title  String,
+	image ImageBlob required,
+	isCoverImage Boolean,
+    height Integer,
+    width Integer,
+    taken Instant,
+    uploaded Instant,
     createdBy String,
   createdDate Instant,
   updatedBy Instant,
@@ -270,13 +282,13 @@ relationship OneToOne {
 
 relationship ManyToOne {
   Album{user(login)} to User
-  Photo{album(title)} to Album
+  Photos{album(title)} to Album
 }
 
 
 
 relationship ManyToMany {
-  Photo{tag(name)} to Tag{photo}
+  Photos{tag(title)} to Tag{photos}
 }
 relationship ManyToOne {
 Post{user(email)}  to User
@@ -316,7 +328,7 @@ Invoice{Customer(email)} to User
 
 
 paginate * with pagination
-paginate Photo, Tag with infinite-scroll
+paginate Photos, Tag with infinite-scroll
 
 filter *
 service * with serviceClass

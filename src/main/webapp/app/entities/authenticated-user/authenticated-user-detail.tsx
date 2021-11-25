@@ -42,6 +42,12 @@ export const AuthenticatedUserDetail = (props: RouteComponentProps<{ id: string 
           </dt>
           <dd>{authenticatedUserEntity.lastName}</dd>
           <dt>
+            <span id="provider">
+              <Translate contentKey="campsitesindiaApp.authenticatedUser.provider">Provider</Translate>
+            </span>
+          </dt>
+          <dd>{authenticatedUserEntity.provider}</dd>
+          <dt>
             <span id="authTimestamp">
               <Translate contentKey="campsitesindiaApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>
             </span>

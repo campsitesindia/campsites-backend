@@ -39,6 +39,16 @@ public class PhotosCriteria implements Serializable, Criteria {
 
     private StringFilter title;
 
+    private BooleanFilter isCoverImage;
+
+    private IntegerFilter height;
+
+    private IntegerFilter width;
+
+    private InstantFilter taken;
+
+    private InstantFilter uploaded;
+
     private StringFilter createdBy;
 
     private InstantFilter createdDate;
@@ -47,7 +57,11 @@ public class PhotosCriteria implements Serializable, Criteria {
 
     private InstantFilter updateDate;
 
+    private LongFilter albumId;
+
     private LongFilter listingId;
+
+    private LongFilter tagId;
 
     public PhotosCriteria() {}
 
@@ -59,11 +73,18 @@ public class PhotosCriteria implements Serializable, Criteria {
         this.href = other.href == null ? null : other.href.copy();
         this.src = other.src == null ? null : other.src.copy();
         this.title = other.title == null ? null : other.title.copy();
+        this.isCoverImage = other.isCoverImage == null ? null : other.isCoverImage.copy();
+        this.height = other.height == null ? null : other.height.copy();
+        this.width = other.width == null ? null : other.width.copy();
+        this.taken = other.taken == null ? null : other.taken.copy();
+        this.uploaded = other.uploaded == null ? null : other.uploaded.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.updatedBy = other.updatedBy == null ? null : other.updatedBy.copy();
         this.updateDate = other.updateDate == null ? null : other.updateDate.copy();
+        this.albumId = other.albumId == null ? null : other.albumId.copy();
         this.listingId = other.listingId == null ? null : other.listingId.copy();
+        this.tagId = other.tagId == null ? null : other.tagId.copy();
     }
 
     @Override
@@ -176,6 +197,81 @@ public class PhotosCriteria implements Serializable, Criteria {
         this.title = title;
     }
 
+    public BooleanFilter getIsCoverImage() {
+        return isCoverImage;
+    }
+
+    public BooleanFilter isCoverImage() {
+        if (isCoverImage == null) {
+            isCoverImage = new BooleanFilter();
+        }
+        return isCoverImage;
+    }
+
+    public void setIsCoverImage(BooleanFilter isCoverImage) {
+        this.isCoverImage = isCoverImage;
+    }
+
+    public IntegerFilter getHeight() {
+        return height;
+    }
+
+    public IntegerFilter height() {
+        if (height == null) {
+            height = new IntegerFilter();
+        }
+        return height;
+    }
+
+    public void setHeight(IntegerFilter height) {
+        this.height = height;
+    }
+
+    public IntegerFilter getWidth() {
+        return width;
+    }
+
+    public IntegerFilter width() {
+        if (width == null) {
+            width = new IntegerFilter();
+        }
+        return width;
+    }
+
+    public void setWidth(IntegerFilter width) {
+        this.width = width;
+    }
+
+    public InstantFilter getTaken() {
+        return taken;
+    }
+
+    public InstantFilter taken() {
+        if (taken == null) {
+            taken = new InstantFilter();
+        }
+        return taken;
+    }
+
+    public void setTaken(InstantFilter taken) {
+        this.taken = taken;
+    }
+
+    public InstantFilter getUploaded() {
+        return uploaded;
+    }
+
+    public InstantFilter uploaded() {
+        if (uploaded == null) {
+            uploaded = new InstantFilter();
+        }
+        return uploaded;
+    }
+
+    public void setUploaded(InstantFilter uploaded) {
+        this.uploaded = uploaded;
+    }
+
     public StringFilter getCreatedBy() {
         return createdBy;
     }
@@ -236,6 +332,21 @@ public class PhotosCriteria implements Serializable, Criteria {
         this.updateDate = updateDate;
     }
 
+    public LongFilter getAlbumId() {
+        return albumId;
+    }
+
+    public LongFilter albumId() {
+        if (albumId == null) {
+            albumId = new LongFilter();
+        }
+        return albumId;
+    }
+
+    public void setAlbumId(LongFilter albumId) {
+        this.albumId = albumId;
+    }
+
     public LongFilter getListingId() {
         return listingId;
     }
@@ -249,6 +360,21 @@ public class PhotosCriteria implements Serializable, Criteria {
 
     public void setListingId(LongFilter listingId) {
         this.listingId = listingId;
+    }
+
+    public LongFilter getTagId() {
+        return tagId;
+    }
+
+    public LongFilter tagId() {
+        if (tagId == null) {
+            tagId = new LongFilter();
+        }
+        return tagId;
+    }
+
+    public void setTagId(LongFilter tagId) {
+        this.tagId = tagId;
     }
 
     @Override
@@ -268,17 +394,44 @@ public class PhotosCriteria implements Serializable, Criteria {
             Objects.equals(href, that.href) &&
             Objects.equals(src, that.src) &&
             Objects.equals(title, that.title) &&
+            Objects.equals(isCoverImage, that.isCoverImage) &&
+            Objects.equals(height, that.height) &&
+            Objects.equals(width, that.width) &&
+            Objects.equals(taken, that.taken) &&
+            Objects.equals(uploaded, that.uploaded) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(updatedBy, that.updatedBy) &&
             Objects.equals(updateDate, that.updateDate) &&
-            Objects.equals(listingId, that.listingId)
+            Objects.equals(albumId, that.albumId) &&
+            Objects.equals(listingId, that.listingId) &&
+            Objects.equals(tagId, that.tagId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alt, caption, description, href, src, title, createdBy, createdDate, updatedBy, updateDate, listingId);
+        return Objects.hash(
+            id,
+            alt,
+            caption,
+            description,
+            href,
+            src,
+            title,
+            isCoverImage,
+            height,
+            width,
+            taken,
+            uploaded,
+            createdBy,
+            createdDate,
+            updatedBy,
+            updateDate,
+            albumId,
+            listingId,
+            tagId
+        );
     }
 
     // prettier-ignore
@@ -292,11 +445,18 @@ public class PhotosCriteria implements Serializable, Criteria {
             (href != null ? "href=" + href + ", " : "") +
             (src != null ? "src=" + src + ", " : "") +
             (title != null ? "title=" + title + ", " : "") +
+            (isCoverImage != null ? "isCoverImage=" + isCoverImage + ", " : "") +
+            (height != null ? "height=" + height + ", " : "") +
+            (width != null ? "width=" + width + ", " : "") +
+            (taken != null ? "taken=" + taken + ", " : "") +
+            (uploaded != null ? "uploaded=" + uploaded + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (updatedBy != null ? "updatedBy=" + updatedBy + ", " : "") +
             (updateDate != null ? "updateDate=" + updateDate + ", " : "") +
+            (albumId != null ? "albumId=" + albumId + ", " : "") +
             (listingId != null ? "listingId=" + listingId + ", " : "") +
+            (tagId != null ? "tagId=" + tagId + ", " : "") +
             "}";
     }
 }

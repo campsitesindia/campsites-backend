@@ -1,5 +1,6 @@
 package com.dd.campsites.service.criteria;
 
+import com.dd.campsites.domain.enumeration.AuthProvider;
 import java.io.Serializable;
 import java.util.Objects;
 import tech.jhipster.service.Criteria;
@@ -23,6 +24,23 @@ import tech.jhipster.service.filter.StringFilter;
  */
 public class AuthenticatedUserCriteria implements Serializable, Criteria {
 
+    /**
+     * Class for filtering AuthProvider
+     */
+    public static class AuthProviderFilter extends Filter<AuthProvider> {
+
+        public AuthProviderFilter() {}
+
+        public AuthProviderFilter(AuthProviderFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public AuthProviderFilter copy() {
+            return new AuthProviderFilter(this);
+        }
+    }
+
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
@@ -30,6 +48,8 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
     private StringFilter firstName;
 
     private StringFilter lastName;
+
+    private AuthProviderFilter provider;
 
     private InstantFilter authTimestamp;
 
@@ -41,6 +61,7 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.firstName = other.firstName == null ? null : other.firstName.copy();
         this.lastName = other.lastName == null ? null : other.lastName.copy();
+        this.provider = other.provider == null ? null : other.provider.copy();
         this.authTimestamp = other.authTimestamp == null ? null : other.authTimestamp.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
     }
@@ -95,6 +116,21 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
         this.lastName = lastName;
     }
 
+    public AuthProviderFilter getProvider() {
+        return provider;
+    }
+
+    public AuthProviderFilter provider() {
+        if (provider == null) {
+            provider = new AuthProviderFilter();
+        }
+        return provider;
+    }
+
+    public void setProvider(AuthProviderFilter provider) {
+        this.provider = provider;
+    }
+
     public InstantFilter getAuthTimestamp() {
         return authTimestamp;
     }
@@ -138,6 +174,7 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
             Objects.equals(lastName, that.lastName) &&
+            Objects.equals(provider, that.provider) &&
             Objects.equals(authTimestamp, that.authTimestamp) &&
             Objects.equals(userId, that.userId)
         );
@@ -145,7 +182,7 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, authTimestamp, userId);
+        return Objects.hash(id, firstName, lastName, provider, authTimestamp, userId);
     }
 
     // prettier-ignore
@@ -155,6 +192,7 @@ public class AuthenticatedUserCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (firstName != null ? "firstName=" + firstName + ", " : "") +
             (lastName != null ? "lastName=" + lastName + ", " : "") +
+            (provider != null ? "provider=" + provider + ", " : "") +
             (authTimestamp != null ? "authTimestamp=" + authTimestamp + ", " : "") +
             (userId != null ? "userId=" + userId + ", " : "") +
             "}";

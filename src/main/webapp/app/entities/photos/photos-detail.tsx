@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
+import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './photos.reducer';
@@ -66,6 +66,55 @@ export const PhotosDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{photosEntity.title}</dd>
           <dt>
+            <span id="image">
+              <Translate contentKey="campsitesindiaApp.photos.image">Image</Translate>
+            </span>
+          </dt>
+          <dd>
+            {photosEntity.image ? (
+              <div>
+                {photosEntity.imageContentType ? (
+                  <a onClick={openFile(photosEntity.imageContentType, photosEntity.image)}>
+                    <img src={`data:${photosEntity.imageContentType};base64,${photosEntity.image}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {photosEntity.imageContentType}, {byteSize(photosEntity.image)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="isCoverImage">
+              <Translate contentKey="campsitesindiaApp.photos.isCoverImage">Is Cover Image</Translate>
+            </span>
+          </dt>
+          <dd>{photosEntity.isCoverImage ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="height">
+              <Translate contentKey="campsitesindiaApp.photos.height">Height</Translate>
+            </span>
+          </dt>
+          <dd>{photosEntity.height}</dd>
+          <dt>
+            <span id="width">
+              <Translate contentKey="campsitesindiaApp.photos.width">Width</Translate>
+            </span>
+          </dt>
+          <dd>{photosEntity.width}</dd>
+          <dt>
+            <span id="taken">
+              <Translate contentKey="campsitesindiaApp.photos.taken">Taken</Translate>
+            </span>
+          </dt>
+          <dd>{photosEntity.taken ? <TextFormat value={photosEntity.taken} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="uploaded">
+              <Translate contentKey="campsitesindiaApp.photos.uploaded">Uploaded</Translate>
+            </span>
+          </dt>
+          <dd>{photosEntity.uploaded ? <TextFormat value={photosEntity.uploaded} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
             <span id="createdBy">
               <Translate contentKey="campsitesindiaApp.photos.createdBy">Created By</Translate>
             </span>
@@ -90,9 +139,26 @@ export const PhotosDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{photosEntity.updateDate ? <TextFormat value={photosEntity.updateDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
+            <Translate contentKey="campsitesindiaApp.photos.album">Album</Translate>
+          </dt>
+          <dd>{photosEntity.album ? photosEntity.album.title : ''}</dd>
+          <dt>
             <Translate contentKey="campsitesindiaApp.photos.listing">Listing</Translate>
           </dt>
           <dd>{photosEntity.listing ? photosEntity.listing.title : ''}</dd>
+          <dt>
+            <Translate contentKey="campsitesindiaApp.photos.tag">Tag</Translate>
+          </dt>
+          <dd>
+            {photosEntity.tags
+              ? photosEntity.tags.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.name}</a>
+                    {photosEntity.tags && i === photosEntity.tags.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/photos" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

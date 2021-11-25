@@ -59,6 +59,7 @@ public class CacheConfiguration {
             createCache(cm, com.dd.campsites.domain.ListingType.class.getName());
             createCache(cm, com.dd.campsites.domain.Listing.class.getName());
             createCache(cm, com.dd.campsites.domain.Photos.class.getName());
+            createCache(cm, com.dd.campsites.domain.Photos.class.getName() + ".tags");
             createCache(cm, com.dd.campsites.domain.Videos.class.getName());
             createCache(cm, com.dd.campsites.domain.Features.class.getName());
             createCache(cm, com.dd.campsites.domain.Bookings.class.getName());
@@ -73,6 +74,9 @@ public class CacheConfiguration {
             createCache(cm, com.dd.campsites.domain.FeaturesInRoom.class.getName());
             createCache(cm, com.dd.campsites.domain.RoomsForListing.class.getName());
             createCache(cm, com.dd.campsites.domain.RoomsInBooking.class.getName());
+            createCache(cm, com.dd.campsites.domain.Album.class.getName());
+            createCache(cm, com.dd.campsites.domain.Tag.class.getName());
+            createCache(cm, com.dd.campsites.domain.Tag.class.getName() + ".photos");
             // jhipster-needle-ehcache-add-entry
         };
     }

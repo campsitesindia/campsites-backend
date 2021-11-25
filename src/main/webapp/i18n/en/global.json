@@ -29,6 +29,8 @@
         "featuresInRoom": "Features In Room",
         "roomsForListing": "Rooms For Listing",
         "roomsInBooking": "Rooms In Booking",
+        "album": "Album",
+        "tag": "Tag",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

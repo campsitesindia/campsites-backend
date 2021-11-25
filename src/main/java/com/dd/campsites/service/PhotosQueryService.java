@@ -99,6 +99,21 @@ public class PhotosQueryService extends QueryService<Photos> {
             if (criteria.getTitle() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTitle(), Photos_.title));
             }
+            if (criteria.getIsCoverImage() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsCoverImage(), Photos_.isCoverImage));
+            }
+            if (criteria.getHeight() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getHeight(), Photos_.height));
+            }
+            if (criteria.getWidth() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getWidth(), Photos_.width));
+            }
+            if (criteria.getTaken() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTaken(), Photos_.taken));
+            }
+            if (criteria.getUploaded() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getUploaded(), Photos_.uploaded));
+            }
             if (criteria.getCreatedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), Photos_.createdBy));
             }
@@ -111,11 +126,21 @@ public class PhotosQueryService extends QueryService<Photos> {
             if (criteria.getUpdateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getUpdateDate(), Photos_.updateDate));
             }
+            if (criteria.getAlbumId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getAlbumId(), root -> root.join(Photos_.album, JoinType.LEFT).get(Album_.id))
+                    );
+            }
             if (criteria.getListingId() != null) {
                 specification =
                     specification.and(
                         buildSpecification(criteria.getListingId(), root -> root.join(Photos_.listing, JoinType.LEFT).get(Listing_.id))
                     );
+            }
+            if (criteria.getTagId() != null) {
+                specification =
+                    specification.and(buildSpecification(criteria.getTagId(), root -> root.join(Photos_.tags, JoinType.LEFT).get(Tag_.id)));
             }
         }
         return specification;

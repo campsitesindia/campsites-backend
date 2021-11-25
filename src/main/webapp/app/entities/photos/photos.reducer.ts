@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit';
+import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
@@ -10,6 +11,7 @@ const initialState: EntityState<IPhotos> = {
   errorMessage: null,
   entities: [],
   entity: defaultValue,
+  links: { next: 0 },
   updating: false,
   totalItems: 0,
   updateSuccess: false,
@@ -36,9 +38,7 @@ export const getEntity = createAsyncThunk(
 export const createEntity = createAsyncThunk(
   'photos/create_entity',
   async (entity: IPhotos, thunkAPI) => {
-    const result = await axios.post<IPhotos>(apiUrl, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
-    return result;
+    return axios.post<IPhotos>(apiUrl, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError }
 );
@@ -46,9 +46,7 @@ export const createEntity = createAsyncThunk(
 export const updateEntity = createAsyncThunk(
   'photos/update_entity',
   async (entity: IPhotos, thunkAPI) => {
-    const result = await axios.put<IPhotos>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
-    return result;
+    return axios.put<IPhotos>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError }
 );
@@ -56,9 +54,7 @@ export const updateEntity = createAsyncThunk(
 export const partialUpdateEntity = createAsyncThunk(
   'photos/partial_update_entity',
   async (entity: IPhotos, thunkAPI) => {
-    const result = await axios.patch<IPhotos>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
-    return result;
+    return axios.patch<IPhotos>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError }
 );
@@ -67,9 +63,7 @@ export const deleteEntity = createAsyncThunk(
   'photos/delete_entity',
   async (id: string | number, thunkAPI) => {
     const requestUrl = `${apiUrl}/${id}`;
-    const result = await axios.delete<IPhotos>(requestUrl);
-    thunkAPI.dispatch(getEntities({}));
-    return result;
+    return await axios.delete<IPhotos>(requestUrl);
   },
   { serializeError: serializeAxiosError }
 );
@@ -91,10 +85,13 @@ export const PhotosSlice = createEntitySlice({
         state.entity = {};
       })
       .addMatcher(isFulfilled(getEntities), (state, action) => {
+        const links = parseHeaderForLinks(action.payload.headers.link);
+
         return {
           ...state,
           loading: false,
-          entities: action.payload.data,
+          links,
+          entities: loadMoreDataWhenScrolled(state.entities, action.payload.data, links),
           totalItems: parseInt(action.payload.headers['x-total-count'], 10),
         };
       })

@@ -6,11 +6,26 @@ import com.dd.campsites.service.PhotosQueryService;
 import com.dd.campsites.service.PhotosService;
 import com.dd.campsites.service.criteria.PhotosCriteria;
 import com.dd.campsites.web.rest.errors.BadRequestAlertException;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.MetadataException;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.drew.metadata.jpeg.JpegDirectory;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,10 +74,19 @@ public class PhotosResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/photos")
-    public ResponseEntity<Photos> createPhotos(@RequestBody Photos photos) throws URISyntaxException {
+    public ResponseEntity<Photos> createPhotos(@Valid @RequestBody Photos photos) throws URISyntaxException {
         log.debug("REST request to save Photos : {}", photos);
         if (photos.getId() != null) {
             throw new BadRequestAlertException("A new photos cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        try {
+            photos = setMetadata(photos);
+        } catch (ImageProcessingException ipe) {
+            log.error(ipe.getMessage());
+        } catch (MetadataException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         Photos result = photosService.save(photos);
         return ResponseEntity
@@ -82,8 +106,10 @@ public class PhotosResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/photos/{id}")
-    public ResponseEntity<Photos> updatePhotos(@PathVariable(value = "id", required = false) final Long id, @RequestBody Photos photos)
-        throws URISyntaxException {
+    public ResponseEntity<Photos> updatePhotos(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody Photos photos
+    ) throws URISyntaxException {
         log.debug("REST request to update Photos : {}, {}", id, photos);
         if (photos.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -117,7 +143,7 @@ public class PhotosResource {
     @PatchMapping(value = "/photos/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<Photos> partialUpdatePhotos(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Photos photos
+        @NotNull @RequestBody Photos photos
     ) throws URISyntaxException {
         log.debug("REST request to partial update Photos partially : {}, {}", id, photos);
         if (photos.getId() == null) {
@@ -193,5 +219,36 @@ public class PhotosResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    private Photos setMetadata(Photos photo) throws ImageProcessingException, IOException, MetadataException {
+        String str = DatatypeConverter.printBase64Binary(photo.getImage());
+        byte[] data2 = DatatypeConverter.parseBase64Binary(str);
+        InputStream inputStream = new ByteArrayInputStream(data2);
+        BufferedInputStream bis = new BufferedInputStream(inputStream);
+        Metadata metadata = ImageMetadataReader.readMetadata(bis);
+        ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+
+        if (directory != null) {
+            Date date = directory.getDateDigitized();
+            if (date != null) {
+                photo.setTaken(date.toInstant());
+            }
+        }
+
+        if (photo.getTaken() == null) {
+            log.debug("Photo EXIF date digitized not available, setting taken on date to now...");
+            photo.setTaken(Instant.now());
+        }
+
+        photo.setUploaded(Instant.now());
+
+        JpegDirectory jpgDirectory = metadata.getFirstDirectoryOfType(JpegDirectory.class);
+        if (jpgDirectory != null) {
+            photo.setHeight(jpgDirectory.getImageHeight());
+            photo.setWidth(jpgDirectory.getImageWidth());
+        }
+
+        return photo;
     }
 }

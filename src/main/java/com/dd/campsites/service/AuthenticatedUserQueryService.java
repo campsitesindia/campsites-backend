@@ -87,6 +87,9 @@ public class AuthenticatedUserQueryService extends QueryService<AuthenticatedUse
             if (criteria.getLastName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastName(), AuthenticatedUser_.lastName));
             }
+            if (criteria.getProvider() != null) {
+                specification = specification.and(buildSpecification(criteria.getProvider(), AuthenticatedUser_.provider));
+            }
             if (criteria.getAuthTimestamp() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAuthTimestamp(), AuthenticatedUser_.authTimestamp));
             }

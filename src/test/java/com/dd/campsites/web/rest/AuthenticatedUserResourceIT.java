@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dd.campsites.IntegrationTest;
 import com.dd.campsites.domain.AuthenticatedUser;
 import com.dd.campsites.domain.User;
+import com.dd.campsites.domain.enumeration.AuthProvider;
 import com.dd.campsites.repository.AuthenticatedUserRepository;
 import com.dd.campsites.service.criteria.AuthenticatedUserCriteria;
 import java.time.Instant;
@@ -39,6 +40,9 @@ class AuthenticatedUserResourceIT {
     private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
 
+    private static final AuthProvider DEFAULT_PROVIDER = AuthProvider.local;
+    private static final AuthProvider UPDATED_PROVIDER = AuthProvider.facebook;
+
     private static final Instant DEFAULT_AUTH_TIMESTAMP = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_AUTH_TIMESTAMP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -69,6 +73,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser authenticatedUser = new AuthenticatedUser()
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
+            .provider(DEFAULT_PROVIDER)
             .authTimestamp(DEFAULT_AUTH_TIMESTAMP);
         return authenticatedUser;
     }
@@ -83,6 +88,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser authenticatedUser = new AuthenticatedUser()
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
+            .provider(UPDATED_PROVIDER)
             .authTimestamp(UPDATED_AUTH_TIMESTAMP);
         return authenticatedUser;
     }
@@ -109,6 +115,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser testAuthenticatedUser = authenticatedUserList.get(authenticatedUserList.size() - 1);
         assertThat(testAuthenticatedUser.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testAuthenticatedUser.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testAuthenticatedUser.getProvider()).isEqualTo(DEFAULT_PROVIDER);
         assertThat(testAuthenticatedUser.getAuthTimestamp()).isEqualTo(DEFAULT_AUTH_TIMESTAMP);
     }
 
@@ -146,6 +153,7 @@ class AuthenticatedUserResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(authenticatedUser.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
+            .andExpect(jsonPath("$.[*].provider").value(hasItem(DEFAULT_PROVIDER.toString())))
             .andExpect(jsonPath("$.[*].authTimestamp").value(hasItem(DEFAULT_AUTH_TIMESTAMP.toString())));
     }
 
@@ -163,6 +171,7 @@ class AuthenticatedUserResourceIT {
             .andExpect(jsonPath("$.id").value(authenticatedUser.getId().intValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
+            .andExpect(jsonPath("$.provider").value(DEFAULT_PROVIDER.toString()))
             .andExpect(jsonPath("$.authTimestamp").value(DEFAULT_AUTH_TIMESTAMP.toString()));
     }
 
@@ -342,6 +351,58 @@ class AuthenticatedUserResourceIT {
 
     @Test
     @Transactional
+    void getAllAuthenticatedUsersByProviderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        authenticatedUserRepository.saveAndFlush(authenticatedUser);
+
+        // Get all the authenticatedUserList where provider equals to DEFAULT_PROVIDER
+        defaultAuthenticatedUserShouldBeFound("provider.equals=" + DEFAULT_PROVIDER);
+
+        // Get all the authenticatedUserList where provider equals to UPDATED_PROVIDER
+        defaultAuthenticatedUserShouldNotBeFound("provider.equals=" + UPDATED_PROVIDER);
+    }
+
+    @Test
+    @Transactional
+    void getAllAuthenticatedUsersByProviderIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        authenticatedUserRepository.saveAndFlush(authenticatedUser);
+
+        // Get all the authenticatedUserList where provider not equals to DEFAULT_PROVIDER
+        defaultAuthenticatedUserShouldNotBeFound("provider.notEquals=" + DEFAULT_PROVIDER);
+
+        // Get all the authenticatedUserList where provider not equals to UPDATED_PROVIDER
+        defaultAuthenticatedUserShouldBeFound("provider.notEquals=" + UPDATED_PROVIDER);
+    }
+
+    @Test
+    @Transactional
+    void getAllAuthenticatedUsersByProviderIsInShouldWork() throws Exception {
+        // Initialize the database
+        authenticatedUserRepository.saveAndFlush(authenticatedUser);
+
+        // Get all the authenticatedUserList where provider in DEFAULT_PROVIDER or UPDATED_PROVIDER
+        defaultAuthenticatedUserShouldBeFound("provider.in=" + DEFAULT_PROVIDER + "," + UPDATED_PROVIDER);
+
+        // Get all the authenticatedUserList where provider equals to UPDATED_PROVIDER
+        defaultAuthenticatedUserShouldNotBeFound("provider.in=" + UPDATED_PROVIDER);
+    }
+
+    @Test
+    @Transactional
+    void getAllAuthenticatedUsersByProviderIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        authenticatedUserRepository.saveAndFlush(authenticatedUser);
+
+        // Get all the authenticatedUserList where provider is not null
+        defaultAuthenticatedUserShouldBeFound("provider.specified=true");
+
+        // Get all the authenticatedUserList where provider is null
+        defaultAuthenticatedUserShouldNotBeFound("provider.specified=false");
+    }
+
+    @Test
+    @Transactional
     void getAllAuthenticatedUsersByAuthTimestampIsEqualToSomething() throws Exception {
         // Initialize the database
         authenticatedUserRepository.saveAndFlush(authenticatedUser);
@@ -422,6 +483,7 @@ class AuthenticatedUserResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(authenticatedUser.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
+            .andExpect(jsonPath("$.[*].provider").value(hasItem(DEFAULT_PROVIDER.toString())))
             .andExpect(jsonPath("$.[*].authTimestamp").value(hasItem(DEFAULT_AUTH_TIMESTAMP.toString())));
 
         // Check, that the count call also returns 1
@@ -470,7 +532,11 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser updatedAuthenticatedUser = authenticatedUserRepository.findById(authenticatedUser.getId()).get();
         // Disconnect from session so that the updates on updatedAuthenticatedUser are not directly saved in db
         em.detach(updatedAuthenticatedUser);
-        updatedAuthenticatedUser.firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME).authTimestamp(UPDATED_AUTH_TIMESTAMP);
+        updatedAuthenticatedUser
+            .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME)
+            .provider(UPDATED_PROVIDER)
+            .authTimestamp(UPDATED_AUTH_TIMESTAMP);
 
         restAuthenticatedUserMockMvc
             .perform(
@@ -486,6 +552,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser testAuthenticatedUser = authenticatedUserList.get(authenticatedUserList.size() - 1);
         assertThat(testAuthenticatedUser.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testAuthenticatedUser.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testAuthenticatedUser.getProvider()).isEqualTo(UPDATED_PROVIDER);
         assertThat(testAuthenticatedUser.getAuthTimestamp()).isEqualTo(UPDATED_AUTH_TIMESTAMP);
     }
 
@@ -559,7 +626,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser partialUpdatedAuthenticatedUser = new AuthenticatedUser();
         partialUpdatedAuthenticatedUser.setId(authenticatedUser.getId());
 
-        partialUpdatedAuthenticatedUser.firstName(UPDATED_FIRST_NAME);
+        partialUpdatedAuthenticatedUser.firstName(UPDATED_FIRST_NAME).authTimestamp(UPDATED_AUTH_TIMESTAMP);
 
         restAuthenticatedUserMockMvc
             .perform(
@@ -575,7 +642,8 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser testAuthenticatedUser = authenticatedUserList.get(authenticatedUserList.size() - 1);
         assertThat(testAuthenticatedUser.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testAuthenticatedUser.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
-        assertThat(testAuthenticatedUser.getAuthTimestamp()).isEqualTo(DEFAULT_AUTH_TIMESTAMP);
+        assertThat(testAuthenticatedUser.getProvider()).isEqualTo(DEFAULT_PROVIDER);
+        assertThat(testAuthenticatedUser.getAuthTimestamp()).isEqualTo(UPDATED_AUTH_TIMESTAMP);
     }
 
     @Test
@@ -590,7 +658,11 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser partialUpdatedAuthenticatedUser = new AuthenticatedUser();
         partialUpdatedAuthenticatedUser.setId(authenticatedUser.getId());
 
-        partialUpdatedAuthenticatedUser.firstName(UPDATED_FIRST_NAME).lastName(UPDATED_LAST_NAME).authTimestamp(UPDATED_AUTH_TIMESTAMP);
+        partialUpdatedAuthenticatedUser
+            .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME)
+            .provider(UPDATED_PROVIDER)
+            .authTimestamp(UPDATED_AUTH_TIMESTAMP);
 
         restAuthenticatedUserMockMvc
             .perform(
@@ -606,6 +678,7 @@ class AuthenticatedUserResourceIT {
         AuthenticatedUser testAuthenticatedUser = authenticatedUserList.get(authenticatedUserList.size() - 1);
         assertThat(testAuthenticatedUser.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testAuthenticatedUser.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testAuthenticatedUser.getProvider()).isEqualTo(UPDATED_PROVIDER);
         assertThat(testAuthenticatedUser.getAuthTimestamp()).isEqualTo(UPDATED_AUTH_TIMESTAMP);
     }
 

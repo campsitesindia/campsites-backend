@@ -24,11 +24,19 @@
       "href": "Href",
       "src": "Src",
       "title": "Title",
+      "image": "Image",
+      "isCoverImage": "Is Cover Image",
+      "height": "Height",
+      "width": "Width",
+      "taken": "Taken",
+      "uploaded": "Uploaded",
       "createdBy": "Created By",
       "createdDate": "Created Date",
       "updatedBy": "Updated By",
       "updateDate": "Update Date",
-      "listing": "Listing"
+      "album": "Album",
+      "listing": "Listing",
+      "tag": "Tag"
     }
   }
 }

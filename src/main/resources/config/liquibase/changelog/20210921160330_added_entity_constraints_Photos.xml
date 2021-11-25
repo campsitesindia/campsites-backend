@@ -8,10 +8,28 @@
     -->
     <changeSet id="20210921160330-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="album_id"
+                                 baseTableName="photos"
+                                 constraintName="fk_photos__album_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="album"/>
+
         <addForeignKeyConstraint baseColumnNames="listing_id"
                                  baseTableName="photos"
                                  constraintName="fk_photos__listing_id"
                                  referencedColumnNames="id"
                                  referencedTableName="listing"/>
+
+        <addForeignKeyConstraint baseColumnNames="photos_id"
+                                 baseTableName="rel_photos__tag"
+                                 constraintName="fk_rel_photos__tag__photos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="photos"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="rel_photos__tag"
+                                 constraintName="fk_rel_photos__tag__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
     </changeSet>
 </databaseChangeLog>

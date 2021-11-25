@@ -34,6 +34,14 @@ public interface PhotosService {
     Page<Photos> findAll(Pageable pageable);
 
     /**
+     * Get all the photos with eager load of many-to-many relationships.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<Photos> findAllWithEagerRelationships(Pageable pageable);
+
+    /**
      * Get the "id" photos.
      *
      * @param id the id of the entity.

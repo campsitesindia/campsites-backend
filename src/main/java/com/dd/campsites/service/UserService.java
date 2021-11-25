@@ -145,6 +145,52 @@ public class UserService {
         return newUser;
     }
 
+    public User registerOauthUser(User user) {
+        userRepository
+            .findOneByLogin(user.getLogin().toLowerCase())
+            .ifPresent(
+                existingUser -> {
+                    boolean removed = removeNonActivatedUser(existingUser);
+                    if (!removed) {
+                        throw new UsernameAlreadyUsedException();
+                    }
+                }
+            );
+        userRepository
+            .findOneByEmailIgnoreCase(user.getEmail())
+            .ifPresent(
+                existingUser -> {
+                    boolean removed = removeNonActivatedUser(existingUser);
+                    if (!removed) {
+                        throw new EmailAlreadyUsedException();
+                    }
+                }
+            );
+        User newUser = new User();
+        // String encryptedPassword = passwordEncoder.encode(password);
+        newUser.setLogin(user.getLogin().toLowerCase());
+        // new user gets initially a generated password
+        // newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        if (user.getEmail() != null) {
+            newUser.setEmail(user.getEmail().toLowerCase());
+        }
+        newUser.setImageUrl(user.getImageUrl());
+        newUser.setLangKey(user.getLangKey());
+        // new user is not active
+        newUser.setActivated(true);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        Set<Authority> authorities = new HashSet<>();
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        this.clearUserCaches(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.isActivated()) {
             return false;
@@ -306,6 +352,8 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities() {
+        log.info("Getting authenticate user:{}", SecurityUtils.getCurrentUserLogin());
+        log.info(SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin).get().getEmail());
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
     }
 

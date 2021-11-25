@@ -1,5 +1,6 @@
 package com.dd.campsites.domain;
 
+import com.dd.campsites.domain.enumeration.AuthProvider;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
@@ -26,6 +27,10 @@ public class AuthenticatedUser implements Serializable {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider")
+    private AuthProvider provider;
 
     @Column(name = "auth_timestamp")
     private Instant authTimestamp;
@@ -72,6 +77,19 @@ public class AuthenticatedUser implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public AuthProvider getProvider() {
+        return this.provider;
+    }
+
+    public AuthenticatedUser provider(AuthProvider provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
     }
 
     public Instant getAuthTimestamp() {
@@ -126,6 +144,7 @@ public class AuthenticatedUser implements Serializable {
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
+            ", provider='" + getProvider() + "'" +
             ", authTimestamp='" + getAuthTimestamp() + "'" +
             "}";
     }

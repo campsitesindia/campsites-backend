@@ -55,6 +55,10 @@ import featuresInRoom from 'app/entities/features-in-room/features-in-room.reduc
 import roomsForListing from 'app/entities/rooms-for-listing/rooms-for-listing.reducer';
 // prettier-ignore
 import roomsInBooking from 'app/entities/rooms-in-booking/rooms-in-booking.reducer';
+// prettier-ignore
+import album from 'app/entities/album/album.reducer';
+// prettier-ignore
+import tag from 'app/entities/tag/tag.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -90,6 +94,8 @@ const rootReducer = {
   featuresInRoom,
   roomsForListing,
   roomsInBooking,
+  album,
+  tag,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

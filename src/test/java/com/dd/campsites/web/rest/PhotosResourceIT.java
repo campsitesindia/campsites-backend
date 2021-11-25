@@ -2,33 +2,45 @@ package com.dd.campsites.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dd.campsites.IntegrationTest;
+import com.dd.campsites.domain.Album;
 import com.dd.campsites.domain.Listing;
 import com.dd.campsites.domain.Photos;
+import com.dd.campsites.domain.Tag;
 import com.dd.campsites.repository.PhotosRepository;
+import com.dd.campsites.service.PhotosService;
 import com.dd.campsites.service.criteria.PhotosCriteria;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link PhotosResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PhotosResourceIT {
@@ -51,6 +63,28 @@ class PhotosResourceIT {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
+
+    private static final Boolean DEFAULT_IS_COVER_IMAGE = false;
+    private static final Boolean UPDATED_IS_COVER_IMAGE = true;
+
+    private static final Integer DEFAULT_HEIGHT = 1;
+    private static final Integer UPDATED_HEIGHT = 2;
+    private static final Integer SMALLER_HEIGHT = 1 - 1;
+
+    private static final Integer DEFAULT_WIDTH = 1;
+    private static final Integer UPDATED_WIDTH = 2;
+    private static final Integer SMALLER_WIDTH = 1 - 1;
+
+    private static final Instant DEFAULT_TAKEN = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_TAKEN = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_UPLOADED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_UPLOADED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
@@ -71,6 +105,12 @@ class PhotosResourceIT {
 
     @Autowired
     private PhotosRepository photosRepository;
+
+    @Mock
+    private PhotosRepository photosRepositoryMock;
+
+    @Mock
+    private PhotosService photosServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -94,6 +134,13 @@ class PhotosResourceIT {
             .href(DEFAULT_HREF)
             .src(DEFAULT_SRC)
             .title(DEFAULT_TITLE)
+            .image(DEFAULT_IMAGE)
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .isCoverImage(DEFAULT_IS_COVER_IMAGE)
+            .height(DEFAULT_HEIGHT)
+            .width(DEFAULT_WIDTH)
+            .taken(DEFAULT_TAKEN)
+            .uploaded(DEFAULT_UPLOADED)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .updatedBy(DEFAULT_UPDATED_BY)
@@ -115,6 +162,13 @@ class PhotosResourceIT {
             .href(UPDATED_HREF)
             .src(UPDATED_SRC)
             .title(UPDATED_TITLE)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .isCoverImage(UPDATED_IS_COVER_IMAGE)
+            .height(UPDATED_HEIGHT)
+            .width(UPDATED_WIDTH)
+            .taken(UPDATED_TAKEN)
+            .uploaded(UPDATED_UPLOADED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -146,6 +200,13 @@ class PhotosResourceIT {
         assertThat(testPhotos.getHref()).isEqualTo(DEFAULT_HREF);
         assertThat(testPhotos.getSrc()).isEqualTo(DEFAULT_SRC);
         assertThat(testPhotos.getTitle()).isEqualTo(DEFAULT_TITLE);
+        assertThat(testPhotos.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testPhotos.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testPhotos.getIsCoverImage()).isEqualTo(DEFAULT_IS_COVER_IMAGE);
+        assertThat(testPhotos.getHeight()).isEqualTo(DEFAULT_HEIGHT);
+        assertThat(testPhotos.getWidth()).isEqualTo(DEFAULT_WIDTH);
+        assertThat(testPhotos.getTaken()).isEqualTo(DEFAULT_TAKEN);
+        assertThat(testPhotos.getUploaded()).isEqualTo(DEFAULT_UPLOADED);
         assertThat(testPhotos.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testPhotos.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testPhotos.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
@@ -188,10 +249,35 @@ class PhotosResourceIT {
             .andExpect(jsonPath("$.[*].href").value(hasItem(DEFAULT_HREF)))
             .andExpect(jsonPath("$.[*].src").value(hasItem(DEFAULT_SRC)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].isCoverImage").value(hasItem(DEFAULT_IS_COVER_IMAGE.booleanValue())))
+            .andExpect(jsonPath("$.[*].height").value(hasItem(DEFAULT_HEIGHT)))
+            .andExpect(jsonPath("$.[*].width").value(hasItem(DEFAULT_WIDTH)))
+            .andExpect(jsonPath("$.[*].taken").value(hasItem(DEFAULT_TAKEN.toString())))
+            .andExpect(jsonPath("$.[*].uploaded").value(hasItem(DEFAULT_UPLOADED.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPhotosWithEagerRelationshipsIsEnabled() throws Exception {
+        when(photosServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPhotosMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(photosServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPhotosWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(photosServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPhotosMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(photosServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -212,6 +298,13 @@ class PhotosResourceIT {
             .andExpect(jsonPath("$.href").value(DEFAULT_HREF))
             .andExpect(jsonPath("$.src").value(DEFAULT_SRC))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.isCoverImage").value(DEFAULT_IS_COVER_IMAGE.booleanValue()))
+            .andExpect(jsonPath("$.height").value(DEFAULT_HEIGHT))
+            .andExpect(jsonPath("$.width").value(DEFAULT_WIDTH))
+            .andExpect(jsonPath("$.taken").value(DEFAULT_TAKEN.toString()))
+            .andExpect(jsonPath("$.uploaded").value(DEFAULT_UPLOADED.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
@@ -706,6 +799,370 @@ class PhotosResourceIT {
 
     @Test
     @Transactional
+    void getAllPhotosByIsCoverImageIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where isCoverImage equals to DEFAULT_IS_COVER_IMAGE
+        defaultPhotosShouldBeFound("isCoverImage.equals=" + DEFAULT_IS_COVER_IMAGE);
+
+        // Get all the photosList where isCoverImage equals to UPDATED_IS_COVER_IMAGE
+        defaultPhotosShouldNotBeFound("isCoverImage.equals=" + UPDATED_IS_COVER_IMAGE);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByIsCoverImageIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where isCoverImage not equals to DEFAULT_IS_COVER_IMAGE
+        defaultPhotosShouldNotBeFound("isCoverImage.notEquals=" + DEFAULT_IS_COVER_IMAGE);
+
+        // Get all the photosList where isCoverImage not equals to UPDATED_IS_COVER_IMAGE
+        defaultPhotosShouldBeFound("isCoverImage.notEquals=" + UPDATED_IS_COVER_IMAGE);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByIsCoverImageIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where isCoverImage in DEFAULT_IS_COVER_IMAGE or UPDATED_IS_COVER_IMAGE
+        defaultPhotosShouldBeFound("isCoverImage.in=" + DEFAULT_IS_COVER_IMAGE + "," + UPDATED_IS_COVER_IMAGE);
+
+        // Get all the photosList where isCoverImage equals to UPDATED_IS_COVER_IMAGE
+        defaultPhotosShouldNotBeFound("isCoverImage.in=" + UPDATED_IS_COVER_IMAGE);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByIsCoverImageIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where isCoverImage is not null
+        defaultPhotosShouldBeFound("isCoverImage.specified=true");
+
+        // Get all the photosList where isCoverImage is null
+        defaultPhotosShouldNotBeFound("isCoverImage.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height equals to DEFAULT_HEIGHT
+        defaultPhotosShouldBeFound("height.equals=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height equals to UPDATED_HEIGHT
+        defaultPhotosShouldNotBeFound("height.equals=" + UPDATED_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height not equals to DEFAULT_HEIGHT
+        defaultPhotosShouldNotBeFound("height.notEquals=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height not equals to UPDATED_HEIGHT
+        defaultPhotosShouldBeFound("height.notEquals=" + UPDATED_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height in DEFAULT_HEIGHT or UPDATED_HEIGHT
+        defaultPhotosShouldBeFound("height.in=" + DEFAULT_HEIGHT + "," + UPDATED_HEIGHT);
+
+        // Get all the photosList where height equals to UPDATED_HEIGHT
+        defaultPhotosShouldNotBeFound("height.in=" + UPDATED_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height is not null
+        defaultPhotosShouldBeFound("height.specified=true");
+
+        // Get all the photosList where height is null
+        defaultPhotosShouldNotBeFound("height.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height is greater than or equal to DEFAULT_HEIGHT
+        defaultPhotosShouldBeFound("height.greaterThanOrEqual=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height is greater than or equal to UPDATED_HEIGHT
+        defaultPhotosShouldNotBeFound("height.greaterThanOrEqual=" + UPDATED_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height is less than or equal to DEFAULT_HEIGHT
+        defaultPhotosShouldBeFound("height.lessThanOrEqual=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height is less than or equal to SMALLER_HEIGHT
+        defaultPhotosShouldNotBeFound("height.lessThanOrEqual=" + SMALLER_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsLessThanSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height is less than DEFAULT_HEIGHT
+        defaultPhotosShouldNotBeFound("height.lessThan=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height is less than UPDATED_HEIGHT
+        defaultPhotosShouldBeFound("height.lessThan=" + UPDATED_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByHeightIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where height is greater than DEFAULT_HEIGHT
+        defaultPhotosShouldNotBeFound("height.greaterThan=" + DEFAULT_HEIGHT);
+
+        // Get all the photosList where height is greater than SMALLER_HEIGHT
+        defaultPhotosShouldBeFound("height.greaterThan=" + SMALLER_HEIGHT);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width equals to DEFAULT_WIDTH
+        defaultPhotosShouldBeFound("width.equals=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width equals to UPDATED_WIDTH
+        defaultPhotosShouldNotBeFound("width.equals=" + UPDATED_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width not equals to DEFAULT_WIDTH
+        defaultPhotosShouldNotBeFound("width.notEquals=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width not equals to UPDATED_WIDTH
+        defaultPhotosShouldBeFound("width.notEquals=" + UPDATED_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width in DEFAULT_WIDTH or UPDATED_WIDTH
+        defaultPhotosShouldBeFound("width.in=" + DEFAULT_WIDTH + "," + UPDATED_WIDTH);
+
+        // Get all the photosList where width equals to UPDATED_WIDTH
+        defaultPhotosShouldNotBeFound("width.in=" + UPDATED_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width is not null
+        defaultPhotosShouldBeFound("width.specified=true");
+
+        // Get all the photosList where width is null
+        defaultPhotosShouldNotBeFound("width.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width is greater than or equal to DEFAULT_WIDTH
+        defaultPhotosShouldBeFound("width.greaterThanOrEqual=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width is greater than or equal to UPDATED_WIDTH
+        defaultPhotosShouldNotBeFound("width.greaterThanOrEqual=" + UPDATED_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width is less than or equal to DEFAULT_WIDTH
+        defaultPhotosShouldBeFound("width.lessThanOrEqual=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width is less than or equal to SMALLER_WIDTH
+        defaultPhotosShouldNotBeFound("width.lessThanOrEqual=" + SMALLER_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsLessThanSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width is less than DEFAULT_WIDTH
+        defaultPhotosShouldNotBeFound("width.lessThan=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width is less than UPDATED_WIDTH
+        defaultPhotosShouldBeFound("width.lessThan=" + UPDATED_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByWidthIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where width is greater than DEFAULT_WIDTH
+        defaultPhotosShouldNotBeFound("width.greaterThan=" + DEFAULT_WIDTH);
+
+        // Get all the photosList where width is greater than SMALLER_WIDTH
+        defaultPhotosShouldBeFound("width.greaterThan=" + SMALLER_WIDTH);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByTakenIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where taken equals to DEFAULT_TAKEN
+        defaultPhotosShouldBeFound("taken.equals=" + DEFAULT_TAKEN);
+
+        // Get all the photosList where taken equals to UPDATED_TAKEN
+        defaultPhotosShouldNotBeFound("taken.equals=" + UPDATED_TAKEN);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByTakenIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where taken not equals to DEFAULT_TAKEN
+        defaultPhotosShouldNotBeFound("taken.notEquals=" + DEFAULT_TAKEN);
+
+        // Get all the photosList where taken not equals to UPDATED_TAKEN
+        defaultPhotosShouldBeFound("taken.notEquals=" + UPDATED_TAKEN);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByTakenIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where taken in DEFAULT_TAKEN or UPDATED_TAKEN
+        defaultPhotosShouldBeFound("taken.in=" + DEFAULT_TAKEN + "," + UPDATED_TAKEN);
+
+        // Get all the photosList where taken equals to UPDATED_TAKEN
+        defaultPhotosShouldNotBeFound("taken.in=" + UPDATED_TAKEN);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByTakenIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where taken is not null
+        defaultPhotosShouldBeFound("taken.specified=true");
+
+        // Get all the photosList where taken is null
+        defaultPhotosShouldNotBeFound("taken.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByUploadedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where uploaded equals to DEFAULT_UPLOADED
+        defaultPhotosShouldBeFound("uploaded.equals=" + DEFAULT_UPLOADED);
+
+        // Get all the photosList where uploaded equals to UPDATED_UPLOADED
+        defaultPhotosShouldNotBeFound("uploaded.equals=" + UPDATED_UPLOADED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByUploadedIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where uploaded not equals to DEFAULT_UPLOADED
+        defaultPhotosShouldNotBeFound("uploaded.notEquals=" + DEFAULT_UPLOADED);
+
+        // Get all the photosList where uploaded not equals to UPDATED_UPLOADED
+        defaultPhotosShouldBeFound("uploaded.notEquals=" + UPDATED_UPLOADED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByUploadedIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where uploaded in DEFAULT_UPLOADED or UPDATED_UPLOADED
+        defaultPhotosShouldBeFound("uploaded.in=" + DEFAULT_UPLOADED + "," + UPDATED_UPLOADED);
+
+        // Get all the photosList where uploaded equals to UPDATED_UPLOADED
+        defaultPhotosShouldNotBeFound("uploaded.in=" + UPDATED_UPLOADED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPhotosByUploadedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where uploaded is not null
+        defaultPhotosShouldBeFound("uploaded.specified=true");
+
+        // Get all the photosList where uploaded is null
+        defaultPhotosShouldNotBeFound("uploaded.specified=false");
+    }
+
+    @Test
+    @Transactional
     void getAllPhotosByCreatedByIsEqualToSomething() throws Exception {
         // Initialize the database
         photosRepository.saveAndFlush(photos);
@@ -940,6 +1397,25 @@ class PhotosResourceIT {
 
     @Test
     @Transactional
+    void getAllPhotosByAlbumIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+        Album album = AlbumResourceIT.createEntity(em);
+        em.persist(album);
+        em.flush();
+        photos.setAlbum(album);
+        photosRepository.saveAndFlush(photos);
+        Long albumId = album.getId();
+
+        // Get all the photosList where album equals to albumId
+        defaultPhotosShouldBeFound("albumId.equals=" + albumId);
+
+        // Get all the photosList where album equals to (albumId + 1)
+        defaultPhotosShouldNotBeFound("albumId.equals=" + (albumId + 1));
+    }
+
+    @Test
+    @Transactional
     void getAllPhotosByListingIsEqualToSomething() throws Exception {
         // Initialize the database
         photosRepository.saveAndFlush(photos);
@@ -957,6 +1433,25 @@ class PhotosResourceIT {
         defaultPhotosShouldNotBeFound("listingId.equals=" + (listingId + 1));
     }
 
+    @Test
+    @Transactional
+    void getAllPhotosByTagIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+        Tag tag = TagResourceIT.createEntity(em);
+        em.persist(tag);
+        em.flush();
+        photos.addTag(tag);
+        photosRepository.saveAndFlush(photos);
+        Long tagId = tag.getId();
+
+        // Get all the photosList where tag equals to tagId
+        defaultPhotosShouldBeFound("tagId.equals=" + tagId);
+
+        // Get all the photosList where tag equals to (tagId + 1)
+        defaultPhotosShouldNotBeFound("tagId.equals=" + (tagId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -972,6 +1467,13 @@ class PhotosResourceIT {
             .andExpect(jsonPath("$.[*].href").value(hasItem(DEFAULT_HREF)))
             .andExpect(jsonPath("$.[*].src").value(hasItem(DEFAULT_SRC)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].isCoverImage").value(hasItem(DEFAULT_IS_COVER_IMAGE.booleanValue())))
+            .andExpect(jsonPath("$.[*].height").value(hasItem(DEFAULT_HEIGHT)))
+            .andExpect(jsonPath("$.[*].width").value(hasItem(DEFAULT_WIDTH)))
+            .andExpect(jsonPath("$.[*].taken").value(hasItem(DEFAULT_TAKEN.toString())))
+            .andExpect(jsonPath("$.[*].uploaded").value(hasItem(DEFAULT_UPLOADED.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
@@ -1030,6 +1532,13 @@ class PhotosResourceIT {
             .href(UPDATED_HREF)
             .src(UPDATED_SRC)
             .title(UPDATED_TITLE)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .isCoverImage(UPDATED_IS_COVER_IMAGE)
+            .height(UPDATED_HEIGHT)
+            .width(UPDATED_WIDTH)
+            .taken(UPDATED_TAKEN)
+            .uploaded(UPDATED_UPLOADED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1053,6 +1562,13 @@ class PhotosResourceIT {
         assertThat(testPhotos.getHref()).isEqualTo(UPDATED_HREF);
         assertThat(testPhotos.getSrc()).isEqualTo(UPDATED_SRC);
         assertThat(testPhotos.getTitle()).isEqualTo(UPDATED_TITLE);
+        assertThat(testPhotos.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testPhotos.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testPhotos.getIsCoverImage()).isEqualTo(UPDATED_IS_COVER_IMAGE);
+        assertThat(testPhotos.getHeight()).isEqualTo(UPDATED_HEIGHT);
+        assertThat(testPhotos.getWidth()).isEqualTo(UPDATED_WIDTH);
+        assertThat(testPhotos.getTaken()).isEqualTo(UPDATED_TAKEN);
+        assertThat(testPhotos.getUploaded()).isEqualTo(UPDATED_UPLOADED);
         assertThat(testPhotos.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testPhotos.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testPhotos.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
@@ -1132,8 +1648,8 @@ class PhotosResourceIT {
             .href(UPDATED_HREF)
             .src(UPDATED_SRC)
             .title(UPDATED_TITLE)
-            .updatedBy(UPDATED_UPDATED_BY)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .height(UPDATED_HEIGHT)
+            .width(UPDATED_WIDTH);
 
         restPhotosMockMvc
             .perform(
@@ -1153,10 +1669,17 @@ class PhotosResourceIT {
         assertThat(testPhotos.getHref()).isEqualTo(UPDATED_HREF);
         assertThat(testPhotos.getSrc()).isEqualTo(UPDATED_SRC);
         assertThat(testPhotos.getTitle()).isEqualTo(UPDATED_TITLE);
+        assertThat(testPhotos.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testPhotos.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testPhotos.getIsCoverImage()).isEqualTo(DEFAULT_IS_COVER_IMAGE);
+        assertThat(testPhotos.getHeight()).isEqualTo(UPDATED_HEIGHT);
+        assertThat(testPhotos.getWidth()).isEqualTo(UPDATED_WIDTH);
+        assertThat(testPhotos.getTaken()).isEqualTo(DEFAULT_TAKEN);
+        assertThat(testPhotos.getUploaded()).isEqualTo(DEFAULT_UPLOADED);
         assertThat(testPhotos.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testPhotos.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-        assertThat(testPhotos.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
-        assertThat(testPhotos.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
+        assertThat(testPhotos.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testPhotos.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
     }
 
     @Test
@@ -1178,6 +1701,13 @@ class PhotosResourceIT {
             .href(UPDATED_HREF)
             .src(UPDATED_SRC)
             .title(UPDATED_TITLE)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .isCoverImage(UPDATED_IS_COVER_IMAGE)
+            .height(UPDATED_HEIGHT)
+            .width(UPDATED_WIDTH)
+            .taken(UPDATED_TAKEN)
+            .uploaded(UPDATED_UPLOADED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .updatedBy(UPDATED_UPDATED_BY)
@@ -1201,6 +1731,13 @@ class PhotosResourceIT {
         assertThat(testPhotos.getHref()).isEqualTo(UPDATED_HREF);
         assertThat(testPhotos.getSrc()).isEqualTo(UPDATED_SRC);
         assertThat(testPhotos.getTitle()).isEqualTo(UPDATED_TITLE);
+        assertThat(testPhotos.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testPhotos.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testPhotos.getIsCoverImage()).isEqualTo(UPDATED_IS_COVER_IMAGE);
+        assertThat(testPhotos.getHeight()).isEqualTo(UPDATED_HEIGHT);
+        assertThat(testPhotos.getWidth()).isEqualTo(UPDATED_WIDTH);
+        assertThat(testPhotos.getTaken()).isEqualTo(UPDATED_TAKEN);
+        assertThat(testPhotos.getUploaded()).isEqualTo(UPDATED_UPLOADED);
         assertThat(testPhotos.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testPhotos.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testPhotos.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);

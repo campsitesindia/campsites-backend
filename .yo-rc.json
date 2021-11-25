@@ -56,7 +56,9 @@
       "FeaturesListing",
       "FeaturesInRoom",
       "RoomsForListing",
-      "RoomsInBooking"
+      "RoomsInBooking",
+      "Album",
+      "Tag"
     ],
     "skipCheckLengthOfIdentifier": false,
     "skipFakeData": false,
@@ -67,6 +69,6 @@
     "creationTimestamp": 1632239670607,
     "jwtSecretKey": "MWQ1YjVmODViYzBmY2UyZTc1YTUyOWFhYTllMTdlNWVlZDBmZGEyMjFiMmRkMjUwN2E0ZGU2YWEwZjRhZDQwNTliNjczY2E0MTc4YzExOTEwOWVlZWY1Yzc2YThhZjUyODgyZDNhZDZkYWMxNTFlNTI3NTVlYTM0OGYzMjVlMjQ=",
     "devServerPort": 9060,
-    "lastLiquibaseTimestamp": 1632240990000
+    "lastLiquibaseTimestamp": 1637260351000
   }
 }

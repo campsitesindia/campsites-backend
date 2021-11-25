@@ -66,6 +66,7 @@ export const AuthenticatedUserUpdate = (props: RouteComponentProps<{ id: string 
         }
       : {
           ...authenticatedUserEntity,
+          provider: 'LOCAL',
           authTimestamp: convertDateTimeFromServer(authenticatedUserEntity.authTimestamp),
           userId: authenticatedUserEntity?.user?.id,
         };
@@ -111,6 +112,17 @@ export const AuthenticatedUserUpdate = (props: RouteComponentProps<{ id: string 
                 data-cy="lastName"
                 type="text"
               />
+              <ValidatedField
+                label={translate('campsitesindiaApp.authenticatedUser.provider')}
+                id="authenticated-user-provider"
+                name="provider"
+                data-cy="provider"
+                type="select"
+              >
+                <option value="LOCAL">{translate('campsitesindiaApp.AuthProvider.LOCAL')}</option>
+                <option value="FAEBOOK">{translate('campsitesindiaApp.AuthProvider.FAEBOOK')}</option>
+                <option value="GOOGLE">{translate('campsitesindiaApp.AuthProvider.GOOGLE')}</option>
+              </ValidatedField>
               <ValidatedField
                 label={translate('campsitesindiaApp.authenticatedUser.authTimestamp')}
                 id="authenticated-user-authTimestamp"

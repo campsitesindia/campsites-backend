@@ -110,6 +110,9 @@ export const AuthenticatedUser = (props: RouteComponentProps<{ url: string }>) =
                 <th className="hand" onClick={sort('lastName')}>
                   <Translate contentKey="campsitesindiaApp.authenticatedUser.lastName">Last Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('provider')}>
+                  <Translate contentKey="campsitesindiaApp.authenticatedUser.provider">Provider</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('authTimestamp')}>
                   <Translate contentKey="campsitesindiaApp.authenticatedUser.authTimestamp">Auth Timestamp</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
@@ -130,6 +133,9 @@ export const AuthenticatedUser = (props: RouteComponentProps<{ url: string }>) =
                   </td>
                   <td>{authenticatedUser.firstName}</td>
                   <td>{authenticatedUser.lastName}</td>
+                  <td>
+                    <Translate contentKey={`campsitesindiaApp.AuthProvider.${authenticatedUser.provider}`} />
+                  </td>
                   <td>
                     {authenticatedUser.authTimestamp ? (
                       <TextFormat type="date" value={authenticatedUser.authTimestamp} format={APP_DATE_FORMAT} />
