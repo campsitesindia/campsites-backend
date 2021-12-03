@@ -26,6 +26,32 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isCoverImage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "width",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "taken",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "uploaded",
+      "fieldType": "Instant"
+    },
+    {
       "fieldName": "createdBy",
       "fieldType": "String"
     },
@@ -45,15 +71,30 @@
   "relationships": [
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "album",
+      "otherEntityRelationshipName": "photos",
+      "relationshipName": "album",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "listing",
       "otherEntityRelationshipName": "photos",
       "relationshipName": "listing",
       "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "photos",
+      "relationshipName": "tag",
+      "otherEntityField": "title",
+      "ownerSide": true
     }
   ],
   "entityTableName": "photos",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,

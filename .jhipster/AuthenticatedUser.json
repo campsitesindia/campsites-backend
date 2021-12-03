@@ -10,6 +10,11 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "provider",
+      "fieldType": "AuthProvider",
+      "fieldValues": "LOCAL,FAEBOOK,GOOGLE"
+    },
+    {
       "fieldName": "authTimestamp",
       "fieldType": "Instant"
     }

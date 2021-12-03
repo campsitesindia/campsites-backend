@@ -38,6 +38,18 @@
       "fieldType": "Double"
     },
     {
+      "fieldName": "pricePerChild",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "isPublished",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "phone",
       "fieldType": "String"
     },
@@ -81,18 +93,17 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "listingType",
-      "otherEntityRelationshipName": "listing",
-      "relationshipName": "listingType",
-      "otherEntityField": "title",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "many-to-one",
       "otherEntityName": "location",
       "otherEntityRelationshipName": "listing",
       "relationshipName": "location",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "listingType",
+      "otherEntityRelationshipName": "listing",
+      "relationshipName": "listingType",
       "otherEntityField": "title"
     },
     {

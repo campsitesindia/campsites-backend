@@ -18,8 +18,32 @@
       "fieldType": "Double"
     },
     {
+      "fieldName": "childPricePerNight",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "numOfNights",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "razorpayPaymentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "razorpayOrderId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "razorpaySignature",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "totalAmount",
+      "fieldType": "Double"
     },
     {
       "fieldName": "createdBy",

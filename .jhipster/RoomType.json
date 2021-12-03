@@ -26,6 +26,10 @@
       "fieldType": "Double"
     },
     {
+      "fieldName": "roomRateChildPerNight",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "createdBy",
       "fieldType": "String"
     },
