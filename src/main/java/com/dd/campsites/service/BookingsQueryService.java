@@ -99,6 +99,18 @@ public class BookingsQueryService extends QueryService<Bookings> {
             if (criteria.getNumOfNights() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNumOfNights(), Bookings_.numOfNights));
             }
+            if (criteria.getRazorpayPaymentId() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRazorpayPaymentId(), Bookings_.razorpayPaymentId));
+            }
+            if (criteria.getRazorpayOrderId() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRazorpayOrderId(), Bookings_.razorpayOrderId));
+            }
+            if (criteria.getRazorpaySignature() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRazorpaySignature(), Bookings_.razorpaySignature));
+            }
+            if (criteria.getDiscount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDiscount(), Bookings_.discount));
+            }
             if (criteria.getTotalAmount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTotalAmount(), Bookings_.totalAmount));
             }

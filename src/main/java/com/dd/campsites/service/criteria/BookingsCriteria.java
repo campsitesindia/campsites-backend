@@ -39,6 +39,14 @@ public class BookingsCriteria implements Serializable, Criteria {
 
     private IntegerFilter numOfNights;
 
+    private StringFilter razorpayPaymentId;
+
+    private StringFilter razorpayOrderId;
+
+    private StringFilter razorpaySignature;
+
+    private DoubleFilter discount;
+
     private DoubleFilter totalAmount;
 
     private StringFilter createdBy;
@@ -65,6 +73,10 @@ public class BookingsCriteria implements Serializable, Criteria {
         this.pricePerNight = other.pricePerNight == null ? null : other.pricePerNight.copy();
         this.childPricePerNight = other.childPricePerNight == null ? null : other.childPricePerNight.copy();
         this.numOfNights = other.numOfNights == null ? null : other.numOfNights.copy();
+        this.razorpayPaymentId = other.razorpayPaymentId == null ? null : other.razorpayPaymentId.copy();
+        this.razorpayOrderId = other.razorpayOrderId == null ? null : other.razorpayOrderId.copy();
+        this.razorpaySignature = other.razorpaySignature == null ? null : other.razorpaySignature.copy();
+        this.discount = other.discount == null ? null : other.discount.copy();
         this.totalAmount = other.totalAmount == null ? null : other.totalAmount.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
@@ -183,6 +195,66 @@ public class BookingsCriteria implements Serializable, Criteria {
 
     public void setNumOfNights(IntegerFilter numOfNights) {
         this.numOfNights = numOfNights;
+    }
+
+    public StringFilter getRazorpayPaymentId() {
+        return razorpayPaymentId;
+    }
+
+    public StringFilter razorpayPaymentId() {
+        if (razorpayPaymentId == null) {
+            razorpayPaymentId = new StringFilter();
+        }
+        return razorpayPaymentId;
+    }
+
+    public void setRazorpayPaymentId(StringFilter razorpayPaymentId) {
+        this.razorpayPaymentId = razorpayPaymentId;
+    }
+
+    public StringFilter getRazorpayOrderId() {
+        return razorpayOrderId;
+    }
+
+    public StringFilter razorpayOrderId() {
+        if (razorpayOrderId == null) {
+            razorpayOrderId = new StringFilter();
+        }
+        return razorpayOrderId;
+    }
+
+    public void setRazorpayOrderId(StringFilter razorpayOrderId) {
+        this.razorpayOrderId = razorpayOrderId;
+    }
+
+    public StringFilter getRazorpaySignature() {
+        return razorpaySignature;
+    }
+
+    public StringFilter razorpaySignature() {
+        if (razorpaySignature == null) {
+            razorpaySignature = new StringFilter();
+        }
+        return razorpaySignature;
+    }
+
+    public void setRazorpaySignature(StringFilter razorpaySignature) {
+        this.razorpaySignature = razorpaySignature;
+    }
+
+    public DoubleFilter getDiscount() {
+        return discount;
+    }
+
+    public DoubleFilter discount() {
+        if (discount == null) {
+            discount = new DoubleFilter();
+        }
+        return discount;
+    }
+
+    public void setDiscount(DoubleFilter discount) {
+        this.discount = discount;
     }
 
     public DoubleFilter getTotalAmount() {
@@ -322,6 +394,10 @@ public class BookingsCriteria implements Serializable, Criteria {
             Objects.equals(pricePerNight, that.pricePerNight) &&
             Objects.equals(childPricePerNight, that.childPricePerNight) &&
             Objects.equals(numOfNights, that.numOfNights) &&
+            Objects.equals(razorpayPaymentId, that.razorpayPaymentId) &&
+            Objects.equals(razorpayOrderId, that.razorpayOrderId) &&
+            Objects.equals(razorpaySignature, that.razorpaySignature) &&
+            Objects.equals(discount, that.discount) &&
             Objects.equals(totalAmount, that.totalAmount) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
@@ -343,6 +419,10 @@ public class BookingsCriteria implements Serializable, Criteria {
             pricePerNight,
             childPricePerNight,
             numOfNights,
+            razorpayPaymentId,
+            razorpayOrderId,
+            razorpaySignature,
+            discount,
             totalAmount,
             createdBy,
             createdDate,
@@ -365,6 +445,10 @@ public class BookingsCriteria implements Serializable, Criteria {
             (pricePerNight != null ? "pricePerNight=" + pricePerNight + ", " : "") +
             (childPricePerNight != null ? "childPricePerNight=" + childPricePerNight + ", " : "") +
             (numOfNights != null ? "numOfNights=" + numOfNights + ", " : "") +
+            (razorpayPaymentId != null ? "razorpayPaymentId=" + razorpayPaymentId + ", " : "") +
+            (razorpayOrderId != null ? "razorpayOrderId=" + razorpayOrderId + ", " : "") +
+            (razorpaySignature != null ? "razorpaySignature=" + razorpaySignature + ", " : "") +
+            (discount != null ? "discount=" + discount + ", " : "") +
             (totalAmount != null ? "totalAmount=" + totalAmount + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +

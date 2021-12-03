@@ -11,6 +11,10 @@ export interface IBookings {
   pricePerNight?: number | null;
   childPricePerNight?: number | null;
   numOfNights?: number | null;
+  razorpayPaymentId?: string | null;
+  razorpayOrderId?: string | null;
+  razorpaySignature?: string | null;
+  discount?: number | null;
   totalAmount?: number | null;
   createdBy?: string | null;
   createdDate?: string | null;

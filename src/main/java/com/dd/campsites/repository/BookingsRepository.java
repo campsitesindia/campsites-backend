@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface BookingsRepository extends JpaRepository<Bookings, Long>, JpaSpecificationExecutor<Bookings> {
     @Query("select bookings from Bookings bookings where bookings.user.login = ?#{principal.username}")
     List<Bookings> findByUserIsCurrentUser();
+
+    Bookings findBookingsByRazorpayOrderId(String id);
 }

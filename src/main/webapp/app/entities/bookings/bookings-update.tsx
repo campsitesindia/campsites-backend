@@ -158,6 +158,34 @@ export const BookingsUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
+                label={translate('campsitesindiaApp.bookings.razorpayPaymentId')}
+                id="bookings-razorpayPaymentId"
+                name="razorpayPaymentId"
+                data-cy="razorpayPaymentId"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.bookings.razorpayOrderId')}
+                id="bookings-razorpayOrderId"
+                name="razorpayOrderId"
+                data-cy="razorpayOrderId"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.bookings.razorpaySignature')}
+                id="bookings-razorpaySignature"
+                name="razorpaySignature"
+                data-cy="razorpaySignature"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('campsitesindiaApp.bookings.discount')}
+                id="bookings-discount"
+                name="discount"
+                data-cy="discount"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('campsitesindiaApp.bookings.totalAmount')}
                 id="bookings-totalAmount"
                 name="totalAmount"

@@ -21,11 +21,44 @@ logging:
     com.dd.campsites: DEBUG
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 443735087462-o3db8od0k73bll0vstd9ddsdpufhrhu8.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: 'http://localhost:8080/oauth2/callback/google'
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 121189305185277
+            clientSecret: 42ffe5aa7379e8326387e0fe16f34132
+            redirectUri: '{baseUrl}/oauth2/callback/{registrationId}'
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: d3e47fc2ddd966fa4352
+            clientSecret: 3bc0f6b8332f93076354c2a5bada2f5a05aea60d
+            redirectUri: '{baseUrl}/oauth2/callback/{registrationId}'
+            scope:
+              - user:email
+              - read:user
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+
   servlet:
     multipart:
       enabled: true
       max-file-size: 12MB
       max-request-size: 12MB
+    upload:
+      path: upload
 
   devtools:
     restart:
@@ -73,6 +106,8 @@ server:
 # ===================================================================
 
 jhipster:
+  clientApp:
+    name: campsitesindia
   cache: # Cache configuration
     ehcache: # Ehcache configuration
       time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
@@ -81,7 +116,7 @@ jhipster:
   cors:
     # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)
     allowed-origins: 'http://localhost:8100,http://localhost:9000,http://localhost:9060,http://localhost:3000,http://localhost:8080'
-    allowed-methods: 'POST,PUT, GET, OPTIONS, DELETE'
+    allowed-methods: 'POST,PUT,GET,OPTIONS,DELETE'
     allowed-headers: '*'
     exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'
     allow-credentials: true
@@ -112,4 +147,16 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+razorpay:
+  apiKey: rzp_test_pvJmuk3mYLgwDy
+  secretKey: YZfB3casYnq2A1Ad5kFBoc4k

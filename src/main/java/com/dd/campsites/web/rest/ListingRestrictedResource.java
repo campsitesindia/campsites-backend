@@ -15,6 +15,7 @@ import com.dd.campsites.service.criteria.ListingCriteria;
 import com.dd.campsites.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -29,18 +30,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link com.dd.campsites.domain.Listing}.
+ * REST controller for managing {@link Listing}.
  */
 @RestController
-@RequestMapping("/api")
-public class ListingResource {
+@RequestMapping("/api/restricted")
+public class ListingRestrictedResource {
 
-    private final Logger log = LoggerFactory.getLogger(ListingResource.class);
+    private final Logger log = LoggerFactory.getLogger(ListingRestrictedResource.class);
 
     private static final String ENTITY_NAME = "listing";
 
@@ -59,7 +61,7 @@ public class ListingResource {
 
     private final ListingDetailsService listingDetailsService;
 
-    public ListingResource(
+    public ListingRestrictedResource(
         ListingService listingService,
         UserService userService,
         UserRepository userRepository,
@@ -74,58 +76,6 @@ public class ListingResource {
         this.listingRepository = listingRepository;
         this.listingQueryService = listingQueryService;
         this.listingDetailsService = listingDetailsService;
-    }
-
-    /**
-     * {@code POST  /listings} : Create a new listing.
-     *
-     * @param listing the listing to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new listing, or with status {@code 400 (Bad Request)} if the listing has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/listings")
-    public ResponseEntity<Listing> createListing(@RequestBody Listing listing) throws URISyntaxException {
-        log.debug("REST request to save Listing : {}", listing);
-        if (listing.getId() != null) {
-            throw new BadRequestAlertException("A new listing cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        Listing result = listingService.save(listing);
-        return ResponseEntity
-            .created(new URI("/api/listings/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * {@code PUT  /listings/:id} : Updates an existing listing.
-     *
-     * @param id the id of the listing to save.
-     * @param listing the listing to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated listing,
-     * or with status {@code 400 (Bad Request)} if the listing is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the listing couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/listings/{id}")
-    public ResponseEntity<Listing> updateListing(@PathVariable(value = "id", required = false) final Long id, @RequestBody Listing listing)
-        throws URISyntaxException {
-        log.debug("REST request to update Listing : {}, {}", id, listing);
-        if (listing.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, listing.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!listingRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Listing result = listingService.save(listing);
-        return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, listing.getId().toString()))
-            .body(result);
     }
 
     /**
@@ -157,57 +107,6 @@ public class ListingResource {
     }
 
     /**
-     * {@code PATCH  /listings/:id} : Partial updates given fields of an existing listing, field will ignore if it is null
-     *
-     * @param id the id of the listing to save.
-     * @param listing the listing to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated listing,
-     * or with status {@code 400 (Bad Request)} if the listing is not valid,
-     * or with status {@code 404 (Not Found)} if the listing is not found,
-     * or with status {@code 500 (Internal Server Error)} if the listing couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/listings/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Listing> partialUpdateListing(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Listing listing
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Listing partially : {}, {}", id, listing);
-        if (listing.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, listing.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!listingRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<Listing> result = listingService.partialUpdate(listing);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, listing.getId().toString())
-        );
-    }
-
-    /**
-     * {@code GET  /listings} : get all the listings.
-     *
-     * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of listings in body.
-     */
-    @GetMapping("/listings")
-    public ResponseEntity<List<Listing>> getAllListings(ListingCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Listings by criteria: {}", criteria);
-        Page<Listing> page = listingQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
      * {@code GET  /listingsWithExtraInformation} : get all the listings.
      *
      * @param pageable the pagination information.
@@ -217,12 +116,20 @@ public class ListingResource {
     @GetMapping("/listingsWithExtraInformation")
     public ResponseEntity<List<ListingModel>> getAllListingsWithExtraInformation(ListingCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Listings with details by criteria: {}");
-
+        User user = null;
         if (getUser().isEmpty()) {
-            log.debug(" nos user is present ................");
+            log.debug(" No user is present ................");
+            List<ListingModel> emptyLM = new ArrayList<ListingModel>();
+            return ResponseEntity.ok().body(emptyLM);
+        } else {
+            user = getUser().get();
         }
 
-        Page<ListingModel> page = listingDetailsService.findAll(criteria, pageable);
+        ListingCriteria listingCriteria = new ListingCriteria();
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(user.getId());
+        listingCriteria.setOwnerId(longFilter);
+        Page<ListingModel> page = listingDetailsService.findAll(listingCriteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -260,6 +167,11 @@ public class ListingResource {
      */
     @GetMapping("/listings/details/{id}")
     public ResponseEntity<ListingModel> getListingDetails(@PathVariable Long id) {
+        if (getUser().isEmpty()) {
+            log.debug(" No user is present ................");
+            ListingModel emptyLM = new ListingModel();
+            return ResponseEntity.ok().body(emptyLM);
+        }
         log.debug("REST request to get Listing Details : {}", id);
         Optional<ListingModel> listing = listingDetailsService.findOne(id);
         return ResponseUtil.wrapOrNotFound(listing);

@@ -16,7 +16,7 @@ public class ApplicationProperties {
 
     private final OAuth2 oauth2 = new OAuth2();
 
-    private PaymentRazorPay paymentRazorPay = new PaymentRazorPay();
+    //    private PaymentRazorPay paymentRazorPay = new PaymentRazorPay();
 
     public static final class OAuth2 {
 
@@ -32,48 +32,47 @@ public class ApplicationProperties {
         }
     }
 
-    public static class PaymentRazorPay {
-
-        public void setApiKey(String apiKey) {
-            this.apiKey = apiKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        private String apiKey;
-        private String secretKey;
-
-        public String getApiKey() {
-            return apiKey;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public PaymentRazorPay paymentRazorPay(String apiKey, String secretKey) {
-            this.apiKey = apiKey;
-            this.secretKey = secretKey;
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            return "PaymentRazorPay{" + "apiKey='" + apiKey + '\'' + ", secretKey='" + secretKey + '\'' + '}';
-        }
-    }
+    //    public static class PaymentRazorPay {
+    //
+    //        public void setApiKey(String apiKey) {
+    //            this.apiKey = apiKey;
+    //        }
+    //
+    //        public void setSecretKey(String secretKey) {
+    //            this.secretKey = secretKey;
+    //        }
+    //
+    //        private String apiKey;
+    //        private String secretKey;
+    //
+    //        public String getApiKey() {
+    //            return apiKey;
+    //        }
+    //
+    //        public String getSecretKey() {
+    //            return secretKey;
+    //        }
+    //
+    //        public PaymentRazorPay paymentRazorPay(String apiKey, String secretKey) {
+    //            this.apiKey = apiKey;
+    //            this.secretKey = secretKey;
+    //            return this;
+    //        }
+    //
+    //        @Override
+    //        public String toString() {
+    //            return "PaymentRazorPay{" + "apiKey='" + apiKey + '\'' + ", secretKey='" + secretKey + '\'' + '}';
+    //        }
+    //    }
 
     public OAuth2 getOauth2() {
         return oauth2;
     }
-
-    public void setPaymentRazorPay(PaymentRazorPay paymentRazorPay) {
-        this.paymentRazorPay = paymentRazorPay;
-    }
-
-    public PaymentRazorPay getPaymentRazorPay() {
-        return paymentRazorPay;
-    }
+    //    public void setPaymentRazorPay(PaymentRazorPay paymentRazorPay) {
+    //        this.paymentRazorPay = paymentRazorPay;
+    //    }
+    //
+    //    public PaymentRazorPay getPaymentRazorPay() {
+    //        return paymentRazorPay;
+    //    }
 }

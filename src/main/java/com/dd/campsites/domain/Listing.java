@@ -38,6 +38,8 @@ public class Listing implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content")
     private String content;
 

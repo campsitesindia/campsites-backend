@@ -70,6 +70,30 @@ export const BookingsDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{bookingsEntity.numOfNights}</dd>
           <dt>
+            <span id="razorpayPaymentId">
+              <Translate contentKey="campsitesindiaApp.bookings.razorpayPaymentId">Razorpay Payment Id</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.razorpayPaymentId}</dd>
+          <dt>
+            <span id="razorpayOrderId">
+              <Translate contentKey="campsitesindiaApp.bookings.razorpayOrderId">Razorpay Order Id</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.razorpayOrderId}</dd>
+          <dt>
+            <span id="razorpaySignature">
+              <Translate contentKey="campsitesindiaApp.bookings.razorpaySignature">Razorpay Signature</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.razorpaySignature}</dd>
+          <dt>
+            <span id="discount">
+              <Translate contentKey="campsitesindiaApp.bookings.discount">Discount</Translate>
+            </span>
+          </dt>
+          <dd>{bookingsEntity.discount}</dd>
+          <dt>
             <span id="totalAmount">
               <Translate contentKey="campsitesindiaApp.bookings.totalAmount">Total Amount</Translate>
             </span>

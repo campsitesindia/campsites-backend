@@ -56,6 +56,19 @@ class BookingsResourceIT {
     private static final Integer UPDATED_NUM_OF_NIGHTS = 2;
     private static final Integer SMALLER_NUM_OF_NIGHTS = 1 - 1;
 
+    private static final String DEFAULT_RAZORPAY_PAYMENT_ID = "AAAAAAAAAA";
+    private static final String UPDATED_RAZORPAY_PAYMENT_ID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RAZORPAY_ORDER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_RAZORPAY_ORDER_ID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RAZORPAY_SIGNATURE = "AAAAAAAAAA";
+    private static final String UPDATED_RAZORPAY_SIGNATURE = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_DISCOUNT = 1D;
+    private static final Double UPDATED_DISCOUNT = 2D;
+    private static final Double SMALLER_DISCOUNT = 1D - 1D;
+
     private static final Double DEFAULT_TOTAL_AMOUNT = 1D;
     private static final Double UPDATED_TOTAL_AMOUNT = 2D;
     private static final Double SMALLER_TOTAL_AMOUNT = 1D - 1D;
@@ -103,6 +116,10 @@ class BookingsResourceIT {
             .pricePerNight(DEFAULT_PRICE_PER_NIGHT)
             .childPricePerNight(DEFAULT_CHILD_PRICE_PER_NIGHT)
             .numOfNights(DEFAULT_NUM_OF_NIGHTS)
+            .razorpayPaymentId(DEFAULT_RAZORPAY_PAYMENT_ID)
+            .razorpayOrderId(DEFAULT_RAZORPAY_ORDER_ID)
+            .razorpaySignature(DEFAULT_RAZORPAY_SIGNATURE)
+            .discount(DEFAULT_DISCOUNT)
             .totalAmount(DEFAULT_TOTAL_AMOUNT)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -125,6 +142,10 @@ class BookingsResourceIT {
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
             .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .razorpayPaymentId(UPDATED_RAZORPAY_PAYMENT_ID)
+            .razorpayOrderId(UPDATED_RAZORPAY_ORDER_ID)
+            .razorpaySignature(UPDATED_RAZORPAY_SIGNATURE)
+            .discount(UPDATED_DISCOUNT)
             .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -157,6 +178,10 @@ class BookingsResourceIT {
         assertThat(testBookings.getPricePerNight()).isEqualTo(DEFAULT_PRICE_PER_NIGHT);
         assertThat(testBookings.getChildPricePerNight()).isEqualTo(DEFAULT_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(DEFAULT_NUM_OF_NIGHTS);
+        assertThat(testBookings.getRazorpayPaymentId()).isEqualTo(DEFAULT_RAZORPAY_PAYMENT_ID);
+        assertThat(testBookings.getRazorpayOrderId()).isEqualTo(DEFAULT_RAZORPAY_ORDER_ID);
+        assertThat(testBookings.getRazorpaySignature()).isEqualTo(DEFAULT_RAZORPAY_SIGNATURE);
+        assertThat(testBookings.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
         assertThat(testBookings.getTotalAmount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -200,6 +225,10 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].childPricePerNight").value(hasItem(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].numOfNights").value(hasItem(DEFAULT_NUM_OF_NIGHTS)))
+            .andExpect(jsonPath("$.[*].razorpayPaymentId").value(hasItem(DEFAULT_RAZORPAY_PAYMENT_ID)))
+            .andExpect(jsonPath("$.[*].razorpayOrderId").value(hasItem(DEFAULT_RAZORPAY_ORDER_ID)))
+            .andExpect(jsonPath("$.[*].razorpaySignature").value(hasItem(DEFAULT_RAZORPAY_SIGNATURE)))
+            .andExpect(jsonPath("$.[*].discount").value(hasItem(DEFAULT_DISCOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -225,6 +254,10 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.pricePerNight").value(DEFAULT_PRICE_PER_NIGHT.doubleValue()))
             .andExpect(jsonPath("$.childPricePerNight").value(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue()))
             .andExpect(jsonPath("$.numOfNights").value(DEFAULT_NUM_OF_NIGHTS))
+            .andExpect(jsonPath("$.razorpayPaymentId").value(DEFAULT_RAZORPAY_PAYMENT_ID))
+            .andExpect(jsonPath("$.razorpayOrderId").value(DEFAULT_RAZORPAY_ORDER_ID))
+            .andExpect(jsonPath("$.razorpaySignature").value(DEFAULT_RAZORPAY_SIGNATURE))
+            .andExpect(jsonPath("$.discount").value(DEFAULT_DISCOUNT.doubleValue()))
             .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -746,6 +779,344 @@ class BookingsResourceIT {
 
     @Test
     @Transactional
+    void getAllBookingsByRazorpayPaymentIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId equals to DEFAULT_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldBeFound("razorpayPaymentId.equals=" + DEFAULT_RAZORPAY_PAYMENT_ID);
+
+        // Get all the bookingsList where razorpayPaymentId equals to UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.equals=" + UPDATED_RAZORPAY_PAYMENT_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayPaymentIdIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId not equals to DEFAULT_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.notEquals=" + DEFAULT_RAZORPAY_PAYMENT_ID);
+
+        // Get all the bookingsList where razorpayPaymentId not equals to UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldBeFound("razorpayPaymentId.notEquals=" + UPDATED_RAZORPAY_PAYMENT_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayPaymentIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId in DEFAULT_RAZORPAY_PAYMENT_ID or UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldBeFound("razorpayPaymentId.in=" + DEFAULT_RAZORPAY_PAYMENT_ID + "," + UPDATED_RAZORPAY_PAYMENT_ID);
+
+        // Get all the bookingsList where razorpayPaymentId equals to UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.in=" + UPDATED_RAZORPAY_PAYMENT_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayPaymentIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId is not null
+        defaultBookingsShouldBeFound("razorpayPaymentId.specified=true");
+
+        // Get all the bookingsList where razorpayPaymentId is null
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayPaymentIdContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId contains DEFAULT_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldBeFound("razorpayPaymentId.contains=" + DEFAULT_RAZORPAY_PAYMENT_ID);
+
+        // Get all the bookingsList where razorpayPaymentId contains UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.contains=" + UPDATED_RAZORPAY_PAYMENT_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayPaymentIdNotContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayPaymentId does not contain DEFAULT_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldNotBeFound("razorpayPaymentId.doesNotContain=" + DEFAULT_RAZORPAY_PAYMENT_ID);
+
+        // Get all the bookingsList where razorpayPaymentId does not contain UPDATED_RAZORPAY_PAYMENT_ID
+        defaultBookingsShouldBeFound("razorpayPaymentId.doesNotContain=" + UPDATED_RAZORPAY_PAYMENT_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId equals to DEFAULT_RAZORPAY_ORDER_ID
+        defaultBookingsShouldBeFound("razorpayOrderId.equals=" + DEFAULT_RAZORPAY_ORDER_ID);
+
+        // Get all the bookingsList where razorpayOrderId equals to UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldNotBeFound("razorpayOrderId.equals=" + UPDATED_RAZORPAY_ORDER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId not equals to DEFAULT_RAZORPAY_ORDER_ID
+        defaultBookingsShouldNotBeFound("razorpayOrderId.notEquals=" + DEFAULT_RAZORPAY_ORDER_ID);
+
+        // Get all the bookingsList where razorpayOrderId not equals to UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldBeFound("razorpayOrderId.notEquals=" + UPDATED_RAZORPAY_ORDER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId in DEFAULT_RAZORPAY_ORDER_ID or UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldBeFound("razorpayOrderId.in=" + DEFAULT_RAZORPAY_ORDER_ID + "," + UPDATED_RAZORPAY_ORDER_ID);
+
+        // Get all the bookingsList where razorpayOrderId equals to UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldNotBeFound("razorpayOrderId.in=" + UPDATED_RAZORPAY_ORDER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId is not null
+        defaultBookingsShouldBeFound("razorpayOrderId.specified=true");
+
+        // Get all the bookingsList where razorpayOrderId is null
+        defaultBookingsShouldNotBeFound("razorpayOrderId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId contains DEFAULT_RAZORPAY_ORDER_ID
+        defaultBookingsShouldBeFound("razorpayOrderId.contains=" + DEFAULT_RAZORPAY_ORDER_ID);
+
+        // Get all the bookingsList where razorpayOrderId contains UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldNotBeFound("razorpayOrderId.contains=" + UPDATED_RAZORPAY_ORDER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpayOrderIdNotContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpayOrderId does not contain DEFAULT_RAZORPAY_ORDER_ID
+        defaultBookingsShouldNotBeFound("razorpayOrderId.doesNotContain=" + DEFAULT_RAZORPAY_ORDER_ID);
+
+        // Get all the bookingsList where razorpayOrderId does not contain UPDATED_RAZORPAY_ORDER_ID
+        defaultBookingsShouldBeFound("razorpayOrderId.doesNotContain=" + UPDATED_RAZORPAY_ORDER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature equals to DEFAULT_RAZORPAY_SIGNATURE
+        defaultBookingsShouldBeFound("razorpaySignature.equals=" + DEFAULT_RAZORPAY_SIGNATURE);
+
+        // Get all the bookingsList where razorpaySignature equals to UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldNotBeFound("razorpaySignature.equals=" + UPDATED_RAZORPAY_SIGNATURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature not equals to DEFAULT_RAZORPAY_SIGNATURE
+        defaultBookingsShouldNotBeFound("razorpaySignature.notEquals=" + DEFAULT_RAZORPAY_SIGNATURE);
+
+        // Get all the bookingsList where razorpaySignature not equals to UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldBeFound("razorpaySignature.notEquals=" + UPDATED_RAZORPAY_SIGNATURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature in DEFAULT_RAZORPAY_SIGNATURE or UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldBeFound("razorpaySignature.in=" + DEFAULT_RAZORPAY_SIGNATURE + "," + UPDATED_RAZORPAY_SIGNATURE);
+
+        // Get all the bookingsList where razorpaySignature equals to UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldNotBeFound("razorpaySignature.in=" + UPDATED_RAZORPAY_SIGNATURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature is not null
+        defaultBookingsShouldBeFound("razorpaySignature.specified=true");
+
+        // Get all the bookingsList where razorpaySignature is null
+        defaultBookingsShouldNotBeFound("razorpaySignature.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature contains DEFAULT_RAZORPAY_SIGNATURE
+        defaultBookingsShouldBeFound("razorpaySignature.contains=" + DEFAULT_RAZORPAY_SIGNATURE);
+
+        // Get all the bookingsList where razorpaySignature contains UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldNotBeFound("razorpaySignature.contains=" + UPDATED_RAZORPAY_SIGNATURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByRazorpaySignatureNotContainsSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where razorpaySignature does not contain DEFAULT_RAZORPAY_SIGNATURE
+        defaultBookingsShouldNotBeFound("razorpaySignature.doesNotContain=" + DEFAULT_RAZORPAY_SIGNATURE);
+
+        // Get all the bookingsList where razorpaySignature does not contain UPDATED_RAZORPAY_SIGNATURE
+        defaultBookingsShouldBeFound("razorpaySignature.doesNotContain=" + UPDATED_RAZORPAY_SIGNATURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount equals to DEFAULT_DISCOUNT
+        defaultBookingsShouldBeFound("discount.equals=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount equals to UPDATED_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.equals=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount not equals to DEFAULT_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.notEquals=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount not equals to UPDATED_DISCOUNT
+        defaultBookingsShouldBeFound("discount.notEquals=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount in DEFAULT_DISCOUNT or UPDATED_DISCOUNT
+        defaultBookingsShouldBeFound("discount.in=" + DEFAULT_DISCOUNT + "," + UPDATED_DISCOUNT);
+
+        // Get all the bookingsList where discount equals to UPDATED_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.in=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount is not null
+        defaultBookingsShouldBeFound("discount.specified=true");
+
+        // Get all the bookingsList where discount is null
+        defaultBookingsShouldNotBeFound("discount.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount is greater than or equal to DEFAULT_DISCOUNT
+        defaultBookingsShouldBeFound("discount.greaterThanOrEqual=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount is greater than or equal to UPDATED_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.greaterThanOrEqual=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount is less than or equal to DEFAULT_DISCOUNT
+        defaultBookingsShouldBeFound("discount.lessThanOrEqual=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount is less than or equal to SMALLER_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.lessThanOrEqual=" + SMALLER_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsLessThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount is less than DEFAULT_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.lessThan=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount is less than UPDATED_DISCOUNT
+        defaultBookingsShouldBeFound("discount.lessThan=" + UPDATED_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
+    void getAllBookingsByDiscountIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        bookingsRepository.saveAndFlush(bookings);
+
+        // Get all the bookingsList where discount is greater than DEFAULT_DISCOUNT
+        defaultBookingsShouldNotBeFound("discount.greaterThan=" + DEFAULT_DISCOUNT);
+
+        // Get all the bookingsList where discount is greater than SMALLER_DISCOUNT
+        defaultBookingsShouldBeFound("discount.greaterThan=" + SMALLER_DISCOUNT);
+    }
+
+    @Test
+    @Transactional
     void getAllBookingsByTotalAmountIsEqualToSomething() throws Exception {
         // Initialize the database
         bookingsRepository.saveAndFlush(bookings);
@@ -1154,6 +1525,10 @@ class BookingsResourceIT {
             .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].childPricePerNight").value(hasItem(DEFAULT_CHILD_PRICE_PER_NIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].numOfNights").value(hasItem(DEFAULT_NUM_OF_NIGHTS)))
+            .andExpect(jsonPath("$.[*].razorpayPaymentId").value(hasItem(DEFAULT_RAZORPAY_PAYMENT_ID)))
+            .andExpect(jsonPath("$.[*].razorpayOrderId").value(hasItem(DEFAULT_RAZORPAY_ORDER_ID)))
+            .andExpect(jsonPath("$.[*].razorpaySignature").value(hasItem(DEFAULT_RAZORPAY_SIGNATURE)))
+            .andExpect(jsonPath("$.[*].discount").value(hasItem(DEFAULT_DISCOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -1213,6 +1588,10 @@ class BookingsResourceIT {
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
             .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .razorpayPaymentId(UPDATED_RAZORPAY_PAYMENT_ID)
+            .razorpayOrderId(UPDATED_RAZORPAY_ORDER_ID)
+            .razorpaySignature(UPDATED_RAZORPAY_SIGNATURE)
+            .discount(UPDATED_DISCOUNT)
             .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -1237,6 +1616,10 @@ class BookingsResourceIT {
         assertThat(testBookings.getPricePerNight()).isEqualTo(UPDATED_PRICE_PER_NIGHT);
         assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(UPDATED_NUM_OF_NIGHTS);
+        assertThat(testBookings.getRazorpayPaymentId()).isEqualTo(UPDATED_RAZORPAY_PAYMENT_ID);
+        assertThat(testBookings.getRazorpayOrderId()).isEqualTo(UPDATED_RAZORPAY_ORDER_ID);
+        assertThat(testBookings.getRazorpaySignature()).isEqualTo(UPDATED_RAZORPAY_SIGNATURE);
+        assertThat(testBookings.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
         assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -1315,8 +1698,10 @@ class BookingsResourceIT {
         partialUpdatedBookings
             .checkOutDate(UPDATED_CHECK_OUT_DATE)
             .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
-            .totalAmount(UPDATED_TOTAL_AMOUNT)
-            .createdDate(UPDATED_CREATED_DATE);
+            .razorpayPaymentId(UPDATED_RAZORPAY_PAYMENT_ID)
+            .razorpaySignature(UPDATED_RAZORPAY_SIGNATURE)
+            .updatedBy(UPDATED_UPDATED_BY)
+            .updateDate(UPDATED_UPDATE_DATE);
 
         restBookingsMockMvc
             .perform(
@@ -1336,11 +1721,15 @@ class BookingsResourceIT {
         assertThat(testBookings.getPricePerNight()).isEqualTo(DEFAULT_PRICE_PER_NIGHT);
         assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(DEFAULT_NUM_OF_NIGHTS);
-        assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
+        assertThat(testBookings.getRazorpayPaymentId()).isEqualTo(UPDATED_RAZORPAY_PAYMENT_ID);
+        assertThat(testBookings.getRazorpayOrderId()).isEqualTo(DEFAULT_RAZORPAY_ORDER_ID);
+        assertThat(testBookings.getRazorpaySignature()).isEqualTo(UPDATED_RAZORPAY_SIGNATURE);
+        assertThat(testBookings.getDiscount()).isEqualTo(DEFAULT_DISCOUNT);
+        assertThat(testBookings.getTotalAmount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
-        assertThat(testBookings.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
-        assertThat(testBookings.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
+        assertThat(testBookings.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testBookings.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testBookings.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
     }
 
     @Test
@@ -1362,6 +1751,10 @@ class BookingsResourceIT {
             .pricePerNight(UPDATED_PRICE_PER_NIGHT)
             .childPricePerNight(UPDATED_CHILD_PRICE_PER_NIGHT)
             .numOfNights(UPDATED_NUM_OF_NIGHTS)
+            .razorpayPaymentId(UPDATED_RAZORPAY_PAYMENT_ID)
+            .razorpayOrderId(UPDATED_RAZORPAY_ORDER_ID)
+            .razorpaySignature(UPDATED_RAZORPAY_SIGNATURE)
+            .discount(UPDATED_DISCOUNT)
             .totalAmount(UPDATED_TOTAL_AMOUNT)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -1386,6 +1779,10 @@ class BookingsResourceIT {
         assertThat(testBookings.getPricePerNight()).isEqualTo(UPDATED_PRICE_PER_NIGHT);
         assertThat(testBookings.getChildPricePerNight()).isEqualTo(UPDATED_CHILD_PRICE_PER_NIGHT);
         assertThat(testBookings.getNumOfNights()).isEqualTo(UPDATED_NUM_OF_NIGHTS);
+        assertThat(testBookings.getRazorpayPaymentId()).isEqualTo(UPDATED_RAZORPAY_PAYMENT_ID);
+        assertThat(testBookings.getRazorpayOrderId()).isEqualTo(UPDATED_RAZORPAY_ORDER_ID);
+        assertThat(testBookings.getRazorpaySignature()).isEqualTo(UPDATED_RAZORPAY_SIGNATURE);
+        assertThat(testBookings.getDiscount()).isEqualTo(UPDATED_DISCOUNT);
         assertThat(testBookings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
         assertThat(testBookings.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testBookings.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);

@@ -29,7 +29,7 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="content" type="varchar(255)">
+            <column name="content" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="thumbnail" type="varchar(255)">

@@ -42,6 +42,18 @@ public class Bookings implements Serializable {
     @Column(name = "num_of_nights")
     private Integer numOfNights;
 
+    @Column(name = "razorpay_payment_id")
+    private String razorpayPaymentId;
+
+    @Column(name = "razorpay_order_id")
+    private String razorpayOrderId;
+
+    @Column(name = "razorpay_signature")
+    private String razorpaySignature;
+
+    @Column(name = "discount")
+    private Double discount;
+
     @Column(name = "total_amount")
     private Double totalAmount;
 
@@ -61,7 +73,7 @@ public class Bookings implements Serializable {
     private User user;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "location", "owner" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "location", "listingType", "owner" }, allowSetters = true)
     private Listing listing;
 
     @OneToMany(mappedBy = "bookings")
@@ -159,6 +171,58 @@ public class Bookings implements Serializable {
 
     public void setNumOfNights(Integer numOfNights) {
         this.numOfNights = numOfNights;
+    }
+
+    public String getRazorpayPaymentId() {
+        return this.razorpayPaymentId;
+    }
+
+    public Bookings razorpayPaymentId(String razorpayPaymentId) {
+        this.razorpayPaymentId = razorpayPaymentId;
+        return this;
+    }
+
+    public void setRazorpayPaymentId(String razorpayPaymentId) {
+        this.razorpayPaymentId = razorpayPaymentId;
+    }
+
+    public String getRazorpayOrderId() {
+        return this.razorpayOrderId;
+    }
+
+    public Bookings razorpayOrderId(String razorpayOrderId) {
+        this.razorpayOrderId = razorpayOrderId;
+        return this;
+    }
+
+    public void setRazorpayOrderId(String razorpayOrderId) {
+        this.razorpayOrderId = razorpayOrderId;
+    }
+
+    public String getRazorpaySignature() {
+        return this.razorpaySignature;
+    }
+
+    public Bookings razorpaySignature(String razorpaySignature) {
+        this.razorpaySignature = razorpaySignature;
+        return this;
+    }
+
+    public void setRazorpaySignature(String razorpaySignature) {
+        this.razorpaySignature = razorpaySignature;
+    }
+
+    public Double getDiscount() {
+        return this.discount;
+    }
+
+    public Bookings discount(Double discount) {
+        this.discount = discount;
+        return this;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Double getTotalAmount() {
@@ -313,6 +377,10 @@ public class Bookings implements Serializable {
             ", pricePerNight=" + getPricePerNight() +
             ", childPricePerNight=" + getChildPricePerNight() +
             ", numOfNights=" + getNumOfNights() +
+            ", razorpayPaymentId='" + getRazorpayPaymentId() + "'" +
+            ", razorpayOrderId='" + getRazorpayOrderId() + "'" +
+            ", razorpaySignature='" + getRazorpaySignature() + "'" +
+            ", discount=" + getDiscount() +
             ", totalAmount=" + getTotalAmount() +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

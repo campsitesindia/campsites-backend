@@ -123,6 +123,21 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
                 <th className="hand" onClick={sort('numOfNights')}>
                   <Translate contentKey="campsitesindiaApp.bookings.numOfNights">Num Of Nights</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('razorpayPaymentId')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.razorpayPaymentId">Razorpay Payment Id</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('razorpayOrderId')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.razorpayOrderId">Razorpay Order Id</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('razorpaySignature')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.razorpaySignature">Razorpay Signature</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('discount')}>
+                  <Translate contentKey="campsitesindiaApp.bookings.discount">Discount</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('totalAmount')}>
                   <Translate contentKey="campsitesindiaApp.bookings.totalAmount">Total Amount</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -163,6 +178,10 @@ export const Bookings = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{bookings.pricePerNight}</td>
                   <td>{bookings.childPricePerNight}</td>
                   <td>{bookings.numOfNights}</td>
+                  <td>{bookings.razorpayPaymentId}</td>
+                  <td>{bookings.razorpayOrderId}</td>
+                  <td>{bookings.razorpaySignature}</td>
+                  <td>{bookings.discount}</td>
                   <td>{bookings.totalAmount}</td>
                   <td>{bookings.createdBy}</td>
                   <td>{bookings.createdDate ? <TextFormat type="date" value={bookings.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
