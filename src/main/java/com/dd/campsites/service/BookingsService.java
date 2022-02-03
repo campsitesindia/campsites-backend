@@ -42,6 +42,14 @@ public interface BookingsService {
     Optional<Bookings> findOne(Long id);
 
     /**
+     * Get the  bookings by Razor OrderId.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Bookings findOneByRazorOrderId(String id);
+
+    /**
      * Delete the "id" bookings.
      *
      * @param id the id of the entity.

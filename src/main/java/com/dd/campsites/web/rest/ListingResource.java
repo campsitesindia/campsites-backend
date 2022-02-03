@@ -214,14 +214,8 @@ public class ListingResource {
 
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of listings in body.
      */
-    @GetMapping("/listingsWithExtraInformation")
+    @GetMapping("/listings/listingsWithExtraInformation")
     public ResponseEntity<List<ListingModel>> getAllListingsWithExtraInformation(ListingCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Listings with details by criteria: {}");
-
-        if (getUser().isEmpty()) {
-            log.debug(" nos user is present ................");
-        }
-
         Page<ListingModel> page = listingDetailsService.findAll(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

@@ -24,10 +24,11 @@ public class BookingsServiceImpl implements BookingsService {
 
     private final BookingsRepository bookingsRepository;
 
-    private RazorpayClientWithConfig razorpayClientWithConfig;
+    private final RazorpayClientWithConfig razorpayClientWithConfig;
 
-    public BookingsServiceImpl(BookingsRepository bookingsRepository) {
+    public BookingsServiceImpl(BookingsRepository bookingsRepository, RazorpayClientWithConfig razorpayClientWithConfig) {
         this.bookingsRepository = bookingsRepository;
+        this.razorpayClientWithConfig = razorpayClientWithConfig;
     }
 
     @Override
@@ -44,60 +45,51 @@ public class BookingsServiceImpl implements BookingsService {
             .findById(bookings.getId())
             .map(
                 existingBookings -> {
-                    if (
-                        validateAndUpdateOrder(
-                            bookings.getRazorpayOrderId(),
-                            bookings.getRazorpayPaymentId(),
-                            bookings.getRazorpaySignature(),
-                            razorpayClientWithConfig.getSecret()
-                        )
-                    ) {
-                        if (bookings.getName() != null) {
-                            existingBookings.setName(bookings.getName());
-                        }
+                    if (bookings.getName() != null) {
+                        existingBookings.setName(bookings.getName());
+                    }
 
-                        if (bookings.getCheckInDate() != null) {
-                            existingBookings.setCheckInDate(bookings.getCheckInDate());
-                        }
-                        if (bookings.getCheckOutDate() != null) {
-                            existingBookings.setCheckOutDate(bookings.getCheckOutDate());
-                        }
-                        if (bookings.getPricePerNight() != null) {
-                            existingBookings.setPricePerNight(bookings.getPricePerNight());
-                        }
-                        if (bookings.getChildPricePerNight() != null) {
-                            existingBookings.setChildPricePerNight(bookings.getChildPricePerNight());
-                        }
-                        if (bookings.getNumOfNights() != null) {
-                            existingBookings.setNumOfNights(bookings.getNumOfNights());
-                        }
-                        if (bookings.getRazorpayPaymentId() != null) {
-                            existingBookings.setRazorpayPaymentId(bookings.getRazorpayPaymentId());
-                        }
-                        if (bookings.getRazorpayOrderId() != null) {
-                            existingBookings.setRazorpayOrderId(bookings.getRazorpayOrderId());
-                        }
-                        if (bookings.getRazorpaySignature() != null) {
-                            existingBookings.setRazorpaySignature(bookings.getRazorpaySignature());
-                        }
-                        if (bookings.getDiscount() != null) {
-                            existingBookings.setDiscount(bookings.getDiscount());
-                        }
-                        if (bookings.getTotalAmount() != null) {
-                            existingBookings.setTotalAmount(bookings.getTotalAmount());
-                        }
-                        if (bookings.getCreatedBy() != null) {
-                            existingBookings.setCreatedBy(bookings.getCreatedBy());
-                        }
-                        if (bookings.getCreatedDate() != null) {
-                            existingBookings.setCreatedDate(bookings.getCreatedDate());
-                        }
-                        if (bookings.getUpdatedBy() != null) {
-                            existingBookings.setUpdatedBy(bookings.getUpdatedBy());
-                        }
-                        if (bookings.getUpdateDate() != null) {
-                            existingBookings.setUpdateDate(bookings.getUpdateDate());
-                        }
+                    if (bookings.getCheckInDate() != null) {
+                        existingBookings.setCheckInDate(bookings.getCheckInDate());
+                    }
+                    if (bookings.getCheckOutDate() != null) {
+                        existingBookings.setCheckOutDate(bookings.getCheckOutDate());
+                    }
+                    if (bookings.getPricePerNight() != null) {
+                        existingBookings.setPricePerNight(bookings.getPricePerNight());
+                    }
+                    if (bookings.getChildPricePerNight() != null) {
+                        existingBookings.setChildPricePerNight(bookings.getChildPricePerNight());
+                    }
+                    if (bookings.getNumOfNights() != null) {
+                        existingBookings.setNumOfNights(bookings.getNumOfNights());
+                    }
+                    if (bookings.getRazorpayPaymentId() != null) {
+                        existingBookings.setRazorpayPaymentId(bookings.getRazorpayPaymentId());
+                    }
+                    if (bookings.getRazorpayOrderId() != null) {
+                        existingBookings.setRazorpayOrderId(bookings.getRazorpayOrderId());
+                    }
+                    if (bookings.getRazorpaySignature() != null) {
+                        existingBookings.setRazorpaySignature(bookings.getRazorpaySignature());
+                    }
+                    if (bookings.getDiscount() != null) {
+                        existingBookings.setDiscount(bookings.getDiscount());
+                    }
+                    if (bookings.getTotalAmount() != null) {
+                        existingBookings.setTotalAmount(bookings.getTotalAmount());
+                    }
+                    if (bookings.getCreatedBy() != null) {
+                        existingBookings.setCreatedBy(bookings.getCreatedBy());
+                    }
+                    if (bookings.getCreatedDate() != null) {
+                        existingBookings.setCreatedDate(bookings.getCreatedDate());
+                    }
+                    if (bookings.getUpdatedBy() != null) {
+                        existingBookings.setUpdatedBy(bookings.getUpdatedBy());
+                    }
+                    if (bookings.getUpdateDate() != null) {
+                        existingBookings.setUpdateDate(bookings.getUpdateDate());
                     }
 
                     return existingBookings;
@@ -118,6 +110,13 @@ public class BookingsServiceImpl implements BookingsService {
     public Optional<Bookings> findOne(Long id) {
         log.debug("Request to get Bookings : {}", id);
         return bookingsRepository.findById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Bookings findOneByRazorOrderId(String id) {
+        log.debug("Request to get Bookings : {}", id);
+        return bookingsRepository.findBookingsByRazorpayOrderId(id);
     }
 
     @Override

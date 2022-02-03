@@ -128,7 +128,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/listings**/**").permitAll()
             .antMatchers("/api/features/**").permitAll()
             .antMatchers("/api/photos/**").permitAll()
-            .antMatchers("/api//payment/getPaymentForm").permitAll()
+            .antMatchers("/api/bookings/**").authenticated()
             .antMatchers("/api/room/**").permitAll()
             .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/**").authenticated()
